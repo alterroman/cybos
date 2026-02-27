@@ -30,6 +30,7 @@ Agents are spawned via Claude Code's `Task` tool. Multiple Task calls in the sam
 - **Content**: content-writer, image-prompter
 - **Memo**: memo-analyst, memo-writer
 - **Synthesis**: synthesizer
+- **BD**: bd-lead-finder, bd-lead-qualifier
 
 **Research agent selection**: Dynamic based on research type and intensity (see `.claude/skills/Research/shared/agent-selection-matrix.md`)
 
@@ -63,6 +64,7 @@ Skills are loaded via:
 - **Research**: Universal orchestrator workflow (handles all research types)
 - **Content**: Tweet, essay, and image generation workflows
 - **DDMemo**: Investment memo generation workflow
+- **BD**: Business development lead finding for Serokell (`.claude/skills/BD/`)
 - **Self-improve**: Always-active napkin for tracking mistakes and patterns (`.claude/skills/Self-improve/SKILL.md`)
 
 ---
@@ -97,6 +99,8 @@ Skills are loaded via:
 | "Project status", "work on project X", "show project" | `.claude/commands/cyber-project.md` |
 | "Create project", "init project", "new project" | `.claude/commands/cyber-init-project.md` |
 | "List projects", "all projects", "my projects" | `.claude/commands/cyber-projects.md` |
+| "Find Rust companies", "find BD leads", "Serokell leads", "search for clients" | `.claude/commands/cyber-bd-find-leads.md` |
+| "Research company lead", "deep dive BD lead", "qualify this company" | `.claude/commands/cyber-bd-research-lead.md` |
 
 **Execution Rules:**
 
@@ -200,6 +204,10 @@ See `.claude/skills/Self-improve/SKILL.md` for full specification.
 | `/cyber-project slug` | Show project status and tasks |
 | `/cyber-projects` | List all projects |
 | `/cyber-gtd --project slug` | Process GTD tasks for specific project only |
+| `/cyber-bd-find-leads` | Find Rust companies for Serokell BD pipeline |
+| `/cyber-bd-find-leads --domain blockchain --geo US` | Domain + geo filtered search |
+| `/cyber-bd-find-leads --domain fintech --funding series-a --min-score 70` | Targeted search |
+| `/cyber-bd-research-lead "Company Name"` | Deep-dive BD research on single company |
 
 **Research flags**: `--quick`, `--standard`, `--deep` control intensity/speed tradeoff.
 
