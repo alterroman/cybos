@@ -1,773 +1,623 @@
-# Cybos → Serokell BD OS: Adaptation Plan
+# Cybos → Serokell BD OS: Adaptation Plan (v2)
 
-> One-week implementation plan to transform Cybos from a VC personal assistant (cyber.Fund/Stepan)
-> into a Serokell-specific Sales & BD Operating System, with a design stub for Phase 2
-> (commercial proposal engine).
-
----
-
-## Who Is Serokell (Research Summary)
-
-**What they are**: Boutique software engineering consultancy (Serokell OÜ, Estonia, est. 2015).
-Globally distributed, 20–50 people. Bootstrapped. Revenue entirely from project fees.
-
-**Technical moat**: One of ~5 firms globally capable of production-grade Haskell at blockchain
-protocol scale. Unique combination of Haskell + Nix/NixOS + formal verification + blockchain.
-Key open-source assets: `deploy-rs` (2K GitHub stars), `universum` (185 stars).
-
-**Confirmed clients**: IOHK/Cardano, TQ Tezos, Globacap, Runtime Verification, Telegram/TON.
-
-**ICP (Ideal Customer Profile)**:
-- Engineering-led orgs (CTO or VP Eng as decision maker)
-- Industries: blockchain/crypto protocols, formal verification, high-correctness fintech,
-  language/compiler companies, systems software
-- Stage: Series A or later (real budget for premium engineering)
-- Problem: "We can't hire Haskell engineers" or "we need a custom smart contract language"
-  or "our Haskell codebase is too slow" or "we need a Nix-based infra"
-- Geography: UK and US historically; open to global
-- Engagement: $100K–$2M+, 3–18 months, 2–6 engineers
-
-**Current BD situation**: 100% inbound. No outbound capability. No dedicated BD role.
-Tezos client relationship winding down (tezos-packaging deprecated May 2025). Active signals:
-deploy-rs still has high GitHub traffic; Haskell job market remains thin globally.
-
-**BD gaps this system must fill**:
-1. Proactively surface companies about to need Serokell
-2. Monitor timing signals (Haskell job postings, new blockchain protocols, Nix adoption)
-3. Score and prioritize leads by ICP fit
-4. Generate high-quality cold email drafts (technical credibility tone)
-5. Prepare company research memos for sales conversations
-6. Track BD pipeline and follow-up cadence
+> Updated 2026-02-28. Corrects v1 by: accurately mapping reusable components,
+> adding funding/market/academic scoring dimensions, and recentering ICP on
+> Rust + Solana + Blockchain as primary competence.
 
 ---
 
-## Target State (Phase 1 Complete)
+## What Already Exists (Do Not Rebuild)
 
-A Serokell BD operator (you) starts each day and runs:
+Before listing new work, this is what Cybos already has that is **production-quality and
+directly relevant to the BD use case**:
+
+### BD Infrastructure — Already Rust/Serokell-Focused
+| File | What it does | Status |
+|------|-------------|--------|
+| `.claude/agents/bd-lead-finder.md` | Finds Rust companies on GitHub, job boards, web | ✅ Use as-is, minor ICP update |
+| `.claude/agents/bd-lead-qualifier.md` | Scores companies 0-100 against ICP, finds decision makers | ✅ Use as-is, add new dimensions |
+| `.claude/skills/BD/shared/serokell-icp.md` | ICP definition (already Rust-first) | 🔧 Update: add Solana, blockchain depth |
+| `.claude/skills/BD/shared/scoring-rubric.md` | 6-dimension 100-pt rubric | 🔧 Update: add funding timing, market presence, academic |
+| `.claude/skills/BD/workflows/find-leads.md` | Full orchestration: find → score → Google Sheets | ✅ Use as-is |
+| `.claude/commands/cyber-bd-find-leads.md` | `/cyber-bd-find-leads` command | ✅ Use as-is |
+| `.claude/commands/cyber-bd-research-lead.md` | `/cyber-bd-research-lead` command with 3-agent research | 🔧 Add academic paper agent |
+
+### Research Infrastructure — Fully Reusable for BD
+| Agent | What it does | BD reuse |
+|-------|-------------|----------|
+| `company-researcher` | Business model, product, team, traction | Direct reuse — BD company research |
+| `financial-researcher` | **Funding rounds, investors, burn rate, runway** | Direct reuse — lead scoring input |
+| `market-researcher` | TAM, competitive landscape, market position | Direct reuse — market presence scoring |
+| `team-researcher` | Founder backgrounds, LinkedIn, GitHub | Direct reuse — decision maker finding |
+| `tech-researcher` | Technical deep-dives on stack and architecture | Direct reuse — Rust depth assessment |
+| `content-researcher` | Academic papers, social media, first-principles | 🔧 Add to bd-research-lead for papers |
+| `synthesizer` | Consolidates parallel agent outputs | Direct reuse — BD synthesis |
+| `quality-reviewer` | Gap analysis on research | Direct reuse |
+
+**Key insight**: The research orchestrator (`Research/workflows/orchestrator.md`) with
+3-tier intensity (Quick/Standard/Deep) and parallel agent execution is already exactly
+what the BD research workflow needs. **Do not rebuild it.**
+
+### Other Reusable Infrastructure
+| Component | Reuse |
+|-----------|-------|
+| `cyber-brief.md` | Morning brief (Telegram + email + calendar + GTD) — adapt for BD |
+| `GTD/SKILL.md` with `call-prep.md`, `outreach.md` | BD task routing — extend |
+| `Telegram/workflows/` | Telegram processing — direct reuse |
+| `DDMemo/SKILL.md` + `generate.md` | **Adapt as BD Memo** — Opus analysis + template writing mechanics are perfect |
+| `config/leverage-rules.yaml` | Update rules for BD priorities |
+| `scripts/db/` + SQLite indexing | Extend for pipeline stage tracking |
+| `scripts/telegram-gramjs.ts` | Direct reuse |
+| `scripts/health-check.ts` | Direct reuse |
+
+---
+
+## ICP Correction: Rust + Solana + Blockchain Primary
+
+The existing ICP (`serokell-icp.md`) is already Rust-first — this is correct.
+The v1 plan over-emphasized Haskell (Serokell's *historical* strength).
+Current primary competence is Rust.
+
+### Updated ICP Signal Hierarchy
+
+**Tier 1 — Strongest signals (prioritize immediately)**:
+- Company uses Rust as primary language (GitHub shows >50% Rust)
+- Solana ecosystem: protocol, DApp, validator, tooling, or infrastructure company
+- Building a Rust-based blockchain node, L1, or L2
+- Hiring senior Rust engineers (job postings = capacity need)
+- Substrate/Polkadot ecosystem (Rust-based)
+- NEAR Protocol ecosystem (Rust-based)
+
+**Tier 2 — Strong signals (qualify and research)**:
+- Significant Rust codebase alongside other languages
+- Blockchain/DeFi protocol needing systems-level engineering
+- Smart contract platform with Rust (Solana, NEAR, Cosmos SDK)
+- High-performance fintech (trading, risk, ledger) looking for Rust capacity
+- Systems infrastructure companies (DB, networking, runtime, storage)
+- Developer tooling in Rust (compilers, CLIs, build systems)
+
+**Tier 3 — Weaker but relevant**:
+- Haskell users (Serokell has historical depth, but fewer engagements now)
+- C++/Go shops evaluating Rust migration
+- Formal verification requirements
+- Embedded/IoT Rust
+- AI/ML infrastructure in Rust
+
+**Disqualifiers (remove from pipeline)**:
+- Pure Python/JS shops with no systems component
+- Mobile-only or frontend-only
+- Pre-seed without funding (can't afford engagement)
+- APAC/LATAM (timezone + legal friction)
+- B2C consumer products
+
+---
+
+## New Scoring Dimensions (3 additions)
+
+The existing 6-dimension rubric (Geography 15 + Size 15 + Funding 15 + Rust 25 + Domain 15 + Outsource 15 = 100) needs 3 new signals that the user explicitly requested.
+
+Since adding points would break the 100-point scale, these become **sub-dimensions** within existing categories or **bonus flags** that influence the tier placement:
+
+### Addition 1: Funding Round Timing (within Funding dimension)
+
+Add to `funding-stage` scoring:
+```
+Funding stage with timing modifier:
+- Series A/B raised in last 6 months: 15 (base) + timing flag "🟢 Fresh capital"
+- Series A/B raised 6-18 months ago: 15
+- Series A/B raised >18 months ago: 11 (may be extending runway)
+- Seed $3M+ raised in last 3 months: 13 + timing flag "🟢 Fresh capital"
+- Seed $3M+ raised 3-12 months ago: 11
+```
+
+Timing flag matters because: fresh raise = active hiring/expansion phase = most likely
+to engage contractors. `financial-researcher` already pulls this; just needs to be
+explicitly requested.
+
+### Addition 2: Market Presence Score (new sub-dimension of Domain Fit)
+
+Measures how established the company is in their niche — helps predict deal size and
+strategic importance:
 
 ```
-/serokell-brief           → Daily BD brief: new signals, follow-ups due, pipeline summary
-/serokell-scan            → Scan GitHub/job boards for new Haskell/Nix/blockchain companies
-/serokell-research "Acme" → Deep company research: ICP fit score, decision makers, angle
-/serokell-email "Acme"    → Draft cold outreach email for this company
-/serokell-pipeline        → Show BD pipeline board with all stages
-/serokell-gtd             → Execute BD tasks from GTD.md
-/serokell-telegram        → Process Telegram messages, draft replies
+Market presence (0-5 bonus pts added to Domain score, max domain still 15):
+- GitHub org with >500 stars on primary repos: +3
+- Listed on DeFiLlama / CoinGecko / known blockchain directory: +2 (blockchain)
+- Active developer community (Discord, Telegram, Forum): +2
+- Conference talks or keynotes in their domain: +2
+- Published technical blog with >5 technical posts: +1
 ```
 
-Everything logs, sessions resume, and the vault accumulates institutional memory about
-every company, contact, and interaction.
+`market-researcher` already finds most of these signals — just needs the output format
+to include a market presence summary.
+
+### Addition 3: Academic Publications (new bonus signal)
+
+Signals correctness culture and deep technical requirements — Serokell's sweet spot:
+
+```
+Academic/research signals (bonus flag, not points — but elevates tier):
+- Company published peer-reviewed papers on their tech: "🎓 Research"
+- CTO/founders have academic publications: "🎓 Academic founders"
+- Uses formal verification or model checking: "🎓 Formal methods"
+- References academic work in their blog/docs: "🎓 Research-adjacent"
+```
+
+`content-researcher` can find these via Semantic Scholar, arXiv, and Google Scholar.
+Add it to the `bd-research-lead` research chain at **standard** intensity (not just deep).
 
 ---
 
-## Phase 2 Target State (Commercial Proposal Engine)
+## What Actually Needs to Be Built
 
-When a prospect becomes a lead and shares a project request:
+Now that existing infrastructure is mapped accurately, here is the **real work list** —
+much smaller than v1 suggested.
 
-```
-/serokell-proposal "Acme" → Full proposal workflow:
-  1. Ingest client request (document, email, or description)
-  2. Research: similar GitHub projects, academic papers, existing approaches
-  3. Technical design: recommended architecture, team composition
-  4. Effort estimation: function points or analogy-based hour estimates
-  5. Output: proposal draft (PDF-ready markdown) + internal estimate sheet
-```
+### Category A: Configuration & Context (Day 1) — High impact, fast
+
+These files don't exist yet and are needed for the system to know it works for Serokell:
+
+1. **`context/serokell-identity.md`** (new — replaces `who-am-i.md`)
+   - Who the operator is, their role, focus areas
+   - Active BD priorities and current pipeline status
+   - Communication style preferences
+
+2. **`context/serokell-company.md`** (new — replaces `what-is-cyber.md`)
+   - What Serokell does, core services, differentiators
+   - Confirmed clients (Cardano/IOHK, Tezos/TQ, Runtime Verification)
+   - Deploy-rs as OSS flagship, Haskell + Rust + Nix as stack
+   - Key proof points for cold outreach
+
+3. **`context/serokell-pitch.md`** (new)
+   - 3-5 value props with evidence (correctness culture, Rust scarcity, blockchain track record)
+   - Objection handling: "why not hire in-house?", "why Rust consultancy vs full-time?"
+   - Reference projects by type (blockchain node, smart contract infra, Nix deploy)
+
+4. **`context/serokell-services.md`** (new)
+   - Service catalog: Rust Development, Haskell Development, Nix/NixOS Infrastructure,
+     Smart Contract Development, Blockchain Protocol Engineering
+   - Typical engagement: team size (2-4), duration (3-6 months), $80K-$200K
+   - Out-of-scope: mobile, general web, pure frontend, AI/ML without Rust angle
+
+5. **`config/leverage-rules.yaml`** (update existing)
+   - Replace VC-oriented scoring (term sheets, SF moves, fund automation) with BD priorities:
+     - Hot signal (9): Haskell/Rust job posting, Solana ecosystem company, proposal request inbound
+     - Decision maker engaged (9): CTO or VP Eng replied to outreach
+     - Follow-up urgency (8): >72h since last touch, prospect is in active conversations stage
+     - Fresh capital (8): Raised in last 6 months, expansion mode
+     - Warm intro available (8): Network connection identified
+     - Strategic account (7): Previous client re-engage opportunity
+
+### Category B: ICP and Scoring Updates (Day 2) — Fixes existing files
+
+6. **`BD/shared/serokell-icp.md`** (update)
+   - Add Solana ecosystem explicitly to Tier 1
+   - Add Substrate/NEAR/Cosmos SDK as Tier 1 blockchain signals
+   - Add Haskell to Tier 3 (not primary, but still relevant)
+   - Keep Rust as primary signal throughout
+
+7. **`BD/shared/scoring-rubric.md`** (update — add 3 new dimensions from above)
+   - Add funding round timing flag to Funding dimension
+   - Add market presence sub-score to Domain Fit
+   - Add academic publications bonus flag
+   - Update score interpretation thresholds
+
+8. **`.claude/agents/bd-lead-qualifier.md`** (update)
+   - Add market presence signals to research checklist
+   - Add academic publication search step
+   - Add funding timing flag to funding research
+   - Update output format to include these new signals
+
+### Category C: Research Flow Enhancement (Day 3)
+
+9. **`cyber-bd-research-lead.md`** (update — add content-researcher to the agent mix)
+   The existing command spawns 3 agents. Add a 4th:
+
+   **Agent 4 — content-researcher** (academic papers):
+   - Search arXiv for papers authored by company researchers
+   - Search Semantic Scholar for company + technology combinations
+   - Search Google Scholar for CTO/founder publications
+   - Search conference proceedings (SOSP, OSDI, EuroSys, CCS, etc.)
+   - Output: list of publications, research areas, key contributions
+
+   This integrates the academic signal into standard BD research (not just deep mode).
+
+10. **`BD/shared/serokell-icp.md`** + agent prompts (update financial-researcher guidance)
+    - Ensure `financial-researcher` always checks: days since last raise, investor names
+      (tier 1 VCs signal budget confidence), total raised to date
+    - Add explicit output section: "Funding Timing Assessment" with a fresh/aging flag
+
+### Category D: New Workflows (Days 4-5) — Core new capabilities
+
+These genuinely don't exist yet and need to be built:
+
+11. **`BD/workflows/email-draft.md`** (new skill workflow)
+
+    Serokell cold email constraints:
+    - Audience is technical (CTO, VP Eng) — no buzzwords, no "AI-powered" fluff
+    - Lead with a specific technical observation (their GitHub repo, their job posting, their blog post)
+    - Reference Serokell's relevant work (Cardano, deploy-rs, IOHK, TQ Tezos)
+    - Length: 5-8 sentences, no attachments in cold outreach
+    - CTA: "30-min call", not "schedule a demo"
+    - Tone: peer-to-peer engineer, not vendor
+
+    Workflow:
+    1. Load `companies/<slug>/research/report.md` (from bd-research-lead output)
+    2. Load `context/serokell-pitch.md` and `context/serokell-services.md`
+    3. Generate 3 variants:
+       - **Technical hook**: references their specific GitHub repo or tech decision
+       - **Problem hook**: references their job posting or stated engineering challenge
+       - **Warm hook**: references mutual connection or conference appearance (if found)
+    4. Present variants, save approved to `companies/<slug>/emails/cold-MMDD.md`
+
+12. **`commands/serokell-email.md`** (new command — `/serokell-email "Company"`)
+    - Runs email-draft workflow
+    - Flags: `--followup` (generate follow-up email), `--proposal` (proposal cover email)
+
+13. **`BD/workflows/daily-scan.md`** (new skill workflow — weekly signal scanning)
+
+    4-channel signal scan:
+    1. **GitHub**: New Rust repos >10 stars created in last 7 days; new orgs with Rust
+       primary language; `deploy-rs` in new config files; Solana ecosystem new repos
+    2. **Job boards**: "Rust engineer" OR "Rust developer" new postings on Wellfound,
+       Ashby, Greenhouse, Lever, RemoteOK (last 7 days)
+    3. **Blockchain**: New Solana ecosystem projects (via Solana developer hub, DeFiLlama
+       new protocols); new Substrate chains; new Cosmos SDK chains
+    4. **News**: Perplexity search for "Rust" + "blockchain" OR "fintech" OR "systems"
+       news last 7 days; competitor activity (Tweag, Well-Typed blog posts)
+
+    Output: structured list of signals → queue for qualification → add to `pipeline/leads/`
+
+14. **`commands/serokell-scan.md`** (new — `/serokell-scan`)
+    - Runs daily-scan workflow
+    - Filters by minimum signal strength
+    - Produces scan report and adds companies to lead queue
+
+15. **`BD/workflows/pipeline.md`** (new — pipeline view and management)
+    - Kanban view of all companies by stage: leads → qualified → outreach → conversations → won/lost
+    - Stage transitions with timestamps
+    - Follow-up due tracking (last touch + days elapsed)
+    - Score display alongside each company
+
+16. **`commands/serokell-pipeline.md`** (new — `/serokell-pipeline`)
+    - Shows pipeline kanban
+    - Options: `--stage qualified`, `--company "Acme"` for detail
+
+### Category E: Identity Strip in AGENTS.md (Day 1, alongside context)
+
+17. **`AGENTS.md`** (update — strip cyber.Fund/Stepan references)
+    - Replace all "cyber.Fund" with "Serokell"
+    - Replace all "Stepan" with operator identity
+    - Replace "investment decisions" with "BD pipeline"
+    - Replace "deals/" vault path with "companies/" or "leads/"
+    - Update the skill/command mapping table
+    - Update context injection to load serokell-identity.md and serokell-company.md
+
+18. **`.claude/hooks/load-context.ts`** (update — if it references who-am-i.md / what-is-cyber.md)
+    - Point to new serokell-identity.md and serokell-company.md
+
+### Category F: Phase 2 — Commercial Proposal Engine (Weeks 2-3)
+
+The DDMemo skill (`DDMemo/SKILL.md` → `generate.md`) is the perfect mechanical template
+for this — Opus analysis agent + structured template writer agent. **Adapt it, don't rebuild.**
+
+19. **`skills/BD/BDMemo/SKILL.md`** (adapt from DDMemo)
+    - Replace investment rubric scoring with BD fit scoring
+    - Replace IC recommendation with proposal recommendation
+    - Keep the Opus analysis + Sonnet template writer pattern
+
+20. **`skills/Proposal/SKILL.md`** (new — full proposal generation)
+
+    6-phase workflow:
+    1. **INGEST**: Parse client request (doc, email, free text) → extract requirements
+    2. **RESEARCH** (parallel):
+       - `tech-researcher`: technical requirements, architecture options
+       - `content-researcher`: similar GitHub projects, arXiv papers on approaches
+       - `company-researcher`: client company context (existing relationship info)
+    3. **DESIGN**: Architecture recommendation, team composition, dependencies
+    4. **ESTIMATE**: Analogy-based estimation using reference project library
+    5. **WRITE**: `proposal-writer` agent fills template (Sonnet)
+    6. **OUTPUT**: `proposal.md` (client-facing) + `estimate-internal.md`
+
+21. **New agents for Phase 2**:
+    - `requirements-analyst.md`: Parses client request → functional/non-functional/constraints/ambiguities
+    - `effort-estimator.md`: Breaks work into components, applies hour estimates,
+      generates 3 scenarios (optimistic -20%, realistic, pessimistic +40%)
+    - `proposal-writer.md`: Fills proposal template with Serokell voice (technical, direct)
+
+22. **`context/PROPOSAL_template.md`** (new):
+    ```
+    # [Client]: [Project Title]
+    ## Executive Summary
+    ## Our Understanding of the Problem
+    ## Proposed Technical Approach
+    ## Team Composition
+    ## Delivery Plan & Timeline
+    ## Investment
+    ## Why Serokell
+    ## Next Steps
+    ```
+
+23. **`context/serokell-reference-projects.md`** (new — for effort estimation):
+    Reference library for analogy-based estimation:
+    - Rust library (medium complexity): 4-6 weeks, 1-2 engineers
+    - Blockchain node component: 2-4 months, 2-3 engineers
+    - Smart contract implementation: 2-4 weeks per contract
+    - Nix infrastructure setup: 2-3 weeks, 1 engineer
+    - Performance optimization engagement: 4-8 weeks, 2 engineers
+    - Protocol client (full): 3-6 months, 3-4 engineers
 
 ---
 
-## Architecture Changes Overview
+## What Is NOT Changing (Keep As-Is)
 
-### Remove (cyber.Fund/Stepan-specific)
-| File | Action |
-|------|--------|
-| Context files referencing cyber.Fund | Delete / replace |
-| `context/investment-philosophy.md` | Delete |
-| `context/MEMO_template.md` | Replace with proposal template |
-| `config/leverage-rules.yaml` | Replace with BD-specific scoring |
-| `.claude/agents/memo-analyst.md` | Repurpose → proposal analyst |
-| `.claude/agents/memo-writer.md` | Repurpose → proposal writer |
-| `.claude/agents/synthesizer.md` | Keep, update output format |
-| `AGENTS.md` references to cyber.Fund/Stepan | Replace with Serokell context |
+These are working and don't need changes:
 
-### Repurpose (keep mechanics, swap context)
-| File | What changes |
-|------|-------------|
-| `BD/shared/serokell-icp.md` | Update with precise ICP from research |
-| `BD/shared/scoring-rubric.md` | Add Haskell/Nix-specific signals |
-| `BD/workflows/find-leads.md` | Add GitHub signal scanning |
-| `bd-lead-finder.md` agent | Add new search strategies |
-| `bd-lead-qualifier.md` agent | Update scoring criteria |
-| `cyber-memo.md` → `serokell-research.md` | BD company research, not investment memo |
-| `cyber-brief.md` → `serokell-brief.md` | BD brief, not VC brief |
-| `cyber-gtd.md` → `serokell-gtd.md` | BD task types |
-
-### Create New
-| File | Purpose |
-|------|---------|
-| `context/serokell-identity.md` | Company identity (replaces who-am-i.md) |
-| `context/serokell-pitch.md` | Value props, differentiators, key messages |
-| `context/serokell-services.md` | Service catalog with engagement templates |
-| `config/bd-scoring-rules.yaml` | BD priority scoring (replaces leverage-rules.yaml) |
-| `skills/BD/workflows/daily-scan.md` | GitHub/job board signal scanning |
-| `skills/BD/workflows/email-draft.md` | Cold email generation |
-| `skills/BD/workflows/pipeline.md` | Pipeline view and management |
-| `skills/Proposal/` | Phase 2 skill tree |
-| `.claude/agents/requirements-analyst.md` | Phase 2: parse client requests |
-| `.claude/agents/solution-researcher.md` | Phase 2: research approaches |
-| `.claude/agents/effort-estimator.md` | Phase 2: hour estimation |
-| `.claude/agents/proposal-writer.md` | Phase 2: write the proposal |
-| `commands/serokell-*.md` | All new command files |
+- `Research/SKILL.md` and `Research/workflows/orchestrator.md` — fully reusable
+- `Research/shared/agent-selection-matrix.md` — reusable, just add BD research type
+- `Research/shared/intensity-tiers.md` — direct reuse
+- `Research/shared/mcp-strategy.md` — direct reuse
+- `Content/SKILL.md` and all content workflows — reuse for Serokell blog content
+- `Telegram/SKILL.md` and workflows — direct reuse for BD Telegram
+- `Summarize/SKILL.md` — reuse for call transcripts
+- `GTD/SKILL.md` base — extend for BD tasks, don't replace
+- `GTD/workflows/call-prep.md` — add BD call prep variant
+- `GTD/workflows/outreach.md` — extend for BD email outreach
+- `scripts/telegram-gramjs.ts`, `health-check.ts`, `extract-granola.ts` — direct reuse
+- `scripts/db/` (SQLite indexing) — extend for pipeline, don't replace
+- All `remotion-best-practices/`, `design-taste-frontend/`, `excalidraw-diagram/` — keep untouched
 
 ---
 
-## Day-by-Day Plan
+## Revised File Change Summary
 
-### Day 1 — Identity Strip & Serokell Context
+### New files (12 — down from v1's 24)
+```
+context/serokell-identity.md
+context/serokell-company.md
+context/serokell-pitch.md
+context/serokell-services.md
+context/PROPOSAL_template.md
+context/serokell-reference-projects.md
+skills/BD/workflows/email-draft.md
+skills/BD/workflows/daily-scan.md
+skills/BD/workflows/pipeline.md
+commands/serokell-email.md
+commands/serokell-scan.md
+commands/serokell-pipeline.md
+```
 
-**Goal**: The system knows it is working for Serokell. No cyber.Fund references remain.
+### Updated files (12 — down from v1's 18, more accurate)
+```
+AGENTS.md                                # Strip cyber.Fund/Stepan, add Serokell
+.claude/hooks/load-context.ts            # Update context file references
+config/leverage-rules.yaml              # BD-tuned scoring rules
+.claude/skills/BD/shared/serokell-icp.md       # Add Solana, Substrate, NEAR; Haskell to Tier 3
+.claude/skills/BD/shared/scoring-rubric.md     # Add funding timing, market presence, academic
+.claude/agents/bd-lead-qualifier.md            # Add 3 new signal dimensions
+.claude/commands/cyber-bd-research-lead.md     # Add content-researcher (academic papers)
+.claude/agents/financial-researcher.md         # Add funding timing output section
+.claude/agents/market-researcher.md            # Add market presence output section
+.claude/skills/Research/shared/agent-selection-matrix.md  # Add BD research type
+.claude/skills/GTD/SKILL.md                    # Add BD task patterns
+.claude/skills/GTD/workflows/outreach.md       # Extend for BD email outreach
+```
 
-**Tasks**:
+### Phase 2 only (new — don't build in Phase 1)
+```
+skills/BD/BDMemo/SKILL.md               # Adapted from DDMemo
+skills/Proposal/SKILL.md
+skills/Proposal/workflows/generate.md
+agents/requirements-analyst.md
+agents/effort-estimator.md
+agents/proposal-writer.md
+commands/serokell-proposal.md
+```
 
-1. **Update `AGENTS.md`** (the master system prompt)
-   - Replace all references to Stepan / cyber.Fund / VC / investment with Serokell context
-   - Replace workflow mapping table with BD-appropriate mappings
-   - Update agent roster descriptions to reflect BD purpose
-   - Update logging references to use Serokell paths
+### Archived (5 — reduced from v1's 6)
+```
+context/investment-philosophy.md        # → archive/cyber-fund/
+context/MEMO_template.md                # → archive/cyber-fund/ (replaced by PROPOSAL_template)
+commands/cyber-memo.md                  # → archive/cyber-fund/
+```
+Note: **Don't archive DDMemo** — adapt it for BD Memo in Phase 2.
 
-2. **Create `context/serokell-identity.md`** (replaces `who-am-i.md`)
-   ```markdown
-   # Serokell BD Identity
-   Company: Serokell OÜ (Estonia)
-   Role: Business Development
-   Operator: [your name]
-   Focus: Outbound BD for Haskell/Nix/blockchain engineering services
-   ICP: Engineering-led orgs needing elite functional programming
-   Primary markets: UK, US, EU
+---
+
+## Day-by-Day Plan (Revised)
+
+### Day 1 — Identity Strip & Context (3-4 hours)
+
+**Goal**: System knows it's working for Serokell BD. No cyber.Fund references.
+
+1. Create `context/serokell-identity.md`, `serokell-company.md`, `serokell-pitch.md`, `serokell-services.md`
+2. Update `AGENTS.md`: replace all cyber.Fund/Stepan/investment refs
+3. Update `config/leverage-rules.yaml`: BD-tuned scoring rules
+4. Update `.claude/hooks/load-context.ts` if it references old context files
+5. Archive `context/investment-philosophy.md` and `context/MEMO_template.md`
+
+**Test**: Boot a session, verify system prompt reflects Serokell context.
+
+---
+
+### Day 2 — ICP & Scoring Update (2-3 hours)
+
+**Goal**: Leads scored correctly for Rust + Solana + Blockchain pipeline.
+
+1. Update `BD/shared/serokell-icp.md`:
+   - Add Solana ecosystem to Tier 1
+   - Add Substrate, NEAR, Cosmos SDK to Tier 1
+   - Demote Haskell to Tier 3
+   - Keep Rust as primary signal throughout
+
+2. Update `BD/shared/scoring-rubric.md`:
+   - Add funding round timing flag (modifier on existing Funding dimension)
+   - Add market presence sub-score (modifier on existing Domain dimension)
+   - Add academic publications bonus flag
+   - Update domain scoring: Solana ecosystem = 15, Substrate/NEAR = 15
+
+3. Update `bd-lead-qualifier.md`:
+   - Add funding timing check to research steps
+   - Add market presence signals to research checklist
+   - Add academic/publication signal lookup
+
+4. Update `financial-researcher.md`:
+   - Add "Funding Timing Assessment" section to output format
+   - Request: days since last raise, investor tier, total raised
+
+5. Update `market-researcher.md`:
+   - Add "Market Presence Summary" to output format
+   - Request: GitHub stars, community size, conference appearances, blog activity
+
+**Test**: Run `/cyber-bd-find-leads --domain blockchain` on a test session, verify
+new dimensions appear in output.
+
+---
+
+### Day 3 — Enhanced Research Flow (2-3 hours)
+
+**Goal**: Lead research includes funding, market presence, and academic papers.
+
+1. Update `cyber-bd-research-lead.md`:
+   - Add `content-researcher` as 4th parallel agent (academic papers)
+   - Update synthesis template to include:
+     - Funding Timing: [fresh/aging/unknown]
+     - Market Presence: [score] — [signals found]
+     - Academic/Research: [papers found or "none"]
+   - Update BD brief format with these new fields
+
+2. Update `Research/shared/agent-selection-matrix.md`:
+   - Add BD research type: company + financial + team + content (academic focus)
+
+3. Add `content-researcher` prompt for BD academic search:
+   ```
+   When used in BD research context:
+   - Search arXiv for company name or CTO/founder names
+   - Search Semantic Scholar for relevant papers on their technology
+   - Search Google Scholar for "[Company] + [technology]"
+   - Search conference proceedings: SOSP, OSDI, EuroSys, EuroCrypt, CCS, Usenix Security
+   - Output: list of papers with title, authors, year, venue, relevance to Serokell
    ```
 
-3. **Create `context/serokell-company.md`** (replaces `what-is-cyber.md`)
-   - Full Serokell overview: services, differentiators, client types, case studies
-   - Key technical signals to watch for
-   - Competitive positioning vs Well-Typed, Tweag, FP Complete, MLabs
-
-4. **Create `context/serokell-pitch.md`**
-   - Core value props (correctness, Haskell scarcity, blockchain track record, Nix infra)
-   - Objection handling: "why not hire in-house?" "why Haskell?" "why Estonia?"
-   - Key proof points: Cardano, Tezos, Runtime Verification, TON contest win
-   - Reference projects by type (blockchain protocol, smart contract audit, performance optimization)
-
-5. **Create `context/serokell-services.md`**
-   - Service catalog: Custom Haskell Development, Haskell Team Augmentation,
-     Smart Contract Development & Audit, Nix/NixOS Infrastructure, Formal Verification Consulting
-   - Typical engagement: team size, duration, delivery model
-   - What's out of scope (no mobile, no generic web, no AI/ML without Haskell angle)
-
-6. **Update `.claude/hooks/load-context.ts`**
-   - Replace `who-am-i.md` and `what-is-cyber.md` references with Serokell equivalents
-   - Update deal auto-loading to look at `companies/` (BD pipeline) not `deals/` (investments)
-   - Update session persistence path names
-
-7. **Update `config/leverage-rules.yaml` → `config/bd-scoring-rules.yaml`**
-   - Replace VC-oriented scoring (term sheets, fund automation, SF move) with BD-oriented scoring:
-     - Hot signal (9pts): Haskell job posting, blockchain protocol launch, smart contract audit RFQ
-     - High leverage (8pts): Company from ICP industry, decision maker reply, intro from network
-     - Follow-up urgency (8pts): >72h since last touch, proposal request pending
-     - Strategic (7pts): deploy-rs user, IOHK/Cardano ecosystem company, Tezos-adjacent
-
-**Output**: System boots with Serokell context. No cyber.Fund references in any injected files.
+**Test**: Run `/cyber-bd-research-lead "TigerBeetle"` and verify it finds
+their GitHub, funding data, market presence (stars, HN mentions), and
+any academic publications.
 
 ---
 
-### Day 2 — ICP, Agent Updates, BD Vault Structure
+### Day 4 — Email Drafting (2-3 hours)
 
-**Goal**: Agents know what a good Serokell lead looks like. Vault organized for BD.
+**Goal**: `/serokell-email "Company"` produces 3 usable cold email drafts.
 
-**Tasks**:
+1. Create `BD/workflows/email-draft.md`
+2. Create `commands/serokell-email.md`
+3. Add BD writing style guide to content context:
+   - No buzzwords, no "synergy", no "leverage", no corporate speak
+   - Lead with a specific technical observation
+   - Short sentences, 5-8 total, one clear CTA
+   - Peer-to-peer tone: engineer to engineer
 
-1. **Update `BD/shared/serokell-icp.md`** (already exists, update with research)
-   ```
-   Technical signals (MUST have at least one):
-   - Uses or evaluates Haskell
-   - Building blockchain protocol / L1 / L2
-   - Formal verification requirements
-   - Using Nix/NixOS (especially deploy-rs users)
-   - Smart contract development
-   - Custom DSL or compiler work
-   - High-correctness fintech (banking ledger, trading systems)
-
-   Company profile:
-   - 20-500 employees (too small = no budget, too large = in-house team)
-   - Series A or later (need $100K+ engineering budget)
-   - Engineering-led (CTO or VP Eng is decision maker, not business side)
-   - Geography: US, UK, EU preferred (German speaking is bonus)
-   - NOT a fit: AI/ML only, mobile, general web agencies, crypto exchanges without protocol work
-
-   Exclusions (discard immediately):
-   - Python/Go-only shops with no Haskell interest
-   - Pre-seed startups without funding
-   - B2C consumer products
-   - Non-technical founders with no CTO
-   ```
-
-2. **Update `BD/shared/scoring-rubric.md`**
-   - Add specific Haskell/Nix/blockchain signal scoring:
-     - +20 pts: Active Haskell repo or hiring Haskell engineers
-     - +15 pts: Blockchain protocol / smart contract platform
-     - +15 pts: Uses deploy-rs or Nix in production
-     - +10 pts: Had previous engagement with Serokell (warm)
-     - +10 pts: Formal verification requirements mentioned
-     - +10 pts: Budget signals ($5M+ Series A funding)
-     - -20 pts: Pure Python/Go/Java shop
-     - -20 pts: B2C consumer product
-     - -15 pts: Pre-seed or unfunded
-
-3. **Update `bd-lead-finder.md` agent**
-   - Add GitHub search strategies specific to Serokell's niche:
-     - Companies with Haskell repos and >5 engineers: `org:* language:Haskell stars:>10`
-     - Companies using deploy-rs: Search GitHub for `deploy-rs` in config files
-     - Job boards: search for "Haskell developer" on Wellfound, Greenhouse, Lever, Remotive
-     - DeFi/blockchain: new L1s on CoinGecko, new Cosmos chains, new Substrate networks
-     - Runtime Verification / Tezos / Cardano ecosystem companies
-   - Add search for "smart contract audit" RFQs and security firms
-
-4. **Update `bd-lead-qualifier.md` agent**
-   - Use updated ICP and scoring rubric
-   - Add: find CTO/VP Eng name and LinkedIn/GitHub profile for each qualified lead
-   - Add: note any connection to Serokell network (IOHK ecosystem, Haskell community)
-
-5. **Set up BD vault structure**
-   ```
-   ~/SerokellVault/
-   ├── companies/               # One dir per prospect/client
-   │   └── <company-slug>/
-   │       ├── index.md         # Company overview + pipeline stage
-   │       ├── research/        # Company research
-   │       └── emails/          # Drafted outreach emails
-   ├── pipeline/
-   │   ├── leads/               # Raw leads from scanning
-   │   ├── qualified/           # Scored leads
-   │   ├── outreach/            # Active outreach
-   │   ├── conversations/       # Active conversations
-   │   └── won-lost/            # Closed deals
-   ├── content/
-   │   ├── emails/              # Email templates and drafts
-   │   ├── briefs/              # Daily BD briefs
-   │   └── work/                # Working files
-   ├── context/
-   │   ├── serokell-identity.md
-   │   ├── serokell-company.md
-   │   ├── serokell-pitch.md
-   │   ├── serokell-services.md
-   │   ├── entities/            # Contact cards
-   │   ├── telegram/
-   │   └── emails/
-   ├── GTD.md
-   └── .cybos/
-       ├── db/
-       └── logs/
-   ```
-
-6. **Update `scripts/paths.ts`**
-   - Add `getPipelinePath()`, `getCompaniesPath()`, `getLeadsPath(stage)`
-   - Rename vault to SerokellVault (or make configurable)
-
-**Output**: Agents find and score leads correctly. Vault is organized for BD workflows.
+**Test**: Run `/serokell-email "TigerBeetle"` after running research on it.
+Verify emails reference their specific Rust work, not generic "we love Rust".
 
 ---
 
-### Day 3 — Signal Scanning & Daily BD Brief
+### Day 5 — Signal Scanning & Pipeline View (3-4 hours)
 
-**Goal**: Daily scan surfaces new Haskell/Nix/blockchain companies automatically.
+**Goal**: `/serokell-scan` finds new leads. Pipeline state is visible.
 
-**Tasks**:
+1. Create `BD/workflows/daily-scan.md`
+2. Create `commands/serokell-scan.md`
+3. Create `BD/workflows/pipeline.md`
+4. Create `commands/serokell-pipeline.md`
+5. Update `scripts/db/` to index pipeline stage from `companies/*/index.md`
+6. Update GTD skill to route BD task types to correct workflows
 
-1. **Create `skills/BD/workflows/daily-scan.md`** (new — the core BD intelligence loop)
-
-   Phase 1: GitHub Signals
-   - Search GitHub for new Haskell repos created in last 7 days with >3 stars
-   - Search for `deploy-rs` mentions in new repos
-   - Search for new job postings: "Haskell engineer" OR "functional programming" on GitHub Jobs
-   - Find new organizations with Haskell as primary language
-
-   Phase 2: Job Board Signals
-   - Search Wellfound, RemoteOK, Greenhouse, Lever for:
-     "Haskell" OR "Nix" OR "functional programming" OR "smart contract" (past 7 days)
-   - Extract: company name, role level, team size signals, tech stack
-
-   Phase 3: Blockchain Signals
-   - New Cosmos chains launched (via Mintscan or GitHub cosmos-registry)
-   - New Cardano/Tezos ecosystem projects
-   - New DeFi protocol launches on EVM (potential smart contract audit need)
-   - CoinList, Messari new project listings
-
-   Phase 4: News Signals
-   - Perplexity search: "Haskell blockchain" OR "formal verification software" OR
-     "Nix deployment" news from last 7 days
-   - Serokell competitor activity (Tweag, Well-Typed blog posts → their client signals)
-
-   Output: Structured list of signals with company names → queue for qualification
-
-2. **Create `commands/serokell-scan.md`** (`/serokell-scan`)
-   - Runs daily-scan workflow
-   - Filters by minimum signal strength
-   - Adds new companies to `pipeline/leads/`
-   - Produces scan report
-
-3. **Create `commands/serokell-brief.md`** (`/serokell-brief`) — replaces cyber-brief
-   - 6-step BD morning brief:
-     1. New signals since last scan (from pipeline/leads/)
-     2. Follow-ups due today (companies with last touch >72h)
-     3. Active conversations (companies in outreach/conversations/)
-     4. Today's calendar (discovery calls, demos scheduled)
-     5. GTD BD tasks from GTD.md
-     6. Score everything with bd-scoring-rules.yaml → surface top 5 actions
-   - Output: `content/briefs/MMDD-YY.md`
-
-4. **Update `scripts/db/extractors/`**
-   - Add `extractors/companies.ts` — indexes `companies/*/index.md` (pipeline stage, last touch, score)
-   - Update `extractors/entities.ts` — handle contact cards for BD (CTO name, LinkedIn, GitHub)
-
-5. **Update `scripts/db/query.ts`**
-   - Add: `pipeline-status` — show all companies by stage
-   - Add: `follow-ups-due` — companies with last touch > N days
-   - Add: `find-contact "Name"` — find decision maker info
-
-**Output**: `/serokell-brief` gives you a scored daily action list. `/serokell-scan` finds new leads automatically.
+**Test**: Run `/serokell-scan`, verify it finds Solana-adjacent companies.
+Run `/serokell-pipeline`, verify kanban output.
 
 ---
 
-### Day 4 — Company Research & Email Drafting
+### Day 6 — Brief & GTD Integration (2 hours)
 
-**Goal**: Deep company research with ICP scoring + high-quality cold email generation.
+**Goal**: Morning BD brief. GTD tasks route to BD workflows.
 
-**Tasks**:
-
-1. **Create `commands/serokell-research.md`** (`/serokell-research "Company"`)
-   - Wrapper for research orchestrator with BD output format (not investment format)
-   - Output: BD research memo with:
-     - ICP fit score (0-100) and breakdown
-     - Technical signals found (Haskell repos, Nix usage, blockchain work)
-     - Decision makers (CTO name, LinkedIn, GitHub, Twitter)
-     - Best Serokell services to pitch (specific to their tech stack and problem)
-     - Recommended outreach angle
-     - Red flags or disqualifiers
-   - Save to `companies/<slug>/research/`
-
-2. **Update research agents for BD context**
-   - `company-researcher.md` — add BD output section: pipeline stage recommendation, decision maker info, key hooks for outreach
-   - `tech-researcher.md` — add: "Serokell relevance: which services fit this company's tech?"
-   - `bd-lead-qualifier.md` — integrate with research output to produce final score
-
-3. **Create `skills/BD/workflows/email-draft.md`** (new — core sales tool)
-
-   A Serokell cold email has specific constraints:
-   - Audience is technical (CTO / VP Eng) — no buzzwords, no "AI-powered" fluff
-   - Lead with a specific technical observation (not a generic pitch)
-   - Reference Serokell's relevant work (Cardano, Tezos, Runtime Verification)
-   - Short: 5-8 sentences max, no attachments in cold outreach
-   - Call to action: 30-min call, not "schedule a demo"
-
-   Workflow:
-   1. Load company research (from `companies/<slug>/research/`)
-   2. Load `context/serokell-pitch.md` (value props, proof points)
-   3. Load `context/serokell-services.md` (relevant service for this company)
-   4. Generate 2-3 email variants:
-      - Variant A: Technical hook (reference their GitHub work)
-      - Variant B: Problem hook (reference their job posting pain)
-      - Variant C: Warm intro hook (if network connection found)
-   5. Present all variants for approval
-   6. Save approved email to `companies/<slug>/emails/draft-cold-MMDD.md`
-
-4. **Create `commands/serokell-email.md`** (`/serokell-email "Company"`)
-   - Runs email-draft workflow
-   - Options: `--followup` for follow-up emails, `--proposal` for proposal cover
-
-5. **Update `skills/Content/workflows/` (writing style)**
-   - Create `writing-style-bd.md` — Serokell BD tone:
-     - Technical precision (no vague claims)
-     - Direct, no-fluff: no "synergy", no "leverage", no "AI-powered"
-     - Evidence-based: cite specific Serokell work (repos, papers, clients)
-     - Peer-to-peer tone: CTO to CTO, not vendor to buyer
-     - Short sentences, no corporate speak
-
-**Output**: `/serokell-research "Company"` → ICP score + decision makers + angle.
-`/serokell-email "Company"` → 3 ready-to-use cold email drafts.
+1. Update `leverage-rules.yaml` (if not done on Day 1)
+2. Update `cyber-brief.md`:
+   - BD-specific synthesis prompt
+   - Include pipeline follow-ups due
+   - Include any recent company signals
+3. Update GTD outreach workflow for BD email outreach
+4. Test end-to-end: GTD task "Research TigerBeetle for BD" → bd-research-lead
 
 ---
 
-### Day 5 — Pipeline Management & GTD Integration
+### Day 7 — Cleanup & Phase 2 Design (2-3 hours)
 
-**Goal**: Full pipeline visibility and BD task execution from GTD.md.
-
-**Tasks**:
-
-1. **Create `commands/serokell-pipeline.md`** (`/serokell-pipeline`)
-   - Shows kanban-style pipeline summary:
-     ```
-     LEADS (12)          QUALIFIED (5)       OUTREACH (3)        CONVERSATIONS (2)
-     ─────────────────   ─────────────────   ─────────────────   ─────────────────
-     - Acme Corp [85]    - Beta Inc [72]     - Gamma Ltd         - Delta Co (call Thu)
-     - ...               - ...               - Epsilon            - Zeta (proposal pending)
-     ```
-   - Options: `--stage qualified` to filter, `--company "Acme"` for detail
-
-2. **Create `commands/serokell-pipeline-update.md`** (`/serokell-pipeline-update "Company" --stage`)
-   - Move company between pipeline stages
-   - Log the stage change with date and notes
-   - Trigger follow-up task if needed
-
-3. **Update `skills/GTD/SKILL.md`** for BD task types
-   - BD task patterns to recognize:
-     - `Research [Company] for BD` → `/serokell-research`
-     - `Draft email to [Name] at [Company]` → `/serokell-email`
-     - `Follow up with [Company]` → load email history + draft follow-up
-     - `Prep for call with [Company]` → company research + talking points
-     - `Qualify [Company]` → run lead qualifier agent
-     - `Scan for new Haskell leads` → `/serokell-scan`
-   - Route each type to the correct workflow
-
-4. **Update `GTD/workflows/call-prep.md`** for BD calls
-   - BD discovery call prep: company background, their tech stack, pain point hypotheses,
-     Serokell services to pitch, specific questions to ask, Serokell proof points to mention
-
-5. **Update `GTD/workflows/outreach.md`** for BD outreach
-   - Draft personalized email based on research
-   - Find contact info (email via Hunter.io or manual research)
-   - Schedule follow-up task in GTD.md
-
-6. **Hunter.io integration** (new tool for email finding)
-   - Add `HUNTER_API_KEY` to `.env.example` and config
-   - Create `scripts/hunter.ts` — finds professional emails by name + domain
-   - Integrate into email-draft workflow: auto-populate To: field
-
-7. **Implement pipeline stage tracking in SQLite**
-   - Add `pipeline_companies` table: slug, name, stage, score, last_touch, decision_maker, notes
-   - Update `db/index.ts` to populate from `companies/*/index.md`
-   - Add `db/query.ts` commands: `pipeline-status`, `follow-ups-due`
-
-**Output**: Full pipeline visibility. BD tasks in GTD.md execute correctly.
+1. Reference audit: `grep -r "cyber.Fund\|investment philosophy\|term sheet\|VC fund" .claude/`
+2. Update AGENTS.md command table if any new commands need to be listed
+3. Design Phase 2 (proposal engine) — write `skills/Proposal/SKILL.md` and `generate.md` stubs
+4. Update README.md for Serokell BD context
+5. Commit and push
 
 ---
 
-### Day 6 — Phase 2 Design: Commercial Proposal Engine
+## Enhanced Scoring Rubric (Updated)
 
-**Goal**: Architecture and scaffold for proposal generation (no full implementation yet).
+Complete revised rubric for `BD/shared/scoring-rubric.md`:
 
-**Background**: When a prospect shares a project request (document, email thread, conversation
-notes), the system should:
-1. Parse and structure the requirements
-2. Research existing approaches (GitHub, papers, open-source solutions)
-3. Design a technical solution (architecture, team composition, technology choices)
-4. Estimate effort (hours per role, duration, risk buffer)
-5. Generate a polished proposal document
+| Dimension | Max | Notes |
+|-----------|-----|-------|
+| Geography | 15 | US:15, W.EU:13, E.EU/IL:8, CAN/AU:8 |
+| Company size | 15 | 30-150:15, 15-30 or 150-250:10, 250-500:6 |
+| **Funding stage + timing** | 15 | Series A/B:15, fresh (<6mo): +flag. Seed $3M+:11 |
+| Rust + Solana usage depth | 25 | Rust primary:25, Solana ecosystem:25, Significant Rust:20 |
+| **Domain fit + market presence** | 15 | Blockchain/systems:15, +presence bonus up to +5 |
+| Outsourcing readiness | 15 | Contractors:15, Remote-first:10, Fast-hiring:8 |
 
-**Tasks**:
+**Academic/research**: Bonus flag (no pts change) that upgrades Watch→Qualified or Qualified→Hot when present. Signals correctness culture = perfect Serokell customer.
 
-1. **Design `skills/Proposal/SKILL.md`** — skill overview and principles:
-   - Serokell proposals are technical documents, not sales decks
-   - Lead with architecture and approach, not cost
-   - Estimation methodology: analogy-based (similar past projects) + function point decomposition
-   - Risk categories: requirements clarity, third-party dependencies, talent availability,
-     novel algorithm development
-   - Output format: proposal.md (client-facing) + estimate.md (internal)
-
-2. **Design `skills/Proposal/workflows/generate.md`** — 6-phase workflow:
-
-   **Phase 1: INGEST**
-   - Load client request (file, email, or free-text description)
-   - Extract: problem statement, constraints, deliverables, timeline ask, budget signals
-
-   **Phase 2: RESEARCH** (parallel agents)
-   - `requirements-analyst.md` → parses request, identifies ambiguities, categorizes work types
-   - `solution-researcher.md` → finds similar GitHub projects, papers, Serokell past work
-   - `market-researcher.md` → competitive tools/solutions client could use instead
-
-   **Phase 3: DESIGN**
-   - Technical architecture recommendation (Haskell vs Rust vs mixed, which frameworks)
-   - Team composition (# senior Haskell devs, # Nix devs, QA, PM)
-   - Dependencies and risks
-
-   **Phase 4: ESTIMATE**
-   - `effort-estimator.md` → decomposes into tasks, estimates hours per role
-   - Apply Serokell-specific multipliers: Haskell code density, testing requirements,
-     documentation level, client collaboration overhead
-   - Generate: optimistic / realistic / pessimistic scenario
-
-   **Phase 5: WRITE**
-   - `proposal-writer.md` → fills proposal template
-   - Sections: Executive Summary, Understanding of Requirements, Proposed Approach,
-     Team & Credentials, Timeline, Investment (cost), Why Serokell, Next Steps
-
-   **Phase 6: OUTPUT**
-   - Save `companies/<slug>/proposals/proposal-MMDD.md`
-   - Save `companies/<slug>/proposals/estimate-internal-MMDD.md` (not shared with client)
-
-3. **Design new agents** (stubs — full prompts on Day 7+):
-   - `requirements-analyst.md` — extracts functional/non-functional requirements,
-     flags ambiguities, categorizes: new development / integration / audit / optimization
-   - `solution-researcher.md` — searches GitHub for similar open-source projects,
-     searches arXiv/Semantic Scholar for relevant papers, checks Serokell's past work
-   - `effort-estimator.md` — breaks work into function points, applies hour estimates
-     per point based on complexity, generates 3-scenario estimate
-   - `proposal-writer.md` — writes polished proposal following Serokell voice
-
-4. **Create proposal template** `context/PROPOSAL_template.md`:
-   ```markdown
-   # [Client Company]: [Project Title]
-   ## Proposed by Serokell | [Date]
-
-   ### Executive Summary
-   ### Our Understanding of the Problem
-   ### Proposed Technical Approach
-   ### Team Composition
-   ### Delivery Plan & Timeline
-   ### Investment
-   ### Why Serokell
-   ### Next Steps
-   ```
-
-5. **Create `commands/serokell-proposal.md`** (stub — active in Phase 2):
-   - Entry point for proposal generation
-   - Args: company slug, request file path or description
-   - Options: `--quick` (skip research, draft from description only)
-
-**Output**: Full Phase 2 design documented and ready to implement.
+**Solana clarification**: A Solana protocol/infra company with Rust primary language scores 25 (Rust) + 15 (blockchain domain) = 40/55 on those two dimensions alone. Will almost certainly qualify.
 
 ---
 
-### Day 7 — Integration, Testing & Cleanup
+## APIs Needed
 
-**Goal**: Everything works end-to-end. No dead references. System is clean.
-
-**Tasks**:
-
-1. **Full reference audit**
-   - `grep -r "cyber.Fund\|Stepan\|investment philosophy\|VC fund\|term sheet" .claude/`
-   - Remove or replace every hit
-   - Verify AGENTS.md, all commands, all skills, all agents are Serokell-clean
-
-2. **End-to-end test: BD workflow**
-   - Run `/serokell-scan` → verify it finds leads
-   - Pick a test company → run `/serokell-research "TestCo"` → verify ICP score output
-   - Run `/serokell-email "TestCo"` → verify email drafts look right
-   - Run `/serokell-brief` → verify brief is populated
-
-3. **End-to-end test: GTD workflow**
-   - Add a test task to GTD.md: `Research Haskell company XYZ for BD`
-   - Run `/serokell-gtd` → verify it routes to research workflow
-
-4. **Update README.md** — full rewrite for Serokell BD context:
-   - What the system does
-   - Setup instructions (updated for SerokellVault)
-   - Command reference
-   - Phase 2 roadmap note
-
-5. **Update docs/SETUP.md** — adjust all vault paths, config keys
-
-6. **Update docs/ARCHITECTURE.md** — document all new components
-
-7. **Update `.mcp.json`** — remove any Gmail MCP hardcoded path issue
-   - Make gmail MCP path configurable via env var
-
-8. **Write `docs/SEROKELL-RUNBOOK.md`** — daily BD playbook:
-   - Morning: run `/serokell-brief`
-   - Weekly: run `/serokell-scan`
-   - On new inbound lead: run `/serokell-research`, then `/serokell-email`
-   - On discovery call: run `/serokell-gtd` with call-prep task
-   - On proposal request: run `/serokell-proposal` (Phase 2)
-
----
-
-## Files Change Summary
-
-### Modified (18 files)
-```
-AGENTS.md                                   # Strip cyber.Fund, add Serokell context
-.claude/hooks/load-context.ts               # Update injected context files
-.claude/hooks/session-end.ts                # Update vault paths
-.claude/agents/bd-lead-finder.md            # Add Haskell/Nix-specific search
-.claude/agents/bd-lead-qualifier.md         # Update scoring criteria
-.claude/agents/company-researcher.md        # Add BD output section
-.claude/agents/tech-researcher.md           # Add Serokell relevance section
-.claude/agents/synthesizer.md               # Update output format for BD
-.claude/agents/memo-analyst.md              # Repurpose as proposal analyst
-.claude/agents/memo-writer.md               # Repurpose as proposal writer
-BD/shared/serokell-icp.md                   # Update with precise ICP
-BD/shared/scoring-rubric.md                 # Add Haskell/Nix signals
-BD/workflows/find-leads.md                  # Add GitHub signal scanning
-GTD/SKILL.md                                # BD task patterns
-GTD/workflows/call-prep.md                  # BD discovery call prep
-GTD/workflows/outreach.md                   # BD email outreach
-scripts/paths.ts                            # Add pipeline paths
-scripts/db/query.ts                         # Add pipeline queries
-```
-
-### Created (24 files)
-```
-context/serokell-identity.md                # Replaces who-am-i.md
-context/serokell-company.md                 # Replaces what-is-cyber.md
-context/serokell-pitch.md                   # Value props and proof points
-context/serokell-services.md                # Service catalog
-context/PROPOSAL_template.md               # Proposal document template
-config/bd-scoring-rules.yaml               # Replaces leverage-rules.yaml
-commands/serokell-scan.md                   # /serokell-scan
-commands/serokell-brief.md                  # /serokell-brief
-commands/serokell-research.md               # /serokell-research
-commands/serokell-email.md                  # /serokell-email
-commands/serokell-pipeline.md               # /serokell-pipeline
-commands/serokell-pipeline-update.md        # /serokell-pipeline-update
-commands/serokell-proposal.md               # /serokell-proposal (Phase 2 stub)
-skills/BD/workflows/daily-scan.md           # GitHub/job board scanning
-skills/BD/workflows/email-draft.md          # Cold email generation
-skills/BD/workflows/pipeline.md             # Pipeline view
-skills/Content/writing-style-bd.md          # BD writing tone
-skills/Proposal/SKILL.md                    # Phase 2 proposal skill
-skills/Proposal/workflows/generate.md       # Phase 2 proposal workflow
-agents/requirements-analyst.md              # Phase 2: parse requirements
-agents/solution-researcher.md               # Phase 2: research approaches
-agents/effort-estimator.md                  # Phase 2: hour estimation
-agents/proposal-writer.md                   # Phase 2: write proposal
-scripts/hunter.ts                           # Hunter.io email finder
-```
-
-### Archived (6 files — moved to `archive/cyber-fund/`)
-```
-context/investment-philosophy.md
-context/MEMO_template.md
-commands/cyber-memo.md                      # Investment memo
-commands/cyber-browse.md                    # VC-oriented Twitter scanning
-config/leverage-rules.yaml
-docs/SEROKELL-ADAPTATION-PLAN.md            # This file (move to archive when done)
-```
-
-### Kept Unchanged (major reuse)
-```
-Research/workflows/orchestrator.md          # Generic enough, keep
-Research/shared/                            # All shared research utilities, keep
-Telegram/workflows/                         # Keep, useful for BD Telegram
-Content/workflows/tweet.md                  # Keep for Serokell content
-Content/workflows/essay.md                  # Keep
-scripts/telegram-gramjs.ts                  # Keep
-scripts/db/                                 # Keep all DB scripts
-scripts/extract-granola.ts                  # Keep for call transcripts
-scripts/health-check.ts                     # Keep
-scripts/brief-server.ts                     # Keep for web brief UI
-.claude/settings.json                       # Keep
-```
-
----
-
-## Implementation Notes
-
-### Vault Config
-Update `~/.cybos/config.json`:
-```json
-{
-  "vault_path": "~/SerokellVault",
-  "user": {
-    "name": "[your name]",
-    "owner_name": "[your name]",
-    "slug": "[your-slug]",
-    "aliases": ["serokell"]
-  },
-  "company": "Serokell",
-  "setup_completed": true
-}
-```
-
-### Key APIs Needed
 | API | Purpose | Priority |
 |-----|---------|----------|
-| EXA_API_KEY | Primary research | Required |
-| PERPLEXITY_API_KEY | Fast research | Required |
-| HUNTER_API_KEY | Email finding for cold outreach | High |
-| TELEGRAM_API_ID/HASH | Telegram BD communication | High |
-| GOOGLE_OAUTH | Gmail for managing leads | Medium |
-| GEMINI_API_KEY | Image generation (Serokell blog content) | Low |
-| TYPEFULLY_API_KEY | Social media scheduling | Low |
-| NOTION_TOKEN | Optional pipeline backup | Optional |
-
-### GitHub Search Queries for daily-scan
-Pre-built queries to embed in `daily-scan.md`:
-```
-# New Haskell repos
-https://github.com/search?q=language:Haskell+created:>DATE&type=repositories
-
-# Companies hiring Haskell
-https://github.com/search?q=haskell+engineer+OR+developer+in:readme+created:>DATE&type=repositories
-
-# deploy-rs users (warm leads)
-https://github.com/search?q=deploy-rs+in:file&type=code
-
-# New blockchain protocols
-https://github.com/search?q=blockchain+protocol+language:Haskell+OR+language:Rust&type=repositories
-```
+| EXA_API_KEY | Primary web/company research | Required |
+| PERPLEXITY_API_KEY | Fast research + job board search | Required |
+| TELEGRAM_API_ID/HASH | BD Telegram communication | High |
+| GOOGLE_OAUTH | Gmail for managing inbound leads | High |
+| HUNTER_API_KEY | Email finding for cold outreach | Medium |
+| GOOGLE_SHEETS_API | Lead pipeline export (already used by find-leads) | Configured? |
+| SEMANTIC_SCHOLAR_API | Academic paper search (free API) | Medium |
 
 ---
 
-## Phase 2 Detailed Notes (for implementation after Phase 1)
+## Phase 2 Summary (For Reference — Implement After Phase 1)
 
-### Effort Estimation Approach
+Adapt DDMemo mechanics (Opus analysis + Sonnet template writer) into:
 
-The `effort-estimator.md` agent will use **analogy-based estimation** (most reliable for
-boutique consultancies):
+1. **BDMemo**: Given a qualified lead, generate a BD brief with:
+   - Fit score breakdown with evidence
+   - Recommended services to pitch
+   - Key risks (legal, timezone, language, scope)
+   - Decision maker strategy
+   - Outreach plan (email → call → proposal sequence)
 
-```
-For each component of the request:
-1. Find the closest Serokell past project or open-source equivalent
-2. Estimate relative complexity: 0.5x / 1x / 2x / 3x of the reference
-3. Apply base hours for reference
-4. Sum components, add integration complexity (15-25% of total)
-5. Add testing (20-30%), documentation (10-15%), project management (10-15%)
-6. Produce 3 scenarios: optimistic (-20%), realistic, pessimistic (+40%)
-```
+2. **Proposal Engine**: Given a client request, generate:
+   - Requirements analysis (functional/non-functional/ambiguities)
+   - Technical architecture recommendation
+   - Effort estimate: 3 scenarios (analogy-based, from reference-projects.md)
+   - Proposal document (client-facing)
+   - Internal estimate sheet
 
-Reference library to build in `context/serokell-past-projects.md`:
-- Haskell library: ~2-4 weeks for medium library
-- Smart contract implementation: ~4-8 weeks per contract
-- Smart contract audit: ~1-3 weeks per contract depending on complexity
-- Blockchain node component: ~2-6 months
-- Nix infra setup: ~2-4 weeks
-- Performance optimization engagement: ~4-8 weeks
-
-### Requirements Parsing Approach
-
-The `requirements-analyst.md` agent will classify each requirement into:
-- **Functional**: concrete feature or behavior
-- **Non-functional**: performance, reliability, correctness, compliance
-- **Constraint**: technology mandate, timeline, existing codebase
-- **Ambiguity**: unclear or conflicting — outputs as question list for client
-
-### Proposal Voice
-
-Serokell proposals must sound like they were written by a senior engineer, not a salesperson:
-- Start with the problem, not the company
-- Show that we understand their specific technical situation
-- Propose a concrete architecture, not vague "we'll figure it out"
-- Reference specific tools, libraries, approaches
-- Be honest about uncertainty: "this depends on X, which we'd clarify in discovery"
+The Opus analysis agent for Phase 2 should apply Serokell's engineering judgment:
+"Would we bet our reputation on this architecture? Can we staff the right team?"
 
 ---
 
-## Success Metrics
-
-### Phase 1 Success Criteria
-- [ ] System boots with zero cyber.Fund references
-- [ ] `/serokell-scan` finds 5+ new qualified leads per week
-- [ ] `/serokell-research "Company"` produces ICP score + decision maker in <5 minutes
-- [ ] `/serokell-email "Company"` produces 3 usable cold email variants
-- [ ] `/serokell-brief` runs in <30 seconds, surfaces ≤5 prioritized actions
-- [ ] `/serokell-pipeline` shows accurate pipeline state from SQLite
-- [ ] GTD.md BD tasks route to correct workflows
-
-### Phase 2 Success Criteria
-- [ ] `/serokell-proposal "Company"` produces a complete proposal draft from a client request
-- [ ] Effort estimate has three scenarios with itemized breakdown
-- [ ] Proposal document is client-ready after one human review pass
-- [ ] Research covers: GitHub similar projects + arXiv relevant papers + Serokell past work
-
----
-
-*Plan generated: 2026-02-28*
-*Based on: Serokell GitHub analysis (258 repos), Clutch.co reviews (32, all 5-star),*
-*GoodFirms reviews, Cybos v2.1 architecture analysis*
+*v2 — 2026-02-28. Primary correction: Rust + Solana + Blockchain is the ICP focus.
+Most research infrastructure is reusable — the real work is context files, ICP updates,
+scoring enhancements, email drafting, and signal scanning.*
