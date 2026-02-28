@@ -1,7 +1,7 @@
 ---
 name: bd-lead-finder
 description: Business development lead discovery agent for finding Rust companies matching Serokell ICP. Searches GitHub, job boards, and web sources to build a candidate company list.
-tools: Read, WebFetch, Grep, Glob, Bash, mcp__perplexity__search, mcp__exa__search, mcp__exa__getContents, mcp__parallel-search__web_search_preview, mcp__parallel-search__web_fetch
+tools: Read, WebFetch, Grep, Glob, Bash, mcp__perplexity__perplexity_search, mcp__perplexity__perplexity_ask, mcp__exa__search, mcp__exa__getContents, mcp__parallel-search__web_search_preview, mcp__parallel-search__web_fetch
 model: sonnet
 ---
 

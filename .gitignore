@@ -61,3 +61,4 @@ docs/*
 !docs/USAGE.md
 !docs/ARCHITECTURE.md
 !docs/cc-protocol.md
+!docs/SEROKELL-ADAPTATION-PLAN.md

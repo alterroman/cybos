@@ -1,7 +1,7 @@
 ---
 name: bd-lead-qualifier
 description: Business development lead qualification agent for scoring Rust companies against Serokell's ICP. Reads candidate list from lead-finder, enriches with research, and scores each company 0-100.
-tools: Read, WebFetch, Grep, Glob, Bash, mcp__perplexity__search, mcp__exa__search, mcp__exa__getContents, mcp__parallel-search__web_search_preview, mcp__parallel-search__web_fetch
+tools: Read, WebFetch, Grep, Glob, Bash, mcp__perplexity__perplexity_search, mcp__perplexity__perplexity_ask, mcp__exa__search, mcp__exa__getContents, mcp__parallel-search__web_search_preview, mcp__parallel-search__web_fetch
 model: sonnet
 ---
 
