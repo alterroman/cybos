@@ -19,7 +19,7 @@ let db: Database | null = null
 function getDatabasePath(): string {
   if (isLegacyMode()) {
     // Legacy mode: DB in app root
-    return `${getAppRoot()}/.cybos/cybos.sqlite`
+    return `${getAppRoot()}/.serokell/serokell.sqlite`
   }
   // Vault mode: DB in vault
   return getDbPath()

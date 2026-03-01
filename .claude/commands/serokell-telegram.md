@@ -1,5 +1,5 @@
 ---
-name: cyber-telegram
+name: serokell-telegram
 description: Process Telegram messages - read, draft replies, save drafts via GramJS
 ---
 
@@ -11,19 +11,19 @@ Process Telegram messages via GramJS MTProto client. Read messages, generate AI 
 
 ```bash
 # Unread mode (default) - process unread conversations
-/cyber-telegram                    # 1 unread dialog
-/cyber-telegram --count 3          # 3 unread dialogs
+/serokell-telegram                    # 1 unread dialog
+/serokell-telegram --count 3          # 3 unread dialogs
 
 # User mode - find specific person (any read state)
-/cyber-telegram --user "@username" # By Telegram username
-/cyber-telegram --user "Name"      # By name
+/serokell-telegram --user "@username" # By Telegram username
+/serokell-telegram --user "Name"      # By name
 
 # Requests mode - message requests folder
-/cyber-telegram --requests         # Non-contacts who messaged you
+/serokell-telegram --requests         # Non-contacts who messaged you
 
 # Modifiers (work with all modes)
-/cyber-telegram --dry-run          # Read only, don't save drafts
-/cyber-telegram --no-mark-unread   # Don't preserve unread state
+/serokell-telegram --dry-run          # Read only, don't save drafts
+/serokell-telegram --no-mark-unread   # Don't preserve unread state
 ```
 
 ## Workflow
@@ -50,6 +50,6 @@ Process Telegram messages via GramJS MTProto client. Read messages, generate AI 
 
 | Output | Location |
 |--------|----------|
-| Per-person history | `~/CybosVault/private/context/telegram/<person-slug>.md` |
-| Work file | `~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md` |
-| Logs | `~/CybosVault/private/.cybos/logs/MMDD-YY.md` |
+| Per-person history | `~/SerokellSalesVault/private/context/telegram/<person-slug>.md` |
+| Work file | `~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md` |
+| Logs | `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md` |

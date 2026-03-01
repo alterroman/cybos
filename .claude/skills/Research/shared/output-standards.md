@@ -110,14 +110,14 @@ All consolidated research reports follow this structure:
 3-4 paragraphs covering:
 - What this is (company/tech/market)
 - Key findings across dimensions
-- Investment perspective (cyber•Fund lens)
+- Investment perspective (Serokell lens)
 - Overall assessment
 
 ### Main Sections
 Varies by research type (see type-specific formats)
 
 ### Investment Lens (REQUIRED)
-Apply cyber•Fund rubric:
+Apply Serokell rubric:
 - Thesis fit
 - TAM assessment
 - Defensibility
@@ -253,12 +253,12 @@ Examples:
 ### Debug Logs
 Format: `MMDD-YY.md` (single file per day)
 
-Location: `.cybos/logs/research-debug/`
+Location: `.serokell/logs/research-debug/`
 
 ### MCP Usage Logs
 Format: `MMDD-YY.md` (single file per day)
 
-Location: `.cybos/logs/mcp-usage/`
+Location: `.serokell/logs/mcp-usage/`
 
 ## Logging Format
 

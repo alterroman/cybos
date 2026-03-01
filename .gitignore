@@ -30,8 +30,8 @@ Thumbs.db
 *.swp
 
 # Local runtime data
-.cybos/
-.cybos/logs/
+.serokell/
+.serokell/logs/
 *.swo
 *~
 
@@ -52,7 +52,7 @@ output/
 # Git worktrees
 .worktrees/
 
-# Vault symlink (user data - points to ~/CybosVault with private/ and shared/)
+# Vault symlink (user data - points to ~/SerokellSalesVault with private/ and shared/)
 vault
 
 # Docs - only track specific files

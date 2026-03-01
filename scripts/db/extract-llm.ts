@@ -12,15 +12,15 @@ import { homedir } from "os";
 import db from "./client-sqlite";
 import { loadConfig } from "../config";
 
-// Auto-load vault .env if CYBOS_ANTHROPIC_KEY not in environment
+// Auto-load vault .env if SEROKELL_ANTHROPIC_KEY not in environment
 function ensureEnvLoaded(): void {
-  if (process.env.CYBOS_ANTHROPIC_KEY) return;
+  if (process.env.SEROKELL_ANTHROPIC_KEY) return;
 
   // Try vault .env first
   const config = loadConfig();
   const vaultEnvPaths = [
     config ? join(config.vault_path.replace(/^~/, homedir()), 'private', '.env') : null,
-    join(homedir(), 'CybosVault', 'private', '.env'),
+    join(homedir(), 'SerokellSalesVault', 'private', '.env'),
   ].filter(Boolean) as string[];
 
   // Also try project .env
@@ -47,7 +47,7 @@ function ensureEnvLoaded(): void {
             }
           }
         }
-        if (process.env.CYBOS_ANTHROPIC_KEY) {
+        if (process.env.SEROKELL_ANTHROPIC_KEY) {
           console.log(`Loaded env from: ${envPath}`);
           return;
         }
@@ -87,11 +87,11 @@ let anthropic: Anthropic | null = null;
 
 function getClient(): Anthropic {
   if (!anthropic) {
-    const apiKey = process.env.CYBOS_ANTHROPIC_KEY;
+    const apiKey = process.env.SEROKELL_ANTHROPIC_KEY;
     if (!apiKey) {
       throw new Error(
-        "CYBOS_ANTHROPIC_KEY environment variable is not set. " +
-          "Set it with: export CYBOS_ANTHROPIC_KEY=sk-ant-... " +
+        "SEROKELL_ANTHROPIC_KEY environment variable is not set. " +
+          "Set it with: export SEROKELL_ANTHROPIC_KEY=sk-ant-... " +
           "(separate from Claude Code's ANTHROPIC_API_KEY)"
       );
     }

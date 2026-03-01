@@ -4,7 +4,7 @@ Scan Twitter home timeline to discover trending topics for content creation.
 
 ## Inputs
 
-- Twitter account: Load handle from `~/CybosVault/private/context/identity.md`
+- Twitter account: Load handle from `~/SerokellSalesVault/private/context/identity.md`
 - Focus areas: AI, crypto, robotics, VC, futurism
 
 ## Workflow Steps
@@ -53,7 +53,7 @@ Filter posts by relevance:
 - Low-signal promotional content
 
 **Rank by:**
-1. Relevance to cyber.Fund thesis
+1. Relevance to Serokell thesis
 2. Engagement signals
 3. Recency (prefer <24h)
 4. Potential for unique angle
@@ -80,7 +80,7 @@ Identify 5 top topics from scan. For each:
 Display topics in structured format.
 
 **Save**:
-Save to `~/CybosVault/private/content/ideas/MMDD-browse-YY.md`:
+Save to `~/SerokellSalesVault/private/content/ideas/MMDD-browse-YY.md`:
 
 ```markdown
 # Browse: Twitter Feed
@@ -99,7 +99,7 @@ Save to `~/CybosVault/private/content/ideas/MMDD-browse-YY.md`:
 
 ### 6. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-<slug>-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-<slug>-YY.md`:
 
 ```markdown
 ## HH:MM | browse | twitter | [Top topic summary]
@@ -115,7 +115,7 @@ Append to `~/CybosVault/private/.cybos/logs/MMDD-<slug>-YY.md`:
 
 Before presenting topics:
 
-1. **Relevance check**: All 5 topics fit cyber.Fund's focus areas
+1. **Relevance check**: All 5 topics fit Serokell's focus areas
 2. **Freshness check**: Topics are current (<48h)
 3. **Engagement check**: Each topic has signal (not just random posts)
 4. **Angle check**: Each topic has a non-obvious angle for your voice

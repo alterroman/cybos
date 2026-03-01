@@ -1,4 +1,4 @@
-# Cybos Shared Vault
+# SerokellSalesAgent Shared Vault
 
 This directory contains team-shared data synchronized via GitHub.
 
@@ -21,7 +21,7 @@ Some data should remain in your private vault:
 
 ## Syncing
 
-Sync is handled automatically by Cybos:
+Sync is handled automatically by SerokellSalesAgent:
 
 ```bash
 # Manual sync
@@ -47,9 +47,9 @@ To share a deal or research project with your team:
 
 When a new team member joins:
 
-1. They run the Cybos setup wizard
+1. They run the SerokellSalesAgent setup wizard
 2. In the "Git Backup" step, they enter this repo's URL
-3. Cybos clones the shared vault automatically
+3. SerokellSalesAgent clones the shared vault automatically
 
 ## Merge Conflicts
 

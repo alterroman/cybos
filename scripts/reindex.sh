@@ -53,7 +53,7 @@ run_reindex() {
   local args="${1:-}"
 
   log "=========================================="
-  log "Cybos Reindex"
+  log "SerokellSalesAgent Reindex"
   log "=========================================="
 
   cd "$PROJECT_DIR"

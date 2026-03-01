@@ -42,19 +42,19 @@ Process Telegram messages via GramJS MTProto client. Supports unread messages, s
 
 ```bash
 # Unread mode (default)
-/cyber-telegram                    # 1 unread dialog
-/cyber-telegram --count 3          # 3 unread dialogs
+/serokell-telegram                    # 1 unread dialog
+/serokell-telegram --count 3          # 3 unread dialogs
 
 # User mode
-/cyber-telegram --user "@username" # By username
-/cyber-telegram --user "Name"      # By name
+/serokell-telegram --user "@username" # By username
+/serokell-telegram --user "Name"      # By name
 
 # Requests mode
-/cyber-telegram --requests         # Message requests folder
+/serokell-telegram --requests         # Message requests folder
 
 # Modifiers
-/cyber-telegram --dry-run          # Read only
-/cyber-telegram --no-mark-unread   # Don't preserve unread state
+/serokell-telegram --dry-run          # Read only
+/serokell-telegram --no-mark-unread   # Don't preserve unread state
 
 # Create intro group
 bun scripts/telegram-create-group.ts --dry-run --title "A <> B" --users "@user1,@user2"
@@ -65,7 +65,7 @@ See workflow files for full documentation.
 
 ## Dialog Cache
 
-Dialog cache (`~/.cybos/telegram/dialog-cache.json`) stores all dialog IDs with access hashes for fast lookups:
+Dialog cache (`~/.serokell/telegram/dialog-cache.json`) stores all dialog IDs with access hashes for fast lookups:
 - Populated automatically during searches
 - Used by `telegram-save-drafts.ts` to avoid fetching all dialogs
 - ~1 second draft save vs ~90 seconds without cache

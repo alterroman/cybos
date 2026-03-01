@@ -41,7 +41,7 @@ Extract from user arguments:
 ### 1.2 Create Workspace
 
 ```
-~/CybosVault/private/projects/serokell-bd/leads/MMDD-<domain>-YY/
+~/SerokellSalesVault/private/projects/serokell-bd/leads/MMDD-<domain>-YY/
 ├── raw/                  # Agent outputs
 └── report.md            # Final summary
 ```
@@ -49,7 +49,7 @@ Extract from user arguments:
 **Naming**: `MMDD-<domain>-YY` — e.g., `0227-blockchain-26`
 
 **Actions:**
-1. Ensure `~/CybosVault/private/projects/serokell-bd/leads/` exists (create if not)
+1. Ensure `~/SerokellSalesVault/private/projects/serokell-bd/leads/` exists (create if not)
 2. Create timestamped workspace with `/raw/` subdirectory
 3. Record workspace path for all subsequent steps
 
@@ -172,7 +172,7 @@ Build structured data array:
 Execute the sheets sync script:
 
 ```bash
-node /home/user/cybos/scripts/sheets-sync.js \
+node /home/user/serokell-sales-agent/scripts/sheets-sync.js \
   --sheet-id "[SEROKELL_LEADS_SHEET_ID]" \
   --tab "Leads" \
   --data '[JSON array of leads]'
@@ -181,8 +181,8 @@ node /home/user/cybos/scripts/sheets-sync.js \
 **If sheet ID not configured**: Prompt user:
 ```
 ⚠️ Google Sheets ID not set.
-Please set SEROKELL_LEADS_SHEET_ID in ~/.cybos/config.json
-Or provide it with: /cyber-bd-find-leads --sheet-id YOUR_ID
+Please set SEROKELL_LEADS_SHEET_ID in ~/.serokell/config.json
+Or provide it with: /serokell-bd-find-leads --sheet-id YOUR_ID
 
 Leads saved locally to: [workspace]/report.md
 ```
@@ -232,7 +232,7 @@ See: [workspace]/raw/agent-bd-lead-qualifier.md
 
 ### 5.2 Log Completion
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | bd | find-leads | [domain] [geo]

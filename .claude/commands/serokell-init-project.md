@@ -11,17 +11,17 @@ Project name: $ARGUMENTS
 2. Convert project name to kebab-case slug
    - Example: "Cyber Accelerator Q1" → "cyber-accelerator-q1"
 
-3. Check if `~/CybosVault/private/projects/<slug>/` already exists
+3. Check if `~/SerokellSalesVault/private/projects/<slug>/` already exists
    - If exists: warn and ask if user wants to view existing project instead
 
 4. Create directory structure:
    ```
-   ~/CybosVault/private/projects/<slug>/
-   └── .cybos/
+   ~/SerokellSalesVault/private/projects/<slug>/
+   └── .serokell/
        └── context.md
    ```
 
-   Note: Only .cybos/ is required. User creates other folders as needed.
+   Note: Only .serokell/ is required. User creates other folders as needed.
 
 5. Populate context.md with project template:
 
@@ -82,23 +82,23 @@ Project name: $ARGUMENTS
    - If not: ask user if they want to add a heading to GTD.md for this project
    - If yes: add `# <slug>` section at the end of GTD.md (before # Someday if exists)
 
-7. Log the action to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+7. Log the action to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
    ```
    ## HH:MM | project | init | [Project Name]
    - Workflow: init-project
-   - Output: ~/CybosVault/private/projects/<slug>/ created
+   - Output: ~/SerokellSalesVault/private/projects/<slug>/ created
 
    ---
    ```
 
 8. Display summary:
-   - Project folder created at ~/CybosVault/private/projects/<slug>/
+   - Project folder created at ~/SerokellSalesVault/private/projects/<slug>/
    - Edit context.md to add goals and key results
    - Add tasks under `# <slug>` in GTD.md
 
 **Examples**:
 ```bash
-/cyber-init-project "Cyber Accelerator Q1"
-/cyber-init-project "Database Indexer" --type product
-/cyber-init-project "Demo Day 2026" --type event
+/serokell-init-project "Cyber Accelerator Q1"
+/serokell-init-project "Database Indexer" --type product
+/serokell-init-project "Demo Day 2026" --type event
 ```

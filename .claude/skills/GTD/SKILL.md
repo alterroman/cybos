@@ -9,7 +9,7 @@ Autonomous task execution from GTD.md items.
 
 ## Trigger
 
-- Command: `/cyber-gtd`
+- Command: `/serokell-gtd`
 - Default: plan-first (show before execute)
 
 ## Workflow
@@ -21,7 +21,7 @@ Autonomous task execution from GTD.md items.
    - Plan actions
 3. Show plan → ask to execute
 4. Execute approved items sequentially (one at a time)
-5. Output: `~/CybosVault/private/content/work/MMDD-<slug>.md`
+5. Output: `~/SerokellSalesVault/private/content/work/MMDD-<slug>.md`
 
 ## Classification → Routing
 
@@ -50,7 +50,7 @@ Query database for entity context:
 
 ## Output Format
 
-All outputs to `~/CybosVault/private/content/work/MMDD-<slug>.md`:
+All outputs to `~/SerokellSalesVault/private/content/work/MMDD-<slug>.md`:
 
 ```markdown
 # Task: [Task Description]

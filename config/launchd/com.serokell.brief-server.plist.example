@@ -7,7 +7,7 @@
          Restarts automatically if it crashes -->
 
     <key>Label</key>
-    <string>com.cybos.brief-server</string>
+    <string>com.serokell.brief-server</string>
 
     <key>ProgramArguments</key>
     <array>
@@ -17,7 +17,7 @@
     </array>
 
     <key>WorkingDirectory</key>
-    <string>__CYBOS_ROOT__</string>
+    <string>__SEROKELL_ROOT__</string>
 
     <key>EnvironmentVariables</key>
     <dict>

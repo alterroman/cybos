@@ -23,8 +23,8 @@ Opens Terminal and runs a slash command in Claude Code.
 
 **Example:**
 ```markdown
-[Run GTD](cc://cmd/cyber-gtd)
-[Morning Brief](cc://cmd/cyber-brief)
+[Run GTD](cc://cmd/serokell-gtd)
+[Morning Brief](cc://cmd/serokell-brief)
 ```
 
 ## How It Works
@@ -139,7 +139,7 @@ Run cc-open directly to test:
 cc-open resume/744ee4cf-512f-48da-92fe-c85afed5f196
 
 # Test command mode
-cc-open cmd/cyber-gtd
+cc-open cmd/serokell-gtd
 
 # Check working directory for a session
 cc-open --info 744ee4cf-512f-48da-92fe-c85afed5f196

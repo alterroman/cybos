@@ -75,7 +75,7 @@ Display final version:
 ═══════════════════════════════════════
 ```
 
-Save to `~/CybosVault/private/content/tweets/MMDD-<slug>-YY.md`
+Save to `~/SerokellSalesVault/private/content/tweets/MMDD-<slug>-YY.md`
 
 ### 5. IMAGE (if requested)
 
@@ -83,14 +83,14 @@ Use `@.claude/skills/Content/workflows/image.md`
 
 ### 6. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | content | tweet | [Topic]
 - Workflow: tweet
 - Thread length: [n] tweets
 - Data verified: yes/no
-- Output: ~/CybosVault/private/content/tweets/MMDD-<slug>-YY.md
+- Output: ~/SerokellSalesVault/private/content/tweets/MMDD-<slug>-YY.md
 
 ---
 ```

@@ -1,6 +1,6 @@
 {
   "env": {
-    "CYBOS_VERSION": "1.1",
+    "SEROKELL_VERSION": "1.1",
     "ENABLE_TOOL_SEARCH": "true",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },

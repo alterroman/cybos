@@ -52,10 +52,10 @@ Before making ANY changes to research workflows:
 
 1. **Run all 4 evals manually**:
    ```
-   /cyber-research-company "Anthropic"
-   /cyber-research-tech "Trusted Execution Environments"
-   /cyber-research-market "AI Infrastructure"
-   /cyber-research-topic "post-labor economy"
+   /serokell-research-company "Anthropic"
+   /serokell-research-tech "Trusted Execution Environments"
+   /serokell-research-market "AI Infrastructure"
+   /serokell-research-topic "post-labor economy"
    ```
 
 2. **Document baseline results**:

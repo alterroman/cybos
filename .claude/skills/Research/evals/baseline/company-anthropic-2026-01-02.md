@@ -28,9 +28,9 @@
 
 **Preliminary Investment View:** **Worth Deep Exploration with Concerns**
 
-Anthropic exhibits exceptional characteristics—proven enterprise demand, superior unit economics, technical leadership in coding, and a credible path to profitability. However, the $300-350B valuation prices in flawless execution of an aggressive margin expansion plan and sustained 2-3x annual growth through 2028. For cyber•Fund's typical early-stage AI infrastructure focus, this represents a late-stage, lower-return-multiple opportunity better suited for growth equity portfolios.
+Anthropic exhibits exceptional characteristics—proven enterprise demand, superior unit economics, technical leadership in coding, and a credible path to profitability. However, the $300-350B valuation prices in flawless execution of an aggressive margin expansion plan and sustained 2-3x annual growth through 2028. For Serokell's typical early-stage AI infrastructure focus, this represents a late-stage, lower-return-multiple opportunity better suited for growth equity portfolios.
 
-**cyber•Fund Lens Assessment:**
+**Serokell Lens Assessment:**
 - ✅ **Market Size:** Path to $70B+ revenue validated
 - ✅ **Creating New Markets:** Enterprise AI infrastructure layer
 - ⚠️ **Moat:** Strong but vulnerable to competitive pricing
@@ -395,7 +395,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 - 22 weeks parental leave, $500/month wellness benefit
 - Meaningful equity (pre-IPO)
 
-### Team Assessment (cyber•Fund Criteria)
+### Team Assessment (Serokell Criteria)
 
 **Founder Energy & Speed:** ✅ **HIGH**
 - Evidence: Hypergrowth execution (2,300 employees, $9B ARR in 4 years)
@@ -611,7 +611,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 - Anthropic: $300-350B, $9B ARR (33-39x revenue)
 - xAI: $50B, <$100M ARR (500x+ revenue, Elon premium)
 
-**Fair Value Range (cyber•Fund Assessment):**
+**Fair Value Range (Serokell Assessment):**
 - **Base Case:** $200-250B (25-28x forward revenue on $9B ARR)
 - **Bull Case:** $300-400B (30-35x if 2026 hits $25B ARR)
 - **Bear Case:** $150-180B (if growth decelerates and margins compress)
@@ -623,7 +623,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 
 ---
 
-## Investment Lens (cyber•Fund Framework)
+## Investment Lens (Serokell Framework)
 
 ### 1. Market Size (TAM): ✅ **Path to $1B+ Revenue**
 
@@ -742,8 +742,8 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 - $350B / $9B ARR = 39x
 - $300B / $20B ARR (2026 guidance) = 15x
 
-**Comparison to cyber•Fund Preference:**
-- cyber•Fund typically invests at $10M-$20M pre-seed valuations
+**Comparison to Serokell Preference:**
+- Serokell typically invests at $10M-$20M pre-seed valuations
 - Anthropic is late-stage, pre-IPO (wrong stage for early-stage VC)
 - Return potential: 2-3x by 2028 at best (vs. 10-100x for early-stage)
 
@@ -789,7 +789,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 
 **Fit:** ❌ Big Tech threat is real and existential in 3-5 year timeframe
 
-### cyber•Fund Thesis Fit: Overall Assessment
+### Serokell Thesis Fit: Overall Assessment
 
 **Focus Area Alignment:**
 - ✅ **AI Infrastructure:** Direct play on foundation models + inference layer
@@ -797,7 +797,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 - ⚠️ **Robotics:** Indirect infrastructure layer for embodied AI (models power robot reasoning)
 
 **Stage Appropriateness:**
-- ❌ **Late-stage, pre-IPO** (not typical cyber•Fund sweet spot)
+- ❌ **Late-stage, pre-IPO** (not typical Serokell sweet spot)
 - Minimum check size likely $100M+ (mega-fund territory)
 - Better fit for growth equity or crossover investors
 
@@ -808,7 +808,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
 - **Expected return:** 2-3x (acceptable for growth, low for early-stage VC)
 
 **Investment Recommendation:**
-- For **cyber•Fund (early-stage focus):** Pass on direct investment
+- For **Serokell (early-stage focus):** Pass on direct investment
 - Better opportunities: Anthropic enablers (tooling, vertical AI, agent infrastructure)
 - For **growth portfolios:** Worth exploring at $250-300B valuation (fair entry)
 
@@ -917,7 +917,7 @@ INFRASTRUCTURE (Compute, TPUs, GPUs) ────────► $18B (2025)
    - New teams, jurisdictions, regulatory environments
    - Execution missteps could slow growth, distract from core
 
-10. **Stage Mismatch for cyber•Fund**
+10. **Stage Mismatch for Serokell**
     - Late-stage pre-IPO (not early-stage venture)
     - Minimum check: $100M+ (mega-fund territory)
     - Expected return: 2-3x (vs. 10-100x for seed/Series A)
@@ -1056,7 +1056,7 @@ Anthropic represents the **most successful enterprise AI company in history**, a
 
 **The business is real:** 80% enterprise revenue, $211 per user monetization (8.4x better than OpenAI), 300,000+ customers including Fortune 500s, and proven ROI (15-30% developer velocity gains, 99.9% time reductions in healthcare). This isn't a hype cycle or token speculation—it's the fastest enterprise software scaling in history.
 
-**The team is exceptional:** All 7 co-founders retained, Dario Amodei invented RLHF and led GPT-2/3, Daniela Amodei proven operational scaler, world-class research density. Founders exhibit the energy, expertise, and execution cyber•Fund values.
+**The team is exceptional:** All 7 co-founders retained, Dario Amodei invented RLHF and led GPT-2/3, Daniela Amodei proven operational scaler, world-class research density. Founders exhibit the energy, expertise, and execution Serokell values.
 
 **The moats are real but time-limited:** Constitutional AI (2-3 years), multi-cloud partnerships (3-5 years), developer ecosystem (2-3 years), enterprise relationships (durable). No single insurmountable moat, but multiple reinforcing advantages create defensibility.
 
@@ -1068,7 +1068,7 @@ Anthropic represents the **most successful enterprise AI company in history**, a
 
 **Preliminary View:** **Worth Exploring (with Entry Price Discipline)**
 
-**For cyber•Fund (Early-Stage AI Infrastructure Focus):**
+**For Serokell (Early-Stage AI Infrastructure Focus):**
 - ❌ **Direct investment at $300-350B:** Wrong stage, low return multiple (2-3x)
 - ✅ **Better opportunities:** Anthropic enablers (vertical AI, agent infrastructure, tooling)
 - ⚠️ **Secondary at discount:** If available at $200-250B, worth considering for growth allocation
@@ -1143,7 +1143,7 @@ Anthropic represents the **most successful enterprise AI company in history**, a
 
 ### Final Verdict
 
-**Anthropic is the best-executed enterprise AI company, but the $300-350B valuation leaves limited upside for early-stage venture investors. For cyber•Fund's typical AI infrastructure focus, this is a late-stage, lower-return-multiple opportunity.**
+**Anthropic is the best-executed enterprise AI company, but the $300-350B valuation leaves limited upside for early-stage venture investors. For Serokell's typical AI infrastructure focus, this is a late-stage, lower-return-multiple opportunity.**
 
 **Better fit for growth equity portfolios seeking 2-3x returns with lower risk. However, if available at $200-250B via secondary, worth serious consideration as enterprise AI infrastructure platform play.**
 
@@ -1266,7 +1266,7 @@ Anthropic represents the **most successful enterprise AI company in history**, a
 
 ---
 
-**Report Prepared By:** cyber•Fund Research Team
+**Report Prepared By:** Serokell Research Team
 **Date:** January 2, 2026
 **Research Duration:** 48 hours (parallel agent execution)
 **Next Update Recommended:** Q2 2026 (post-earnings, competitive developments, market data)

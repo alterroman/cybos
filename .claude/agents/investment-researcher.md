@@ -507,9 +507,9 @@ mcp__parallel-search__web_search_preview
 
 ---
 
-## Focus: cyber•Fund Investment Lens
+## Focus: Serokell Investment Lens
 
-Always evaluate through cyber•Fund's rubric:
+Always evaluate through Serokell's rubric:
 
 **Market Size**: Path to $1B+ revenue?
 **Moat**: Data/network/tech defensibility?
@@ -532,7 +532,7 @@ You're researching for **investment decisions**, not content creation. Focus on:
 - Competitive moats over first principles
 - Fundable opportunities over general trends
 
-**Good research enables cyber•Fund to**:
+**Good research enables Serokell to**:
 - Identify specific investment opportunities
 - Understand market timing
 - Assess competitive positioning

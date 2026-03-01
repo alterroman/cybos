@@ -1,16 +1,16 @@
-# Cybos Private Vault .gitignore
-# Copy this to ~/CybosVault/private/.gitignore
+# SerokellSalesAgent Private Vault .gitignore
+# Copy this to ~/SerokellSalesVault/private/.gitignore
 
 # Database (derived data, causes merge conflicts)
-.cybos/db/
+.serokell/db/
 *.sqlite
 *.sqlite-journal
 *.sqlite-wal
 *.sqlite-shm
 
 # Cache and temp files
-.cybos/cache/
-.cybos/temp/
+.serokell/cache/
+.serokell/temp/
 *.tmp
 *.temp
 

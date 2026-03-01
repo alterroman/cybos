@@ -1,6 +1,6 @@
-## What is Cybos
+## What is SerokellSalesAgent
 
-Cybos (Cybernetic Operating System) is a personal AI assistant for Stepan and a venture capital operations aid for cyber•Fund team. Handles research (company DD, tech deep-dives, market analysis), Telegram message management, content (tweets, essays, images), and DD memo generation.
+SerokellSalesAgent (Serokell Sales Agent) is a personal AI assistant for Roman and a venture capital operations aid for Serokell team. Handles research (company DD, tech deep-dives, market analysis), Telegram message management, content (tweets, essays, images), and DD memo generation.
 
 ## Load the following info at all times when working on user tasks (located at private vault root)
 
@@ -12,10 +12,10 @@ Cybos (Cybernetic Operating System) is a personal AI assistant for Stepan and a 
 
 ## Design Principles
 
-1. **Vault-based architecture**: User data lives in `~/CybosVault/` (separate from code), configured via `~/.cybos/config.json`
+1. **Vault-based architecture**: User data lives in `~/SerokellSalesVault/` (separate from code), configured via `~/.serokell/config.json`
 2. **File-first with database indexing**: Source data is markdown on disk, indexed into SQLite for fast queries. External data via MCP tools (Gmail, Telegram, Granola, etc)
 3. **Scaffolding > prompting**: Workflows + tools beat raw prompts
-4. **Slash commands**: All interaction via `/cyber-*` commands
+4. **Slash commands**: All interaction via `/serokell-*` commands
 5. **Logging**: Single-file logging after every workflow
 6. **Context auto-loading**: Deal context loads automatically when mentioned
 7. **Self-improvement**: Continuously learn from mistakes via `.claude/napkin.md` (see Self-improve skill)
@@ -36,7 +36,7 @@ Agents are spawned via Claude Code's `Task` tool. Multiple Task calls in the sam
 
 ## MCP Integrations
 
-Cybos uses these MCP servers with the following priority hierarchy:
+SerokellSalesAgent uses these MCP servers with the following priority hierarchy:
 
 **Primary:**
 - **exa**: Web search, company research, URL content extraction (PRIMARY for research)
@@ -80,27 +80,27 @@ Skills are loaded via:
 | User Request | Read This Workflow First |
 |--------------|--------------------------|
 | "Write telegram post", "create russian post" | `.claude/skills/Content/workflows/telegram-post.md` |
-| "Read telegram", "reply to telegram", "process messages" | `.claude/commands/cyber-telegram.md` |
+| "Read telegram", "reply to telegram", "process messages" | `.claude/commands/serokell-telegram.md` |
 | "Generate image", "create image", "make image" | `.claude/skills/Content/workflows/image.md` |
 | "Write tweet", "draft tweet", "create tweet" | `.claude/skills/Content/workflows/tweet.md` |
 | "Write essay", "create essay", "draft essay" | `.claude/skills/Content/workflows/essay.md` |
 | "Browse twitter", "scan twitter", "trending topics" | `.claude/skills/Browse/workflows/twitter-feed.md` |
-| "Research company", "company DD", "due diligence" | Use `/cyber-research-company` command |
-| "Research tech", "technology analysis", "tech deep-dive" | Use `/cyber-research-tech` command |
-| "Research market", "market analysis", "sector analysis" | Use `/cyber-research-market` command |
-| "Generate memo", "investment memo", "write memo" | Use `/cyber-memo` command |
-| "Schedule tweet", "post to twitter", "publish to linkedin", "schedule to typefully" | `.claude/commands/cyber-schedule.md` |
-| "Work on GTD", "process GTD", "do my tasks" | `.claude/commands/cyber-gtd.md` |
-| "Rebuild index", "reindex entities" | `.claude/commands/cyber-reindex.md` |
-| "Sync emails", "index emails", "morning brief emails" | `.claude/commands/cyber-email.md` (use `--sync` flag) |
-| "Calendar", "my meetings", "what's on my calendar" | `.claude/commands/cyber-calendar.md` |
-| "Morning brief", "daily brief", "generate brief" | `.claude/commands/cyber-brief.md` |
-| "Unstuck", "feeling stuck", "can't focus", "distracted" | `.claude/commands/cyber-unstuck.md` |
-| "Project status", "work on project X", "show project" | `.claude/commands/cyber-project.md` |
-| "Create project", "init project", "new project" | `.claude/commands/cyber-init-project.md` |
-| "List projects", "all projects", "my projects" | `.claude/commands/cyber-projects.md` |
-| "Find Rust companies", "find BD leads", "Serokell leads", "search for clients" | `.claude/commands/cyber-bd-find-leads.md` |
-| "Research company lead", "deep dive BD lead", "qualify this company" | `.claude/commands/cyber-bd-research-lead.md` |
+| "Research company", "company DD", "due diligence" | Use `/serokell-research-company` command |
+| "Research tech", "technology analysis", "tech deep-dive" | Use `/serokell-research-tech` command |
+| "Research market", "market analysis", "sector analysis" | Use `/serokell-research-market` command |
+| "Generate memo", "investment memo", "write memo" | Use `/serokell-memo` command |
+| "Schedule tweet", "post to twitter", "publish to linkedin", "schedule to typefully" | `.claude/commands/serokell-schedule.md` |
+| "Work on GTD", "process GTD", "do my tasks" | `.claude/commands/serokell-gtd.md` |
+| "Rebuild index", "reindex entities" | `.claude/commands/serokell-reindex.md` |
+| "Sync emails", "index emails", "morning brief emails" | `.claude/commands/serokell-email.md` (use `--sync` flag) |
+| "Calendar", "my meetings", "what's on my calendar" | `.claude/commands/serokell-calendar.md` |
+| "Morning brief", "daily brief", "generate brief" | `.claude/commands/serokell-brief.md` |
+| "Unstuck", "feeling stuck", "can't focus", "distracted" | `.claude/commands/serokell-unstuck.md` |
+| "Project status", "work on project X", "show project" | `.claude/commands/serokell-project.md` |
+| "Create project", "init project", "new project" | `.claude/commands/serokell-init-project.md` |
+| "List projects", "all projects", "my projects" | `.claude/commands/serokell-projects.md` |
+| "Find Rust companies", "find BD leads", "Serokell leads", "search for clients" | `.claude/commands/serokell-bd-find-leads.md` |
+| "Research company lead", "deep dive BD lead", "qualify this company" | `.claude/commands/serokell-bd-research-lead.md` |
 
 **Execution Rules:**
 
@@ -137,7 +137,7 @@ When user mentions a person or company name:
 
 ### Logging Requirement
 
-After completing ANY workflow (research, content, memo), append a log entry to `/.cybos/logs/MMDD-YY.md`:
+After completing ANY workflow (research, content, memo), append a log entry to `/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | category | type | subject
@@ -168,50 +168,50 @@ See `.claude/skills/Self-improve/SKILL.md` for full specification.
 
 | Command | Purpose |
 |---------|---------|
-| `/cyber-research-company "Name"` | Company DD research |
-| `/cyber-research-tech "Topic"` | Technology deep-dive |
-| `/cyber-research-market "Sector"` | Market analysis |
-| `/cyber-research-topic "Topic"` | Topic exploration for content |
-| `/cyber-telegram` | Process 1 unread Telegram conversation (GramJS MTProto) |
-| `/cyber-telegram --count 3` | Process 3 unread conversations |
-| `/cyber-telegram --user "@name"` | Process specific user (any read state) |
-| `/cyber-telegram --requests` | Process unread message requests (non-contacts) |
-| `/cyber-telegram --dry-run` | Read only, don't save drafts to Telegram |
-| `/cyber-browse` | Scan Twitter for trending topics (default: twitter) |
-| `/cyber-tweet "Topic"` | Draft tweet |
-| `/cyber-essay "Topic"` | Write essay |
-| `/cyber-image "Concept"` | Generate image |
-| `/cyber-memo "Company"` | Generate DD memo |
-| `/cyber-init-deal "Company"` | Initialize deal folder |
-| `/cyber-save-calls` | Extract Granola calls |
-| `/cyber-log` | Show recent activity |
-| `/cyber-schedule @file.md` | Schedule content to Twitter/LinkedIn via Typefully |
-| `/cyber-gtd` | Process GTD items autonomously (plan-first by default) |
-| `/cyber-gtd --count 3` | Process 3 GTD items |
-| `/cyber-gtd --execute` | Skip plan, run immediately |
-| `/cyber-reindex` | Rebuild SQLite database from all sources |
-| `/cyber-reindex --status` | Show database status (entities, interactions, last run) |
-| `/cyber-reindex --extract` | Index + run LLM extraction for promises/actions |
-| `/cyber-reindex --extract-only` | Run extraction on already-indexed interactions |
-| `/cyber-email --sync` | Sync emails to /context/emails/ (last 3 days, unread + important) |
-| `/cyber-email --sync --days 7` | Sync emails for last 7 days |
-| `/cyber-calendar` | Show today + tomorrow calendar events |
-| `/cyber-calendar --days 3` | Show next 3 days of events |
-| `/cyber-brief` | Generate morning brief (Telegram + Email + Calendar + GTD) |
-| `/cyber-brief --email-days 7` | Include 7 days of emails (default: 3) |
-| `/cyber-unstuck` | Interactive focus ritual for breaking distraction loops |
-| `/cyber-init-project "Name"` | Initialize project folder with context template |
-| `/cyber-project slug` | Show project status and tasks |
-| `/cyber-projects` | List all projects |
-| `/cyber-gtd --project slug` | Process GTD tasks for specific project only |
-| `/cyber-bd-find-leads` | Find Rust companies for Serokell BD pipeline |
-| `/cyber-bd-find-leads --domain blockchain --geo US` | Domain + geo filtered search |
-| `/cyber-bd-find-leads --domain fintech --funding series-a --min-score 70` | Targeted search |
-| `/cyber-bd-research-lead "Company Name"` | Deep-dive BD research on single company |
+| `/serokell-research-company "Name"` | Company DD research |
+| `/serokell-research-tech "Topic"` | Technology deep-dive |
+| `/serokell-research-market "Sector"` | Market analysis |
+| `/serokell-research-topic "Topic"` | Topic exploration for content |
+| `/serokell-telegram` | Process 1 unread Telegram conversation (GramJS MTProto) |
+| `/serokell-telegram --count 3` | Process 3 unread conversations |
+| `/serokell-telegram --user "@name"` | Process specific user (any read state) |
+| `/serokell-telegram --requests` | Process unread message requests (non-contacts) |
+| `/serokell-telegram --dry-run` | Read only, don't save drafts to Telegram |
+| `/serokell-browse` | Scan Twitter for trending topics (default: twitter) |
+| `/serokell-tweet "Topic"` | Draft tweet |
+| `/serokell-essay "Topic"` | Write essay |
+| `/serokell-image "Concept"` | Generate image |
+| `/serokell-memo "Company"` | Generate DD memo |
+| `/serokell-init-deal "Company"` | Initialize deal folder |
+| `/serokell-save-calls` | Extract Granola calls |
+| `/serokell-log` | Show recent activity |
+| `/serokell-schedule @file.md` | Schedule content to Twitter/LinkedIn via Typefully |
+| `/serokell-gtd` | Process GTD items autonomously (plan-first by default) |
+| `/serokell-gtd --count 3` | Process 3 GTD items |
+| `/serokell-gtd --execute` | Skip plan, run immediately |
+| `/serokell-reindex` | Rebuild SQLite database from all sources |
+| `/serokell-reindex --status` | Show database status (entities, interactions, last run) |
+| `/serokell-reindex --extract` | Index + run LLM extraction for promises/actions |
+| `/serokell-reindex --extract-only` | Run extraction on already-indexed interactions |
+| `/serokell-email --sync` | Sync emails to /context/emails/ (last 3 days, unread + important) |
+| `/serokell-email --sync --days 7` | Sync emails for last 7 days |
+| `/serokell-calendar` | Show today + tomorrow calendar events |
+| `/serokell-calendar --days 3` | Show next 3 days of events |
+| `/serokell-brief` | Generate morning brief (Telegram + Email + Calendar + GTD) |
+| `/serokell-brief --email-days 7` | Include 7 days of emails (default: 3) |
+| `/serokell-unstuck` | Interactive focus ritual for breaking distraction loops |
+| `/serokell-init-project "Name"` | Initialize project folder with context template |
+| `/serokell-project slug` | Show project status and tasks |
+| `/serokell-projects` | List all projects |
+| `/serokell-gtd --project slug` | Process GTD tasks for specific project only |
+| `/serokell-bd-find-leads` | Find Rust companies for Serokell BD pipeline |
+| `/serokell-bd-find-leads --domain blockchain --geo US` | Domain + geo filtered search |
+| `/serokell-bd-find-leads --domain fintech --funding series-a --min-score 70` | Targeted search |
+| `/serokell-bd-research-lead "Company Name"` | Deep-dive BD research on single company |
 
 **Research flags**: `--quick`, `--standard`, `--deep` control intensity/speed tradeoff.
 
-**Web Brief URLs** (after running `/cyber-brief`):
+**Web Brief URLs** (after running `/serokell-brief`):
 - Web UI: http://localhost:3847
 - Today's brief: http://localhost:3847?day=today
 - Yesterday's brief: http://localhost:3847?day=yesterday
@@ -222,7 +222,7 @@ See `.claude/skills/Self-improve/SKILL.md` for full specification.
 
 ## Research Architecture
 
-All research commands (`/cyber-research-company`, `/cyber-research-tech`, `/cyber-research-market`, `/cyber-research-topic`) use the **universal orchestrator** workflow:
+All research commands (`/serokell-research-company`, `/serokell-research-tech`, `/serokell-research-market`, `/serokell-research-topic`) use the **universal orchestrator** workflow:
 
 ### Research Orchestrator Flow
 
@@ -312,8 +312,8 @@ When exploring the codebase or planning changes, read `docs/ARCHITECTURE.md` for
 
 ## Repository Structure
 
-Cybos separates code from data:
+SerokellSalesAgent separates code from data:
 
-- **Code repo** (`cybos/`): Application code, commands, scripts - safe to push to GitHub
-- **Data vault** (`~/CybosVault/private/`): Personal data (deals, calls, emails, GTD) - never committed to code repo
-- **Shared vault** (`~/CybosVault/shared/`): Company/team data (deals, calls, emails, GTD)
+- **Code repo** (`serokell-sales-agent/`): Application code, commands, scripts - safe to push to GitHub
+- **Data vault** (`~/SerokellSalesVault/private/`): Personal data (deals, calls, emails, GTD) - never committed to code repo
+- **Shared vault** (`~/SerokellSalesVault/shared/`): Company/team data (deals, calls, emails, GTD)

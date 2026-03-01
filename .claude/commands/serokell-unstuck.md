@@ -5,7 +5,7 @@ Interactive focus/clarity ritual for breaking distraction loops and reconnecting
 ## Usage
 
 ```
-/cyber-unstuck
+/serokell-unstuck
 ```
 
 ## What It Does
@@ -24,7 +24,7 @@ Opens a web interface that guides you through a reflective process:
 
 ## Journal
 
-All sessions logged to `~/CybosVault/private/context/unstuck/journal.md` for self-knowledge over time.
+All sessions logged to `~/SerokellSalesVault/private/context/unstuck/journal.md` for self-knowledge over time.
 
 ## When to Use
 

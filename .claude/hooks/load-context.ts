@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// SessionStart hook: Load core context into every Cybos session
+// SessionStart hook: Load core context into every SerokellSalesAgent session
 
 import { readFileSync, existsSync } from 'fs';
 import { extractGranolaCalls } from '../../scripts/extract-granola';
@@ -54,13 +54,13 @@ function readFile(path: string): string {
  */
 function getLogPathInstruction(): string {
   if (isLegacyMode()) {
-    return '/.cybos/logs/MMDD-YY.md';
+    return '/.serokell/logs/MMDD-YY.md';
   }
   try {
     const logsPath = getLogsPath();
     return logsPath.replace(process.env.HOME || '~', '~');
   } catch {
-    return '~/CybosVault/private/.cybos/logs/MMDD-YY.md';
+    return '~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md';
   }
 }
 
@@ -75,7 +75,7 @@ function getDealsPathInstruction(): string {
     const dealsPath = getDealsPath();
     return dealsPath.replace(process.env.HOME || '~', '~') + '/<company-slug>/';
   } catch {
-    return '~/CybosVault/private/deals/<company-slug>/';
+    return '~/SerokellSalesVault/private/deals/<company-slug>/';
   }
 }
 
@@ -90,7 +90,7 @@ function getProjectsPathInstruction(): string {
     const projectsPath = getProjectsPath();
     return projectsPath.replace(process.env.HOME || '~', '~') + '/<slug>/';
   } catch {
-    return '~/CybosVault/private/projects/<slug>/';
+    return '~/SerokellSalesVault/private/projects/<slug>/';
   }
 }
 
@@ -138,14 +138,14 @@ async function checkDatabaseFreshness(): Promise<{ exists: boolean; ageHours: nu
  */
 function getSessionsPathInstruction(): string {
   if (isLegacyMode()) {
-    return '/.cybos/context/sessions/';
+    return '/.serokell/context/sessions/';
   }
   try {
     const contextPath = getContextPath();
     const sessionsPath = join(contextPath, 'sessions');
     return sessionsPath.replace(process.env.HOME || '~', '~') + '/';
   } catch {
-    return '~/CybosVault/private/context/sessions/';
+    return '~/SerokellSalesVault/private/context/sessions/';
   }
 }
 
@@ -172,7 +172,7 @@ process.stdin.on('end', async () => {
   let setupMessage = '';
 
   if (!setupComplete) {
-    setupMessage = '⚠️ Cybos not configured. Run: bun scripts/brief-server.ts → http://localhost:3847/setup';
+    setupMessage = '⚠️ SerokellSalesAgent not configured. Run: bun scripts/brief-server.ts → http://localhost:3847/setup';
   }
 
   // Check database freshness
@@ -182,9 +182,9 @@ process.stdin.on('end', async () => {
   if (dbStatus.error) {
     indexMessage = `⚠️ ${dbStatus.error}`;
   } else if (!dbStatus.exists) {
-    indexMessage = '⚠️ Database not indexed. Run /cyber-reindex to build.';
+    indexMessage = '⚠️ Database not indexed. Run /serokell-reindex to build.';
   } else if (dbStatus.needsRebuild) {
-    indexMessage = `⚠️ Database stale (${dbStatus.ageHours}h old). Run /cyber-reindex to refresh.`;
+    indexMessage = `⚠️ Database stale (${dbStatus.ageHours}h old). Run /serokell-reindex to refresh.`;
   }
 
   // Try to extract Granola calls (silent, incremental)
@@ -242,7 +242,7 @@ When the user mentions a company that might be a deal:
 ## Project Context Auto-Loading
 When the user mentions a project (e.g., "work on scheduler", "context graph status"):
 1. Check if ${projectsPathInstruction} exists (try kebab-case conversion)
-2. If exists, read ${projectsPathInstruction}.cybos/context.md
+2. If exists, read ${projectsPathInstruction}.serokell/context.md
 3. Also check GTD.md for tasks under the \`# <slug>\` heading
 4. Incorporate this context into your response
 

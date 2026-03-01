@@ -8,10 +8,10 @@
     "Spawns appropriate agents for topic research (could be tech-researcher + market-researcher, or topic-specific agents)",
     "Gathers diverse perspectives (academic, industry, philosophical)",
     "Identifies key thinkers and their frameworks",
-    "Connects topic to cyber•Fund investment thesis",
+    "Connects topic to Serokell investment thesis",
     "Flags companies or technologies related to this topic",
     "Provides content-ready insights for essays or tweets",
-    "Saves to ~/CybosVault/private/research/topics/post-labor-economy/YYYY-MM-DD.md",
+    "Saves to ~/SerokellSalesVault/private/research/topics/post-labor-economy/YYYY-MM-DD.md",
     "Creates topic context file with key sources and thinkers",
     "Logs action"
   ],
@@ -27,7 +27,7 @@
     "quality_indicators": [
       "Academic rigor (papers, books, credible sources cited)",
       "Synthesis across disciplines",
-      "Clear connection to cyber•Fund focus (AI, automation, programmable economy)",
+      "Clear connection to Serokell focus (AI, automation, programmable economy)",
       "Actionable insights for content creation",
       "Identification of contrarian or emerging viewpoints",
       "Practical examples or case studies"

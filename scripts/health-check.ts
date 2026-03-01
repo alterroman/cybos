@@ -2,7 +2,7 @@
 /**
  * Health Check Script
  *
- * Validates all Cybos dependencies and configurations before workflows run.
+ * Validates all SerokellSalesAgent dependencies and configurations before workflows run.
  * Run this to diagnose issues with morning brief, reindex, etc.
  *
  * Usage:
@@ -40,27 +40,27 @@ function warn(name: string, message: string, fix?: string): void {
 }
 
 async function runChecks(): Promise<void> {
-  console.log('🔍 Cybos Health Check\n');
+  console.log('🔍 SerokellSalesAgent Health Check\n');
 
   // 1. Config file
   const config = loadConfig();
   check(
     'Config',
     !!config?.setup_completed,
-    `Config loaded from ~/.cybos/config.json`,
+    `Config loaded from ~/.serokell/config.json`,
     'Config not found or incomplete',
     'Run setup wizard: bun scripts/brief-server.ts, then open http://localhost:3847/setup'
   );
 
   // 2. Vault path
-  const vaultPath = config?.vault_path?.replace(/^~/, homedir()) || join(homedir(), 'CybosVault');
+  const vaultPath = config?.vault_path?.replace(/^~/, homedir()) || join(homedir(), 'SerokellSalesVault');
   const vaultExists = existsSync(join(vaultPath, 'private'));
   check(
     'Vault',
     vaultExists,
     `Vault found at ${vaultPath}`,
     `Vault not found at ${vaultPath}`,
-    'Run setup wizard or mkdir -p ~/CybosVault/private'
+    'Run setup wizard or mkdir -p ~/SerokellSalesVault/private'
   );
 
   // 3. Vault .env
@@ -71,22 +71,22 @@ async function runChecks(): Promise<void> {
     vaultEnvExists,
     `Vault .env found at ${vaultEnv}`,
     `Vault .env not found`,
-    `Create ${vaultEnv} with CYBOS_ANTHROPIC_KEY`
+    `Create ${vaultEnv} with SEROKELL_ANTHROPIC_KEY`
   );
 
-  // 4. CYBOS_ANTHROPIC_KEY
-  let hasAnthropicKey = !!process.env.CYBOS_ANTHROPIC_KEY;
+  // 4. SEROKELL_ANTHROPIC_KEY
+  let hasAnthropicKey = !!process.env.SEROKELL_ANTHROPIC_KEY;
   if (!hasAnthropicKey && vaultEnvExists) {
     // Try loading from vault .env
     const content = readFileSync(vaultEnv, 'utf-8');
-    hasAnthropicKey = content.includes('CYBOS_ANTHROPIC_KEY=');
+    hasAnthropicKey = content.includes('SEROKELL_ANTHROPIC_KEY=');
   }
   check(
-    'CYBOS_ANTHROPIC_KEY',
+    'SEROKELL_ANTHROPIC_KEY',
     hasAnthropicKey,
     'API key found for LLM extraction',
-    'CYBOS_ANTHROPIC_KEY not set',
-    `Add to ${vaultEnv}: CYBOS_ANTHROPIC_KEY=sk-ant-...`
+    'SEROKELL_ANTHROPIC_KEY not set',
+    `Add to ${vaultEnv}: SEROKELL_ANTHROPIC_KEY=sk-ant-...`
   );
 
   // 5. Database
@@ -141,7 +141,7 @@ async function runChecks(): Promise<void> {
   }
 
   // 7. Telegram session
-  const telegramSession = join(homedir(), '.cybos', 'telegram', 'session.txt');
+  const telegramSession = join(homedir(), '.serokell', 'telegram', 'session.txt');
   const hasTelegramSession = existsSync(telegramSession);
   check(
     'Telegram Session',
@@ -241,7 +241,7 @@ async function runChecks(): Promise<void> {
         warn(
           'File Suggestion Hook',
           `Hook returns ${lines.length} results but ${!hasVaultFiles ? 'no vault files' : 'no project files'}`,
-          'Check vault symlink exists and ~/CybosVault has files'
+          'Check vault symlink exists and ~/SerokellSalesVault has files'
         );
       } else {
         check(

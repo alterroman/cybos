@@ -1,4 +1,4 @@
-# Cybos → Serokell BD OS: Adaptation Plan (v2)
+# SerokellSalesAgent → Serokell BD OS: Adaptation Plan (v2)
 
 > Updated 2026-02-28. Corrects v1 by: accurately mapping reusable components,
 > adding funding/market/academic scoring dimensions, and recentering ICP on
@@ -8,7 +8,7 @@
 
 ## What Already Exists (Do Not Rebuild)
 
-Before listing new work, this is what Cybos already has that is **production-quality and
+Before listing new work, this is what SerokellSalesAgent already has that is **production-quality and
 directly relevant to the BD use case**:
 
 ### BD Infrastructure — Already Rust/Serokell-Focused
@@ -19,8 +19,8 @@ directly relevant to the BD use case**:
 | `.claude/skills/BD/shared/serokell-icp.md` | ICP definition (already Rust-first) | 🔧 Update: add Solana, blockchain depth |
 | `.claude/skills/BD/shared/scoring-rubric.md` | 6-dimension 100-pt rubric | 🔧 Update: add funding timing, market presence, academic |
 | `.claude/skills/BD/workflows/find-leads.md` | Full orchestration: find → score → Google Sheets | ✅ Use as-is |
-| `.claude/commands/cyber-bd-find-leads.md` | `/cyber-bd-find-leads` command | ✅ Use as-is |
-| `.claude/commands/cyber-bd-research-lead.md` | `/cyber-bd-research-lead` command with 3-agent research | 🔧 Add academic paper agent |
+| `.claude/commands/serokell-bd-find-leads.md` | `/serokell-bd-find-leads` command | ✅ Use as-is |
+| `.claude/commands/serokell-bd-research-lead.md` | `/serokell-bd-research-lead` command with 3-agent research | 🔧 Add academic paper agent |
 
 ### Research Infrastructure — Fully Reusable for BD
 | Agent | What it does | BD reuse |
@@ -41,7 +41,7 @@ what the BD research workflow needs. **Do not rebuild it.**
 ### Other Reusable Infrastructure
 | Component | Reuse |
 |-----------|-------|
-| `cyber-brief.md` | Morning brief (Telegram + email + calendar + GTD) — adapt for BD |
+| `serokell-brief.md` | Morning brief (Telegram + email + calendar + GTD) — adapt for BD |
 | `GTD/SKILL.md` with `call-prep.md`, `outreach.md` | BD task routing — extend |
 | `Telegram/workflows/` | Telegram processing — direct reuse |
 | `DDMemo/SKILL.md` + `generate.md` | **Adapt as BD Memo** — Opus analysis + template writing mechanics are perfect |
@@ -210,7 +210,7 @@ These files don't exist yet and are needed for the system to know it works for S
 
 ### Category C: Research Flow Enhancement (Day 3)
 
-9. **`cyber-bd-research-lead.md`** (update — add content-researcher to the agent mix)
+9. **`serokell-bd-research-lead.md`** (update — add content-researcher to the agent mix)
    The existing command spawns 3 agents. Add a 4th:
 
    **Agent 4 — content-researcher** (academic papers):
@@ -285,9 +285,9 @@ These genuinely don't exist yet and need to be built:
 
 ### Category E: Identity Strip in AGENTS.md (Day 1, alongside context)
 
-17. **`AGENTS.md`** (update — strip cyber.Fund/Stepan references)
-    - Replace all "cyber.Fund" with "Serokell"
-    - Replace all "Stepan" with operator identity
+17. **`AGENTS.md`** (update — strip Serokell/Roman references)
+    - Replace all "Serokell" with "Serokell"
+    - Replace all "Roman" with operator identity
     - Replace "investment decisions" with "BD pipeline"
     - Replace "deals/" vault path with "companies/" or "leads/"
     - Update the skill/command mapping table
@@ -389,13 +389,13 @@ commands/serokell-pipeline.md
 
 ### Updated files (12 — down from v1's 18, more accurate)
 ```
-AGENTS.md                                # Strip cyber.Fund/Stepan, add Serokell
+AGENTS.md                                # Strip Serokell/Roman, add Serokell
 .claude/hooks/load-context.ts            # Update context file references
 config/leverage-rules.yaml              # BD-tuned scoring rules
 .claude/skills/BD/shared/serokell-icp.md       # Add Solana, Substrate, NEAR; Haskell to Tier 3
 .claude/skills/BD/shared/scoring-rubric.md     # Add funding timing, market presence, academic
 .claude/agents/bd-lead-qualifier.md            # Add 3 new signal dimensions
-.claude/commands/cyber-bd-research-lead.md     # Add content-researcher (academic papers)
+.claude/commands/serokell-bd-research-lead.md     # Add content-researcher (academic papers)
 .claude/agents/financial-researcher.md         # Add funding timing output section
 .claude/agents/market-researcher.md            # Add market presence output section
 .claude/skills/Research/shared/agent-selection-matrix.md  # Add BD research type
@@ -418,7 +418,7 @@ commands/serokell-proposal.md
 ```
 context/investment-philosophy.md        # → archive/cyber-fund/
 context/MEMO_template.md                # → archive/cyber-fund/ (replaced by PROPOSAL_template)
-commands/cyber-memo.md                  # → archive/cyber-fund/
+commands/serokell-memo.md                  # → archive/cyber-fund/
 ```
 Note: **Don't archive DDMemo** — adapt it for BD Memo in Phase 2.
 
@@ -428,10 +428,10 @@ Note: **Don't archive DDMemo** — adapt it for BD Memo in Phase 2.
 
 ### Day 1 — Identity Strip & Context (3-4 hours)
 
-**Goal**: System knows it's working for Serokell BD. No cyber.Fund references.
+**Goal**: System knows it's working for Serokell BD. No Serokell references.
 
 1. Create `context/serokell-identity.md`, `serokell-company.md`, `serokell-pitch.md`, `serokell-services.md`
-2. Update `AGENTS.md`: replace all cyber.Fund/Stepan/investment refs
+2. Update `AGENTS.md`: replace all Serokell/Roman/investment refs
 3. Update `config/leverage-rules.yaml`: BD-tuned scoring rules
 4. Update `.claude/hooks/load-context.ts` if it references old context files
 5. Archive `context/investment-philosophy.md` and `context/MEMO_template.md`
@@ -469,7 +469,7 @@ Note: **Don't archive DDMemo** — adapt it for BD Memo in Phase 2.
    - Add "Market Presence Summary" to output format
    - Request: GitHub stars, community size, conference appearances, blog activity
 
-**Test**: Run `/cyber-bd-find-leads --domain blockchain` on a test session, verify
+**Test**: Run `/serokell-bd-find-leads --domain blockchain` on a test session, verify
 new dimensions appear in output.
 
 ---
@@ -478,7 +478,7 @@ new dimensions appear in output.
 
 **Goal**: Lead research includes funding, market presence, and academic papers.
 
-1. Update `cyber-bd-research-lead.md`:
+1. Update `serokell-bd-research-lead.md`:
    - Add `content-researcher` as 4th parallel agent (academic papers)
    - Update synthesis template to include:
      - Funding Timing: [fresh/aging/unknown]
@@ -499,7 +499,7 @@ new dimensions appear in output.
    - Output: list of papers with title, authors, year, venue, relevance to Serokell
    ```
 
-**Test**: Run `/cyber-bd-research-lead "TigerBeetle"` and verify it finds
+**Test**: Run `/serokell-bd-research-lead "TigerBeetle"` and verify it finds
 their GitHub, funding data, market presence (stars, HN mentions), and
 any academic publications.
 
@@ -543,7 +543,7 @@ Run `/serokell-pipeline`, verify kanban output.
 **Goal**: Morning BD brief. GTD tasks route to BD workflows.
 
 1. Update `leverage-rules.yaml` (if not done on Day 1)
-2. Update `cyber-brief.md`:
+2. Update `serokell-brief.md`:
    - BD-specific synthesis prompt
    - Include pipeline follow-ups due
    - Include any recent company signals
@@ -554,7 +554,7 @@ Run `/serokell-pipeline`, verify kanban output.
 
 ### Day 7 — Cleanup & Phase 2 Design (2-3 hours)
 
-1. Reference audit: `grep -r "cyber.Fund\|investment philosophy\|term sheet\|VC fund" .claude/`
+1. Reference audit: `grep -r "Serokell\|investment philosophy\|term sheet\|VC fund" .claude/`
 2. Update AGENTS.md command table if any new commands need to be listed
 3. Design Phase 2 (proposal engine) — write `skills/Proposal/SKILL.md` and `generate.md` stubs
 4. Update README.md for Serokell BD context

@@ -114,8 +114,8 @@ If critique failed:
 
 ## Step 8: Save
 
-1. Move image to: `~/CybosVault/private/content/images/MMDD-<slug>-YY.png`
-2. Log to: `~/CybosVault/private/.cybos/logs/MMDD-YY.md`
+1. Move image to: `~/SerokellSalesVault/private/content/images/MMDD-<slug>-YY.png`
+2. Log to: `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`
 
 No metadata files.
 

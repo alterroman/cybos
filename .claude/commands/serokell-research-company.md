@@ -10,4 +10,4 @@ Target: $ARGUMENTS
 
 Parse intensity from arguments: --quick, --standard (default), --deep
 
-Apply cyber•Fund investment rubric throughout the research process.
+Apply Serokell investment rubric throughout the research process.

@@ -5,8 +5,8 @@ Generate comprehensive investment memo from research for Investment Committee re
 ## Prerequisites
 
 Before running this workflow:
-- [ ] Company research exists in `~/CybosVault/private/deals/<company>/research/`
-- [ ] Deal context exists in `~/CybosVault/private/deals/<company>/index.md`
+- [ ] Company research exists in `~/SerokellSalesVault/private/deals/<company>/research/`
+- [ ] Deal context exists in `~/SerokellSalesVault/private/deals/<company>/index.md`
 - [ ] Multiple research reports preferred (more data = better memo)
 
 ## Inputs
@@ -23,15 +23,15 @@ Load all available context:
 
 ```
 Read files:
-- ~/CybosVault/private/deals/<company>/index.md
-- ~/CybosVault/private/deals/<company>/research/*.md (all research reports)
+- ~/SerokellSalesVault/private/deals/<company>/index.md
+- ~/SerokellSalesVault/private/deals/<company>/research/*.md (all research reports)
 - context/investment-philosophy.md
 - context/MEMO_template.md
 ```
 
 If research is missing or sparse:
 - Warn user that memo will be limited
-- Suggest running `/cyber-research-company` first
+- Suggest running `/serokell-research-company` first
 - Proceed with available data, flagging gaps
 
 ### 2. ANALYZE (memo-analyst agent with Opus)
@@ -39,7 +39,7 @@ If research is missing or sparse:
 ```
 Task: memo-analyst
 Model: opus
-Prompt: "Conduct comprehensive investment analysis for [company name] using cyber•Fund's investment philosophy and rubric.
+Prompt: "Conduct comprehensive investment analysis for [company name] using Serokell's investment philosophy and rubric.
 
 Company research available:
 [Include all research report content]
@@ -84,7 +84,7 @@ Be intellectually honest - apply the rubric rigorously, flag red flags, think in
 ```
 Task: memo-writer
 Model: sonnet
-Prompt: "Write a comprehensive investment memo for [company name] following cyber•Fund's MEMO template.
+Prompt: "Write a comprehensive investment memo for [company name] following Serokell's MEMO template.
 
 Strategic Analysis:
 [Include memo-analyst output]
@@ -148,21 +148,21 @@ If gaps exist:
 ### 5. OUTPUT
 
 Save memo to:
-- Path: `~/CybosVault/private/deals/<company-slug>/memo/memo.md`
+- Path: `~/SerokellSalesVault/private/deals/<company-slug>/memo/memo.md`
 - **OVERWRITES** previous version (memo is living document)
 
 Consider backing up previous version:
-- If significant memo already exists, save backup to `~/CybosVault/private/deals/<company-slug>/memo/memo_MMDD-YY_backup.md`
+- If significant memo already exists, save backup to `~/SerokellSalesVault/private/deals/<company-slug>/memo/memo_MMDD-YY_backup.md`
 
 ### 6. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-<slug>-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-<slug>-YY.md`:
 
 ```markdown
 ## HH:MM | memo | dd-memo | [Company Name]
 - Workflow: dd-memo
 - Duration: [Xm Ys]
-- Output: ~/CybosVault/private/deals/<company-slug>/memo/memo.md
+- Output: ~/SerokellSalesVault/private/deals/<company-slug>/memo/memo.md
 - Agents: memo-analyst (Opus), memo-writer (Sonnet)
 - Research inputs: [number of research reports used]
 - Recommendation: [INVEST/PASS/MORE DILIGENCE]
@@ -216,7 +216,7 @@ Weighted scoring:
 ## Common Issues
 
 **Insufficient Research**:
-- Run `/cyber-research-company` first
+- Run `/serokell-research-company` first
 - Memo will have major gaps without research foundation
 
 **Missing Financial Data**:
@@ -224,7 +224,7 @@ Weighted scoring:
 - Include in next steps: "Request financial model from founders"
 
 **Unclear Thesis Fit**:
-- Explicitly address how this relates to cyber•Fund focus
+- Explicitly address how this relates to Serokell focus
 - If weak fit, explain why considering anyway
 
 **Weak Founder Assessment**:

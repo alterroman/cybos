@@ -1,4 +1,4 @@
-# Cybos Setup
+# SerokellSalesAgent Setup
 
 This is the single source of truth for setup.
 
@@ -8,19 +8,19 @@ This is the single source of truth for setup.
 # Install Bun runtime
 curl -fsSL https://bun.sh/install | bash
 
-# Run Cybos - setup wizard opens automatically
+# Run SerokellSalesAgent - setup wizard opens automatically
 claude
 ```
 
 The setup wizard at `http://localhost:3847/setup` guides you through:
-1. **Vault Location** - Where to store your data (`~/CybosVault/`)
+1. **Vault Location** - Where to store your data (`~/SerokellSalesVault/`)
 2. **Identity** - Your name and aliases for entity matching
 3. **API Keys** - Required keys for research, images, etc.
 4. **Git Backup** - Optional GitHub sync for your data
 
 When setup completes, a `vault` symlink is created in the project root:
 ```
-cyberman/vault -> ~/CybosVault
+cyberman/vault -> ~/SerokellSalesVault
 ```
 
 **IDE Setup**: Open the `cyberman` folder in VS Code or Cursor. Your vault appears as `vault/` in the sidebar with both `private/` and `shared/` subdirectories.
@@ -29,11 +29,11 @@ cyberman/vault -> ~/CybosVault
 
 ### 1. Configuration
 
-Cybos v2.1 uses a global config at `~/.cybos/config.json`:
+SerokellSalesAgent v2.1 uses a global config at `~/.serokell/config.json`:
 
 ```bash
 # Create config directory
-mkdir -p ~/.cybos
+mkdir -p ~/.serokell
 
 # Copy env template
 cp .env.example .env
@@ -42,17 +42,17 @@ cp .env.example .env
 Edit `.env` with your API keys:
 
 **Required (core features):**
-- `CYBOS_USER_NAME` - Your full name
-- `CYBOS_USER_OWNER_NAME` - First name (for extraction)
-- `CYBOS_USER_SLUG` - kebab-case slug (e.g., `john-smith`)
-- `CYBOS_ANTHROPIC_KEY` - For LLM extraction
+- `SEROKELL_USER_NAME` - Your full name
+- `SEROKELL_USER_OWNER_NAME` - First name (for extraction)
+- `SEROKELL_USER_SLUG` - kebab-case slug (e.g., `john-smith`)
+- `SEROKELL_ANTHROPIC_KEY` - For LLM extraction
 - `PERPLEXITY_API_KEY` - Web research
 - `EXA_API_KEY` - Web search and content extraction
 - `PARALLEL_API_KEY` - Deep research tasks
 - `GEMINI_API_KEY` - Image generation
 
 **Optional:**
-- `CYBOS_USER_ALIASES` - Comma-separated aliases (e.g., `Me,John`)
+- `SEROKELL_USER_ALIASES` - Comma-separated aliases (e.g., `Me,John`)
 - `TYPEFULLY_API_KEY` - Social media scheduling
 - `TELEGRAM_API_ID` / `TELEGRAM_API_HASH` - Telegram access
 - `GOOGLE_OAUTH_CREDENTIALS` - Gmail/Calendar integration
@@ -64,9 +64,9 @@ Edit `.env` with your API keys:
 Create your vault directory structure:
 
 ```bash
-mkdir -p ~/CybosVault/private/{context,deals,research,projects,content,.cybos/db}
-mkdir -p ~/CybosVault/private/content/{ideas,tweets,essays,images,briefs,work}
-mkdir -p ~/CybosVault/private/context/{calls,telegram,emails,entities}
+mkdir -p ~/SerokellSalesVault/private/{context,deals,research,projects,content,.serokell/db}
+mkdir -p ~/SerokellSalesVault/private/content/{ideas,tweets,essays,images,briefs,work}
+mkdir -p ~/SerokellSalesVault/private/context/{calls,telegram,emails,entities}
 ```
 
 Or let the setup wizard create it for you.
@@ -76,7 +76,7 @@ Or let the setup wizard create it for you.
 The setup wizard automatically creates a symlink:
 
 ```
-cyberman/vault -> ~/CybosVault
+cyberman/vault -> ~/SerokellSalesVault
 ```
 
 This enables:
@@ -87,7 +87,7 @@ The `@` autocomplete is powered by `scripts/file-suggestion.sh` (configured in `
 
 **Manual creation** (if needed):
 ```bash
-ln -s ~/CybosVault vault
+ln -s ~/SerokellSalesVault vault
 ```
 
 ### 3. Database Initialization
@@ -101,7 +101,7 @@ bun scripts/db/index.ts
 bun scripts/db/index.ts --extract  # includes promise/action extraction
 ```
 
-Database location: `~/CybosVault/private/.cybos/db/cybos.sqlite`
+Database location: `~/SerokellSalesVault/private/.serokell/db/serokell.sqlite`
 
 ### 4. Shell Integration (Critical)
 
@@ -145,13 +145,13 @@ MCP servers are configured in `.mcp.json` using `${VAR}` syntax for env vars.
 Copy launchd templates and replace placeholders:
 
 ```bash
-cp config/launchd/com.cybos.morning-brief.plist.example ~/Library/LaunchAgents/com.cybos.morning-brief.plist
-cp config/launchd/com.cybos.brief-server.plist.example ~/Library/LaunchAgents/com.cybos.brief-server.plist
+cp config/launchd/com.serokell.morning-brief.plist.example ~/Library/LaunchAgents/com.serokell.morning-brief.plist
+cp config/launchd/com.serokell.brief-server.plist.example ~/Library/LaunchAgents/com.serokell.brief-server.plist
 
-# Edit files to replace __VAULT_PATH__ with ~/CybosVault
+# Edit files to replace __VAULT_PATH__ with ~/SerokellSalesVault
 
-launchctl load ~/Library/LaunchAgents/com.cybos.morning-brief.plist
-launchctl load ~/Library/LaunchAgents/com.cybos.brief-server.plist
+launchctl load ~/Library/LaunchAgents/com.serokell.morning-brief.plist
+launchctl load ~/Library/LaunchAgents/com.serokell.brief-server.plist
 ```
 
 ## Vault Sync (Optional)
@@ -189,10 +189,10 @@ bun scripts/health-check.ts
 
 Expected output when everything is working:
 ```
-✅ Config: Config loaded from ~/.cybos/config.json
-✅ Vault: Vault found at ~/CybosVault
+✅ Config: Config loaded from ~/.serokell/config.json
+✅ Vault: Vault found at ~/SerokellSalesVault
 ✅ Vault .env: Vault .env found
-✅ CYBOS_ANTHROPIC_KEY: API key found for LLM extraction
+✅ SEROKELL_ANTHROPIC_KEY: API key found for LLM extraction
 ✅ Database: SQLite database initialized
 ✅ Entities, Interactions, Extracted Items: Data indexed
 ✅ Telegram Session: Telegram session found
@@ -206,7 +206,7 @@ Expected output when everything is working:
 
 After basic setup, authenticate external services for full functionality:
 
-### Telegram (required for /cyber-brief)
+### Telegram (required for /serokell-brief)
 
 Telegram requires a one-time interactive login:
 
@@ -219,7 +219,7 @@ bun scripts/telegram-gramjs.ts --login
 # 2. Verification code (sent to Telegram)
 # 3. 2FA password (if enabled)
 
-# Session is saved to ~/.cybos/telegram/session.txt
+# Session is saved to ~/.serokell/telegram/session.txt
 ```
 
 **Important:** This must be run in an interactive terminal. Non-interactive runs (like from cron or headless claude) will fail with a helpful error if no session exists.
@@ -233,25 +233,25 @@ Gmail uses OAuth authentication:
 3. Grant permissions and close the browser
 4. Authentication is saved automatically
 
-Or manually trigger: In Claude Code, run any command that uses Gmail (like `/cyber-brief`).
+Or manually trigger: In Claude Code, run any command that uses Gmail (like `/serokell-brief`).
 
-### LLM Extraction (required for /cyber-reindex --extract)
+### LLM Extraction (required for /serokell-reindex --extract)
 
-The `CYBOS_ANTHROPIC_KEY` must be set in your environment. The scripts auto-load from:
+The `SEROKELL_ANTHROPIC_KEY` must be set in your environment. The scripts auto-load from:
 1. Environment variable (if already set)
-2. `~/CybosVault/private/.env`
+2. `~/SerokellSalesVault/private/.env`
 3. Project `.env`
 
 Create the vault .env if it doesn't exist:
 ```bash
-echo "CYBOS_ANTHROPIC_KEY=sk-ant-your-key-here" >> ~/CybosVault/private/.env
+echo "SEROKELL_ANTHROPIC_KEY=sk-ant-your-key-here" >> ~/SerokellSalesVault/private/.env
 ```
 
 ## Security Notes
 
 - **NEVER commit `.env`** - Already in `.gitignore`
 - **NEVER commit `.mcp.json`** - Already in `.gitignore`
-- **NEVER commit `~/.cybos/config.json`** - Contains paths to your data
+- **NEVER commit `~/.serokell/config.json`** - Contains paths to your data
 - **`vault` symlink is ignored** - Your data won't be pushed to GitHub
 - Keep `/context/who-am-i.md` private if open-sourcing
 
@@ -268,11 +268,11 @@ bun scripts/health-check.ts
 |-------|-------|-----|
 | **Morning brief empty** | Telegram not authenticated | `bun scripts/telegram-gramjs.ts --login` |
 | **Explorer shows zero items** | LLM extraction not run | `bun scripts/db/index.ts --extract` |
-| **CYBOS_ANTHROPIC_KEY error** | Key not in environment | Add to `~/CybosVault/private/.env` |
+| **SEROKELL_ANTHROPIC_KEY error** | Key not in environment | Add to `~/SerokellSalesVault/private/.env` |
 | **Telegram script hangs** | No session, waiting for input | Run with `--login` interactively |
 | **Gmail MCP errors** | OAuth not completed | Run any Gmail command, complete browser OAuth |
 | **MCP 401 errors** | Env vars not loaded | Run `./scripts/setup-shell.sh` |
-| **"Identity not loaded"** | Missing identity file | Create `~/CybosVault/private/context/who-am-i.md` |
+| **"Identity not loaded"** | Missing identity file | Create `~/SerokellSalesVault/private/context/who-am-i.md` |
 | **Database not found** | Not initialized | `bun scripts/db/init.ts` |
 
 ### Quick Diagnostics
@@ -284,7 +284,7 @@ bun scripts/health-check.ts
 # Check environment vars
 echo "PERPLEXITY: ${PERPLEXITY_API_KEY:0:10}..."
 echo "EXA: ${EXA_API_KEY:0:10}..."
-echo "CYBOS_ANTHROPIC: ${CYBOS_ANTHROPIC_KEY:0:10}..."
+echo "SEROKELL_ANTHROPIC: ${SEROKELL_ANTHROPIC_KEY:0:10}..."
 
 # Check database status
 bun scripts/db/query.ts status

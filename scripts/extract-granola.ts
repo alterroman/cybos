@@ -5,7 +5,7 @@
  * Extracts meeting transcripts and AI notes from Granola cache
  * to vault's context/calls/ directory with searchable index.
  *
- * Output: ~/CybosVault/private/context/calls/ (or legacy: ./context/calls/)
+ * Output: ~/SerokellSalesVault/private/context/calls/ (or legacy: ./context/calls/)
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, rmSync } from 'fs';

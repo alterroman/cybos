@@ -11,19 +11,19 @@ Load workflow:
 
 ```bash
 # Default search: all domains, US+EU, Series A/B
-/cyber-bd-find-leads
+/serokell-bd-find-leads
 
 # Focus on blockchain companies in the US
-/cyber-bd-find-leads --domain blockchain --geo US
+/serokell-bd-find-leads --domain blockchain --geo US
 
 # EU fintech companies, Series A only, stricter scoring
-/cyber-bd-find-leads --domain fintech --geo EU --funding series-a --min-score 70
+/serokell-bd-find-leads --domain fintech --geo EU --funding series-a --min-score 70
 
 # Systems/embedded with custom Sheets destination
-/cyber-bd-find-leads --domain systems --sheet-id 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms
+/serokell-bd-find-leads --domain systems --sheet-id 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms
 
 # Broad search with higher candidate count
-/cyber-bd-find-leads --limit 50
+/serokell-bd-find-leads --limit 50
 ```
 
 **Flags**:

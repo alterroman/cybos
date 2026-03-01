@@ -10,7 +10,7 @@ Discover trending topics and content ideas from social feeds for post creation.
 ## Capabilities
 
 - **Twitter Feed Scan**: Browse home timeline for high-engagement topics
-- **Topic Discovery**: Identify trends relevant to cyber.Fund's focus areas
+- **Topic Discovery**: Identify trends relevant to Serokell's focus areas
 - **Content Ideas**: Generate post angles from discovered topics
 
 ## Workflows
@@ -44,17 +44,17 @@ Focus on content relevant to:
 ## Usage
 
 ```
-/cyber-browse twitter        # Scan Twitter home timeline
-/cyber-browse twitter --save # Scan and save topics to file
+/serokell-browse twitter        # Scan Twitter home timeline
+/serokell-browse twitter --save # Scan and save topics to file
 ```
 
 ## Output Location
 
-- Topics: `~/CybosVault/private/content/ideas/MMDD-browse-YY.md`
+- Topics: `~/SerokellSalesVault/private/content/ideas/MMDD-browse-YY.md`
 
 ## Integration with Content
 
 Browse output feeds directly into:
-- `/cyber-tweet` - Pick topic and generate post
-- `/cyber-essay` - Expand topic into long-form
+- `/serokell-tweet` - Pick topic and generate post
+- `/serokell-essay` - Expand topic into long-form
 - Research workflows - Deep dive on discovered topic

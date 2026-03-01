@@ -13,7 +13,7 @@ Handle: company names, "research X", "DD on X", "look into X"
    - Tech: @.claude/skills/Research/workflows/tech.md
    - Market: @.claude/skills/Research/workflows/market.md
 3. **Output location:**
-   - GTD tasks output to `~/CybosVault/private/content/work/` (not `~/CybosVault/private/deals/`)
+   - GTD tasks output to `~/SerokellSalesVault/private/content/work/` (not `~/SerokellSalesVault/private/deals/`)
    - Summary format, not full research report
 
 ## Output Format
@@ -34,12 +34,12 @@ For GTD-triggered research, use condensed format:
 
 ## Relevance
 
-[Why this matters for cyber•Fund / current priorities]
+[Why this matters for Serokell / current priorities]
 
 ## Next Steps
 
 - [ ] Schedule call with founder
-- [ ] Deep research (run /cyber-research-company)
+- [ ] Deep research (run /serokell-research-company)
 - [ ] Pass / not a fit because [reason]
 
 ## Sources
@@ -51,7 +51,7 @@ For GTD-triggered research, use condensed format:
 ## Intensity
 
 GTD research is **quick** by default (10-30s).
-For deep research, suggest: "Want me to run full DD with /cyber-research-company?"
+For deep research, suggest: "Want me to run full DD with /serokell-research-company?"
 
 ## Links
 

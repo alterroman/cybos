@@ -1,13 +1,13 @@
 ---
-name: cyber-calendar
+name: serokell-calendar
 description: Query Google Calendar for upcoming meetings (morning brief)
 ---
 
 Query today and tomorrow's calendar events for morning brief.
 
 **Usage:**
-- `/cyber-calendar` - Show today + tomorrow
-- `/cyber-calendar --days 3` - Show next 3 days
+- `/serokell-calendar` - Show today + tomorrow
+- `/serokell-calendar --days 3` - Show next 3 days
 
 **Arguments:**
 - `--days N`: Number of days to query (default: 2, i.e., today + tomorrow)
@@ -92,7 +92,7 @@ Total: 4 events over 2 days
 **Headless Execution:**
 Calendar command is designed for headless Claude Code execution:
 ```bash
-claude --headless "/cyber-calendar"
+claude --headless "/serokell-calendar"
 ```
 
 This enables automated morning brief workflows.

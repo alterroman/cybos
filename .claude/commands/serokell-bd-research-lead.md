@@ -8,12 +8,12 @@ Deep-dive research on a single Serokell BD lead.
    - Strip flags, extract company name
 
 2. Check for existing research
-   - Look in `~/CybosVault/private/projects/serokell-bd/leads/*/raw/` for prior research on this company
+   - Look in `~/SerokellSalesVault/private/projects/serokell-bd/leads/*/raw/` for prior research on this company
    - If found: load as context, note date, ask if user wants fresh research
 
 3. Create workspace
    ```
-   ~/CybosVault/private/projects/serokell-bd/leads/research/MMDD-<company-slug>-YY/
+   ~/SerokellSalesVault/private/projects/serokell-bd/leads/research/MMDD-<company-slug>-YY/
    ├── raw/
    └── report.md
    ```
@@ -79,7 +79,7 @@ Deep-dive research on a single Serokell BD lead.
    - Add "Researched" status
    - Add link to report
 
-9. Log to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+9. Log to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
    ```
    ## HH:MM | bd | research-lead | [Company]
    - Score: [X/100]
@@ -95,8 +95,8 @@ Deep-dive research on a single Serokell BD lead.
 
 **Usage examples**:
 ```bash
-/cyber-bd-research-lead "TigerBeetle"
-/cyber-bd-research-lead "Rivet"
-/cyber-bd-research-lead "Turso"
-/cyber-bd-research-lead "Zed Industries"
+/serokell-bd-research-lead "TigerBeetle"
+/serokell-bd-research-lead "Rivet"
+/serokell-bd-research-lead "Turso"
+/serokell-bd-research-lead "Zed Industries"
 ```

@@ -1,5 +1,5 @@
 ---
-name: cyber-gtd
+name: serokell-gtd
 description: Run autonomous task execution from GTD.md items
 ---
 
@@ -16,10 +16,10 @@ Execute tasks from GTD.md autonomously.
 ## Examples
 
 ```
-/cyber-gtd                    # Plan 1 item → show → ask to execute
-/cyber-gtd --count 3          # Plan 3 items → show → ask
-/cyber-gtd --execute          # Skip plan, run immediately
-/cyber-gtd "Dan Meissler"     # Plan specific item matching text
+/serokell-gtd                    # Plan 1 item → show → ask to execute
+/serokell-gtd --count 3          # Plan 3 items → show → ask
+/serokell-gtd --execute          # Skip plan, run immediately
+/serokell-gtd "Dan Meissler"     # Plan specific item matching text
 ```
 
 ## Workflow
@@ -28,7 +28,7 @@ Load and follow: @.claude/skills/GTD/SKILL.md
 
 ### Step 1: Parse GTD
 
-Read `@~/CybosVault/private/GTD.md` and extract items from `# Next` section.
+Read `@~/SerokellSalesVault/private/GTD.md` and extract items from `# Next` section.
 - Skip empty lines
 - Skip items under other headings (# Someday, # Skip, etc.)
 
@@ -119,7 +119,7 @@ Previous Interactions:
 
 Instructions:
 1. Read and follow the workflow file exactly
-2. Output to: ~/CybosVault/private/content/work/MMDD-<slug>.md
+2. Output to: ~/SerokellSalesVault/private/content/work/MMDD-<slug>.md
 3. Use the output template from .claude/skills/GTD/SKILL.md
 4. Time limit: 5 minutes
 
@@ -135,7 +135,7 @@ If you need information you don't have:
 
 ## Output Location
 
-All task outputs go to: `~/CybosVault/private/content/work/MMDD-<slug>.md`
+All task outputs go to: `~/SerokellSalesVault/private/content/work/MMDD-<slug>.md`
 
 Slug format: kebab-case from task description
 - "Dan Meissler ask for call" → `0106-dan-meissler-call.md`

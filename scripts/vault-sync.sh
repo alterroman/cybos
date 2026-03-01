@@ -17,7 +17,7 @@ set -e
 
 # ===== CONFIGURATION =====
 
-CONFIG_PATH="$HOME/.cybos/config.json"
+CONFIG_PATH="$HOME/.serokell/config.json"
 
 # Colors
 RED='\033[0;31m'

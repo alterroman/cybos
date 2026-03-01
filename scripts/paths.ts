@@ -1,5 +1,5 @@
 /**
- * Cybos Path Resolution
+ * SerokellSalesAgent Path Resolution
  *
  * Centralized path resolution for all vault and app paths.
  * All scripts should import paths from here rather than constructing them directly.
@@ -7,7 +7,7 @@
  * Usage:
  *   import { getVaultPath, getPrivatePath, getDealsPath } from './paths'
  *
- *   const dealsDir = getDealsPath()  // ~/CybosVault/private/deals
+ *   const dealsDir = getDealsPath()  // ~/SerokellSalesVault/private/deals
  */
 
 import { resolve, join } from 'path'
@@ -18,7 +18,7 @@ import { loadConfig, getAppRoot } from './config'
 // ===== VAULT PATHS =====
 
 /**
- * Get the vault root path (e.g., ~/CybosVault)
+ * Get the vault root path (e.g., ~/SerokellSalesVault)
  * Throws if config not loaded
  */
 export function getVaultPath(): string {
@@ -30,14 +30,14 @@ export function getVaultPath(): string {
 }
 
 /**
- * Get the private vault path (e.g., ~/CybosVault/private)
+ * Get the private vault path (e.g., ~/SerokellSalesVault/private)
  */
 export function getPrivatePath(): string {
   return join(getVaultPath(), 'private')
 }
 
 /**
- * Get the shared vault path (e.g., ~/CybosVault/shared)
+ * Get the shared vault path (e.g., ~/SerokellSalesVault/shared)
  */
 export function getSharedPath(): string {
   return join(getVaultPath(), 'shared')
@@ -46,35 +46,35 @@ export function getSharedPath(): string {
 // ===== PRIVATE VAULT SUBDIRECTORIES =====
 
 /**
- * Get the context directory (e.g., ~/CybosVault/private/context)
+ * Get the context directory (e.g., ~/SerokellSalesVault/private/context)
  */
 export function getContextPath(): string {
   return join(getPrivatePath(), 'context')
 }
 
 /**
- * Get the deals directory (e.g., ~/CybosVault/private/deals)
+ * Get the deals directory (e.g., ~/SerokellSalesVault/private/deals)
  */
 export function getDealsPath(): string {
   return join(getPrivatePath(), 'deals')
 }
 
 /**
- * Get the research directory (e.g., ~/CybosVault/private/research)
+ * Get the research directory (e.g., ~/SerokellSalesVault/private/research)
  */
 export function getResearchPath(): string {
   return join(getPrivatePath(), 'research')
 }
 
 /**
- * Get the projects directory (e.g., ~/CybosVault/private/projects)
+ * Get the projects directory (e.g., ~/SerokellSalesVault/private/projects)
  */
 export function getProjectsPath(): string {
   return join(getPrivatePath(), 'projects')
 }
 
 /**
- * Get the content directory (e.g., ~/CybosVault/private/content)
+ * Get the content directory (e.g., ~/SerokellSalesVault/private/content)
  */
 export function getContentPath(): string {
   return join(getPrivatePath(), 'content')
@@ -83,28 +83,28 @@ export function getContentPath(): string {
 // ===== CONTEXT SUBDIRECTORIES =====
 
 /**
- * Get the calls directory (e.g., ~/CybosVault/private/context/calls)
+ * Get the calls directory (e.g., ~/SerokellSalesVault/private/context/calls)
  */
 export function getCallsPath(): string {
   return join(getContextPath(), 'calls')
 }
 
 /**
- * Get the telegram directory (e.g., ~/CybosVault/private/context/telegram)
+ * Get the telegram directory (e.g., ~/SerokellSalesVault/private/context/telegram)
  */
 export function getTelegramPath(): string {
   return join(getContextPath(), 'telegram')
 }
 
 /**
- * Get the emails directory (e.g., ~/CybosVault/private/context/emails)
+ * Get the emails directory (e.g., ~/SerokellSalesVault/private/context/emails)
  */
 export function getEmailsPath(): string {
   return join(getContextPath(), 'emails')
 }
 
 /**
- * Get the entities directory (e.g., ~/CybosVault/private/context/entities)
+ * Get the entities directory (e.g., ~/SerokellSalesVault/private/context/entities)
  */
 export function getEntitiesPath(): string {
   return join(getContextPath(), 'entities')
@@ -113,89 +113,89 @@ export function getEntitiesPath(): string {
 // ===== CONTENT SUBDIRECTORIES =====
 
 /**
- * Get the briefs directory (e.g., ~/CybosVault/private/content/briefs)
+ * Get the briefs directory (e.g., ~/SerokellSalesVault/private/content/briefs)
  */
 export function getBriefsPath(): string {
   return join(getContentPath(), 'briefs')
 }
 
 /**
- * Get the work directory (e.g., ~/CybosVault/private/content/work)
+ * Get the work directory (e.g., ~/SerokellSalesVault/private/content/work)
  */
 export function getWorkPath(): string {
   return join(getContentPath(), 'work')
 }
 
 /**
- * Get the tweets directory (e.g., ~/CybosVault/private/content/tweets)
+ * Get the tweets directory (e.g., ~/SerokellSalesVault/private/content/tweets)
  */
 export function getTweetsPath(): string {
   return join(getContentPath(), 'tweets')
 }
 
 /**
- * Get the essays directory (e.g., ~/CybosVault/private/content/essays)
+ * Get the essays directory (e.g., ~/SerokellSalesVault/private/content/essays)
  */
 export function getEssaysPath(): string {
   return join(getContentPath(), 'essays')
 }
 
 /**
- * Get the images directory (e.g., ~/CybosVault/private/content/images)
+ * Get the images directory (e.g., ~/SerokellSalesVault/private/content/images)
  */
 export function getImagesPath(): string {
   return join(getContentPath(), 'images')
 }
 
 /**
- * Get the posts directory (e.g., ~/CybosVault/private/content/posts)
+ * Get the posts directory (e.g., ~/SerokellSalesVault/private/content/posts)
  */
 export function getPostsPath(): string {
   return join(getContentPath(), 'posts')
 }
 
 /**
- * Get the ideas directory (e.g., ~/CybosVault/private/content/ideas)
+ * Get the ideas directory (e.g., ~/SerokellSalesVault/private/content/ideas)
  */
 export function getIdeasPath(): string {
   return join(getContentPath(), 'ideas')
 }
 
-// ===== CYBOS METADATA PATHS =====
+// ===== SEROKELL METADATA PATHS =====
 
 /**
- * Get the .cybos directory (e.g., ~/CybosVault/private/.cybos)
+ * Get the .serokell directory (e.g., ~/SerokellSalesVault/private/.serokell)
  */
-export function getCybosPath(): string {
-  return join(getPrivatePath(), '.cybos')
+export function getSerokellSalesAgentPath(): string {
+  return join(getPrivatePath(), '.serokell')
 }
 
 /**
- * Get the database path (e.g., ~/CybosVault/private/.cybos/db/cybos.sqlite)
+ * Get the database path (e.g., ~/SerokellSalesVault/private/.serokell/db/serokell.sqlite)
  */
 export function getDbPath(): string {
-  return join(getCybosPath(), 'db', 'cybos.sqlite')
+  return join(getSerokellSalesAgentPath(), 'db', 'serokell.sqlite')
 }
 
 /**
- * Get the database directory (e.g., ~/CybosVault/private/.cybos/db)
+ * Get the database directory (e.g., ~/SerokellSalesVault/private/.serokell/db)
  */
 export function getDbDir(): string {
-  return join(getCybosPath(), 'db')
+  return join(getSerokellSalesAgentPath(), 'db')
 }
 
 /**
- * Get the logs directory (e.g., ~/CybosVault/private/.cybos/logs)
+ * Get the logs directory (e.g., ~/SerokellSalesVault/private/.serokell/logs)
  */
 export function getLogsPath(): string {
-  return join(getCybosPath(), 'logs')
+  return join(getSerokellSalesAgentPath(), 'logs')
 }
 
 /**
- * Get the cache directory (e.g., ~/CybosVault/private/.cybos/cache)
+ * Get the cache directory (e.g., ~/SerokellSalesVault/private/.serokell/cache)
  */
 export function getCachePath(): string {
-  return join(getCybosPath(), 'cache')
+  return join(getSerokellSalesAgentPath(), 'cache')
 }
 
 // ===== SHARED VAULT PATHS =====
@@ -280,7 +280,7 @@ export function getGTDPath(): string {
 }
 
 /**
- * Get today's log file path (e.g., ~/CybosVault/private/.cybos/logs/0118-26.md)
+ * Get today's log file path (e.g., ~/SerokellSalesVault/private/.serokell/logs/0118-26.md)
  */
 export function getTodayLogPath(): string {
   const now = new Date()
@@ -303,7 +303,7 @@ export function getDealPath(dealSlug: string): string {
  * Get a deal's context file
  */
 export function getDealContextPath(dealSlug: string): string {
-  return join(getDealPath(dealSlug), '.cybos', 'context.md')
+  return join(getDealPath(dealSlug), '.serokell', 'context.md')
 }
 
 /**
@@ -333,7 +333,7 @@ export function getProjectPath(projectSlug: string): string {
  * Get a project's context file
  */
 export function getProjectContextPath(projectSlug: string): string {
-  return join(getProjectPath(projectSlug), '.cybos', 'context.md')
+  return join(getProjectPath(projectSlug), '.serokell', 'context.md')
 }
 
 // ===== UTILITIES =====

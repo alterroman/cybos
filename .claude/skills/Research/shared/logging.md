@@ -4,7 +4,7 @@ This reference defines how to log research activities for debugging, auditing, a
 
 ## Unified Logging Location
 
-**All logging consolidated into**: `~/CybosVault/private/.cybos/logs/MMDD-YY.md`
+**All logging consolidated into**: `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`
 
 **Purpose**: Single source of truth for all daily activity, research workflow execution, agent status, MCP calls, and errors
 
@@ -125,7 +125,7 @@ All entries use the same base format with additional context based on event type
 
 ## Example: Complete Research Workflow Log
 
-Single file: `~/CybosVault/private/.cybos/logs/0104-26.md`
+Single file: `~/SerokellSalesVault/private/.serokell/logs/0104-26.md`
 
 ```markdown
 ## 14:30 | research | workflow-start | Acme Corp
@@ -205,7 +205,7 @@ Single file: `~/CybosVault/private/.cybos/logs/0104-26.md`
 - Workflow: research
 - Intensity: Standard
 - Duration: 5m
-- Output: ~/CybosVault/private/deals/acme-corp/research/0104-acme-corp-26.md
+- Output: ~/SerokellSalesVault/private/deals/acme-corp/research/0104-acme-corp-26.md
 - Agents: company, market, team (financial failed, 3/4 success)
 - MCPs used: perplexity, exa, exa-contents, parallel-search
 - Confidence: Medium

@@ -5,9 +5,9 @@ Company name: $ARGUMENTS
 Create the following structure:
 
 ```
-~/CybosVault/private/deals/<company-slug>/
+~/SerokellSalesVault/private/deals/<company-slug>/
 ├── index.md (DataView-queryable frontmatter + full deal context)
-├── .cybos/
+├── .serokell/
 │   └── scratchpad/
 ├── research/
 └── memo/
@@ -27,7 +27,7 @@ Create the following structure:
 status: active
 stage: sourced
 created: YYYY-MM-DD
-lead: stepan
+lead: roman
 tags:
   - deal
 ---
@@ -45,7 +45,7 @@ tags:
 ## Quick Facts
 - Raising: $[X] at $[Y] valuation
 - Sector: [AI Infra | Crypto | Robotics | ...]
-- Thesis fit: [How this fits cyber•Fund focus]
+- Thesis fit: [How this fits Serokell focus]
 
 ## Open Questions
 - [Question 1]
@@ -56,13 +56,13 @@ tags:
 
 4. Create empty scratchpad directory for agent working files
 
-5. Log the action to ~/CybosVault/private/.cybos/logs/MMDD-<slug>-YY.md:
+5. Log the action to ~/SerokellSalesVault/private/.serokell/logs/MMDD-<slug>-YY.md:
    ```
    ## HH:MM | dealflow | init-deal | [Company Name]
    - Workflow: init-deal
-   - Output: ~/CybosVault/private/deals/<company-slug>/ created
+   - Output: ~/SerokellSalesVault/private/deals/<company-slug>/ created
 
    ---
    ```
 
-After initialization, user can run `/cyber-research-company` to populate with research.
+After initialization, user can run `/serokell-research-company` to populate with research.

@@ -52,16 +52,16 @@ Exit workflow.
 
 If file path provided, load content and detect type:
 
-**Tweet** (from `~/CybosVault/private/content/tweets/MMDD-*.md`):
+**Tweet** (from `~/SerokellSalesVault/private/content/tweets/MMDD-*.md`):
 - Look for "## Thread" or "## Tweet Text" section
 - Extract all tweet text
 
-**Telegram Post** (from `~/CybosVault/private/content/posts/MMDD-*.md`):
+**Telegram Post** (from `~/SerokellSalesVault/private/content/posts/MMDD-*.md`):
 - Look for "## English (Twitter)" section
 - Extract English translation
 - DO NOT use Russian section
 
-**Essay** (from `~/CybosVault/private/content/essays/MMDD-*.md`):
+**Essay** (from `~/SerokellSalesVault/private/content/essays/MMDD-*.md`):
 - Extract full markdown content
 - Note: Long content works better on LinkedIn
 
@@ -204,7 +204,7 @@ View: [private_url]
 
 ### 9. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | content | schedule | [topic-slug]

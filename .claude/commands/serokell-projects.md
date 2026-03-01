@@ -15,9 +15,9 @@ Arguments: $ARGUMENTS
       - Reserved headings (skip): `# Next`, `# Someday`, `# IC`, `# Skip`
       - Everything else is a project slug
 
-   b. **Project folders**: List directories in `~/CybosVault/private/projects/`
+   b. **Project folders**: List directories in `~/SerokellSalesVault/private/projects/`
       - Each directory is a project
-      - Read `.cybos/context.md` for status/type
+      - Read `.serokell/context.md` for status/type
 
 2. Merge project lists:
    - GTD-only: Has heading but no folder
@@ -49,18 +49,18 @@ Arguments: $ARGUMENTS
 
 ## Quick Actions
 
-- View project: `/cyber-project <slug>`
-- Create folder: `/cyber-init-project "<Name>"`
-- Process tasks: `/cyber-gtd --project <slug>`
+- View project: `/serokell-project <slug>`
+- Create folder: `/serokell-init-project "<Name>"`
+- Process tasks: `/serokell-gtd --project <slug>`
 ```
 
 6. Warn about orphaned projects (folder exists but no GTD heading):
-   - "Warning: ~/CybosVault/private/projects/old-project/ has no matching GTD heading"
+   - "Warning: ~/SerokellSalesVault/private/projects/old-project/ has no matching GTD heading"
 
 **Examples**:
 ```bash
-/cyber-projects
-/cyber-projects --active
-/cyber-projects --type product
-/cyber-projects --gtd-only
+/serokell-projects
+/serokell-projects --active
+/serokell-projects --type product
+/serokell-projects --gtd-only
 ```

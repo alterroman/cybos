@@ -1,4 +1,4 @@
-You are executing the **cyber-save-calls** command to extract Granola meeting transcripts and AI notes.
+You are executing the **serokell-save-calls** command to extract Granola meeting transcripts and AI notes.
 
 ## Task
 
@@ -69,4 +69,4 @@ Search calls: bun scripts/db/query.ts find-interactions --type call
 - **Normal mode**: Incremental - only NEW calls are processed, existing folders skipped
 - **Force mode**: Removes and re-extracts the N most recent calls to get updated transcripts
 - The startup hook uses normal mode (no --force) to avoid overwriting
-- The script saves calls to ~/CybosVault/private/context/calls/ folders (indexed by database)
+- The script saves calls to ~/SerokellSalesVault/private/context/calls/ folders (indexed by database)
