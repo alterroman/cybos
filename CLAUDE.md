@@ -1,4 +1,4 @@
-# CLAUDE.md — Session Context for Claude Code
+# CLAUDE.md
 
 ## Who is the user
 
