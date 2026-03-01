@@ -12,7 +12,7 @@ import { StringSession } from 'telegram/sessions';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
-const SESSION_DIR = join(process.env.HOME!, '.cybos', 'telegram');
+const SESSION_DIR = join(process.env.HOME!, '.serokell', 'telegram');
 const SESSION_FILE = join(SESSION_DIR, 'session.txt');
 const DIALOG_CACHE_FILE = join(SESSION_DIR, 'dialog-cache.json');
 const API_ID = parseInt(process.env.TELEGRAM_API_ID || '0', 10);

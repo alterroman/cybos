@@ -5,7 +5,7 @@
 
 ## Test 1: Company Research (Anthropic)
 
-**Command**: `/cyber-research-company "Anthropic"`
+**Command**: `/serokell-research-company "Anthropic"`
 
 **Status**: [ ] Pass | [ ] Partial | [ ] Fail
 
@@ -22,7 +22,7 @@
 - [ ] Sources documented
 - [ ] Investment rubric applied
 - [ ] Risks honestly flagged
-- [ ] Comparison to cyber•Fund thesis
+- [ ] Comparison to Serokell thesis
 
 **Issues Found**:
 -
@@ -33,7 +33,7 @@
 
 ## Test 2: Technology Research (TEEs)
 
-**Command**: `/cyber-research-tech "Trusted Execution Environments"`
+**Command**: `/serokell-research-tech "Trusted Execution Environments"`
 
 **Status**: [ ] Pass | [ ] Partial | [ ] Fail
 
@@ -50,7 +50,7 @@
 - [ ] Performance benchmarks noted
 - [ ] Comparison to alternatives
 - [ ] References to papers/docs
-- [ ] Connection to cyber•Fund focus
+- [ ] Connection to Serokell focus
 
 **Issues Found**:
 -
@@ -61,7 +61,7 @@
 
 ## Test 3: Market Research (AI Infrastructure)
 
-**Command**: `/cyber-research-market "AI Infrastructure"`
+**Command**: `/serokell-research-market "AI Infrastructure"`
 
 **Status**: [ ] Pass | [ ] Partial | [ ] Fail
 
@@ -89,7 +89,7 @@
 
 ## Test 4: Topic Research (Expected Failure)
 
-**Command**: `/cyber-research-topic "post-labor economy"`
+**Command**: `/serokell-research-topic "post-labor economy"`
 
 **Status**: [ ] Failed as expected
 

@@ -1,15 +1,15 @@
 ---
 name: ddmemo
-description: Generate comprehensive investment memos for cyber•Fund investment committee decisions. Use when creating DD memos or investment analysis documents.
+description: Generate comprehensive investment memos for Serokell investment committee decisions. Use when creating DD memos or investment analysis documents.
 ---
 
 # DD Memo Skill
 
-Generate comprehensive investment memos for cyber•Fund investment committee decisions.
+Generate comprehensive investment memos for Serokell investment committee decisions.
 
 ## Capabilities
 
-Transform research and analysis into structured investment memos following cyber•Fund's template and investment philosophy.
+Transform research and analysis into structured investment memos following Serokell's template and investment philosophy.
 
 ## Workflows
 
@@ -22,8 +22,8 @@ Transform research and analysis into structured investment memos following cyber
 
 ## Prerequisites
 
-- Company research must exist in `~/CybosVault/private/deals/<company>/research/`
-- Deal context in `~/CybosVault/private/deals/<company>/index.md`
+- Company research must exist in `~/SerokellSalesVault/private/deals/<company>/research/`
+- Deal context in `~/SerokellSalesVault/private/deals/<company>/index.md`
 
 ## Context Files
 
@@ -32,7 +32,7 @@ Transform research and analysis into structured investment memos following cyber
 
 ## Output Location
 
-- `~/CybosVault/private/deals/<company>/memo/memo.md` (overwrites previous version)
+- `~/SerokellSalesVault/private/deals/<company>/memo/memo.md` (overwrites previous version)
 
 ## Memo Components
 
@@ -50,7 +50,7 @@ A complete memo includes:
 
 ## Investment Philosophy
 
-Applies cyber•Fund rubric:
+Applies Serokell rubric:
 - Path to $1B+ revenue (legendary outcomes)
 - Defensible moat (data, network, hard tech)
 - Clear business model (revenue > token speculation)

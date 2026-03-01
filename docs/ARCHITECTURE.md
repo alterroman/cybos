@@ -1,12 +1,12 @@
-# Cybos Architecture
+# SerokellSalesAgent Architecture
 
-*Technical reference for the Cybos system*
+*Technical reference for the SerokellSalesAgent system*
 
 ---
 
 ## System Overview
 
-Cybos is a Claude Code-powered personal AI assistant for an individual user and an operations aid for their organization. It handles three core domains:
+SerokellSalesAgent is a Claude Code-powered personal AI assistant for an individual user and an operations aid for their organization. It handles three core domains:
 
 | Domain | Capability |
 |--------|------------|
@@ -34,7 +34,7 @@ Cybos is a Claude Code-powered personal AI assistant for an individual user and 
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                        CYBOS                            │
+│                        SEROKELL                            │
 │              (Claude Code + .claude folder)             │
 └─────────────────────────────────────────────────────────┘
                             │
@@ -70,7 +70,7 @@ Cybos is a Claude Code-powered personal AI assistant for an individual user and 
 │ Exa / Parallel│   │ ─────────────│   │ /research/    │
 │ Firecrawl     │   │ entities      │   │ /content/     │
 │ Playwright    │   │ interactions  │   │               │
-│ Notion        │   │ extracted_    │   │ /.cybos/   │
+│ Notion        │   │ extracted_    │   │ /.serokell/   │
 │ Nano Banana   │   │   items       │   │ logs/         │
 │ Typefully     │   │               │   │               │
 └───────────────┘   └───────────────┘   └───────────────┘
@@ -80,19 +80,19 @@ Cybos is a Claude Code-powered personal AI assistant for an individual user and 
 
 ## Configuration System (v2.1)
 
-Starting with v2.1, Cybos uses a global configuration system that separates code from data.
+Starting with v2.1, SerokellSalesAgent uses a global configuration system that separates code from data.
 
 ### Configuration Location
 
 ```
-~/.cybos/                          # Global config directory
+~/.serokell/                          # Global config directory
   config.json                      # Main configuration file
 
-~/CybosVault/                      # User data vault (configurable path)
+~/SerokellSalesVault/                      # User data vault (configurable path)
   private/                         # Local-only data
-    .cybos/
+    .serokell/
       logs/                        # All logs (activity, daemon, script)
-      db/cybos.sqlite              # Context graph database
+      db/serokell.sqlite              # Context graph database
     context/                       # Core context files
     deals/                         # Deal folders
     research/                      # Topic/market research
@@ -101,7 +101,7 @@ Starting with v2.1, Cybos uses a global configuration system that separates code
   shared/                          # Team-shared data (optional)
 
 cyberman/                          # Application directory
-  vault -> ~/CybosVault            # Symlink for IDE access (created by setup wizard)
+  vault -> ~/SerokellSalesVault            # Symlink for IDE access (created by setup wizard)
 ```
 
 ### IDE Workflow
@@ -114,12 +114,12 @@ The `vault` symlink allows editing vault files directly in your IDE:
 
 ### Config Schema
 
-Location: `~/.cybos/config.json`
+Location: `~/.serokell/config.json`
 
 ```json
 {
   "version": "2.1",
-  "vault_path": "~/CybosVault",
+  "vault_path": "~/SerokellSalesVault",
   "app_path": "~/Work/cyberman",
   "private": {
     "git_enabled": false,
@@ -144,7 +144,7 @@ Location: `~/.cybos/config.json`
 ```
 
 **Notes:**
-- `app_path` points to where Cybos code is installed (set during setup). Skills use this to locate scripts.
+- `app_path` points to where SerokellSalesAgent code is installed (set during setup). Skills use this to locate scripts.
 - API keys remain in `.env` file for security (not in config JSON).
 
 ### Configuration Scripts
@@ -161,9 +161,9 @@ All scripts should use `scripts/paths.ts` for file paths:
 ```typescript
 import { getDealsPath, getLogsPath, getDbPath } from './paths'
 
-const deals = getDealsPath()      // ~/CybosVault/private/deals
-const logs = getLogsPath()        // ~/CybosVault/private/.cybos/logs
-const db = getDbPath()            // ~/CybosVault/private/.cybos/db/cybos.sqlite
+const deals = getDealsPath()      // ~/SerokellSalesVault/private/deals
+const logs = getLogsPath()        // ~/SerokellSalesVault/private/.serokell/logs
+const db = getDbPath()            // ~/SerokellSalesVault/private/.serokell/db/serokell.sqlite
 ```
 
 ### Legacy Mode
@@ -226,7 +226,7 @@ Claude Code doesn't have a native "skill loader" — we create this behavior thr
 ├── Browse/
 │   └── workflows/      # twitter-feed.md (discover topics from feeds)
 ├── Email/
-│   └── workflows/      # process-gmail.md (via /cyber-email command)
+│   └── workflows/      # process-gmail.md (via /serokell-email command)
 ├── Telegram/
 │   └── workflows/      # process-messages.md (read, draft, save via GramJS)
 ├── Content/
@@ -345,7 +345,7 @@ Agent profiles are stored in `.claude/agents/*.md`.
 
 ```
 /deals/<company>/
-├── .cybos/
+├── .serokell/
 │   ├── context.md        # Deal metadata, status, key contacts
 │   └── scratchpad/       # Temp agent working files
 ├── research/
@@ -383,15 +383,15 @@ Agent profiles are stored in `.claude/agents/*.md`.
 
 ## Granola Call Extraction
 
-Cybos extracts meeting transcripts and AI notes from Granola.
+SerokellSalesAgent extracts meeting transcripts and AI notes from Granola.
 
 ### How It Works
 
 - **Auto-extraction**: SessionStart hook runs incremental extraction (only new calls)
-- **Manual trigger**: `/cyber-save-calls` command
+- **Manual trigger**: `/serokell-save-calls` command
 - **Data source**: `~/Library/Application Support/Granola/cache-v3.json`
 - **Output**: `/context/calls/[MMDD]-[title]-[YY]/` with transcript.txt, notes.md, metadata.json
-- **Database**: Call interactions indexed in SQLite via `/cyber-reindex`
+- **Database**: Call interactions indexed in SQLite via `/serokell-reindex`
 
 ### Output Structure
 
@@ -408,15 +408,15 @@ Cybos extracts meeting transcripts and AI notes from Granola.
 
 ## Telegram GramJS Integration
 
-Cybos processes Telegram messages via GramJS MTProto client (not browser automation).
+SerokellSalesAgent processes Telegram messages via GramJS MTProto client (not browser automation).
 
 ### How It Works
 
 - **Script-based**: `scripts/telegram-gramjs.ts` connects directly to Telegram API
 - **Per-person files**: Each contact has persistent conversation file (`context/telegram/<slug>.md`)
 - **Entity integration**: Looks up entities by telegram username via database
-- **Manual trigger**: `/cyber-telegram` command
-- **Authentication**: First run prompts for phone + code, session saved to `~/.cybos/telegram/`
+- **Manual trigger**: `/serokell-telegram` command
+- **Authentication**: First run prompts for phone + code, session saved to `~/.serokell/telegram/`
 - **Read-only by default**: Never sends messages, only saves drafts
 - **Smart filtering**: Skips archived and muted chats automatically
 
@@ -430,19 +430,19 @@ Cybos processes Telegram messages via GramJS MTProto client (not browser automat
 
 ```bash
 # Unread mode (default)
-/cyber-telegram                    # 1 unread dialog
-/cyber-telegram --count 3          # 3 unread dialogs
+/serokell-telegram                    # 1 unread dialog
+/serokell-telegram --count 3          # 3 unread dialogs
 
 # User mode (any read state)
-/cyber-telegram --user "@username" # By Telegram username
-/cyber-telegram --user "Name"      # By name
+/serokell-telegram --user "@username" # By Telegram username
+/serokell-telegram --user "Name"      # By name
 
 # Requests mode (non-contacts)
-/cyber-telegram --requests         # Message requests folder
+/serokell-telegram --requests         # Message requests folder
 
 # Modifiers
-/cyber-telegram --dry-run          # Read only, no drafts saved
-/cyber-telegram --no-mark-unread   # Don't preserve unread state
+/serokell-telegram --dry-run          # Read only, no drafts saved
+/serokell-telegram --no-mark-unread   # Don't preserve unread state
 ```
 
 ### Workflow
@@ -502,7 +502,7 @@ Cybos processes Telegram messages via GramJS MTProto client (not browser automat
 ### Output Structure
 
 ```
-~/CybosVault/private/
+~/SerokellSalesVault/private/
 ├── context/telegram/
 │   ├── README.md                           # Documentation
 │   ├── anton-lobintsev.md                  # Per-person conversation log
@@ -511,7 +511,7 @@ Cybos processes Telegram messages via GramJS MTProto client (not browser automat
 └── content/work/
     └── 0106-telegram-replies-26.md         # AI draft replies (GTD-style)
 
-~/.cybos/telegram/
+~/.serokell/telegram/
 └── session.txt                             # Auth session (outside git)
 ```
 
@@ -531,21 +531,21 @@ bun add telegram
 - **Drafts only**: `messages.SaveDraft` API saves draft text, user sends manually in Telegram
 - **No read receipts**: Conversations marked unread after processing
 - **No auto-send**: AI drafts require user approval before saving
-- **Session local**: Auth stored in `~/.cybos/telegram/`, not in git
+- **Session local**: Auth stored in `~/.serokell/telegram/`, not in git
 - **Deduplication**: Messages never duplicated thanks to lastMessageId tracking
 
 ---
 
 ## Email Indexing System
 
-Cybos indexes emails from Gmail for context and morning brief.
+SerokellSalesAgent indexes emails from Gmail for context and morning brief.
 
 ### How It Works
 
-- **Manual trigger**: `/cyber-email --sync` command
+- **Manual trigger**: `/serokell-email --sync` command
 - **Data source**: Gmail via `@gongrzhe/server-gmail-autoauth-mcp`
 - **Output**: `/context/emails/YYYY-MM-DD_<from>-<subject>/` with metadata.json, body.md
-- **Database**: Email interactions indexed in SQLite via `/cyber-reindex`
+- **Database**: Email interactions indexed in SQLite via `/serokell-reindex`
 - **Deduplication**: Via `.state.json` tracking processedMessageIds
 
 ### Workflow
@@ -555,7 +555,7 @@ Cybos indexes emails from Gmail for context and morning brief.
 3. Filter out already-processed emails
 4. For each new email: read content, generate summary, save to folder
 5. Update `.state.json` with new messageIds
-6. Run `/cyber-reindex` to index emails in database
+6. Run `/serokell-reindex` to index emails in database
 
 ### Output Structure
 
@@ -590,7 +590,7 @@ Visual morning brief with scheduled generation and browser display.
 
 ### How It Works
 
-- **Scheduled generation**: launchd triggers `/cyber-brief` daily at 8am
+- **Scheduled generation**: launchd triggers `/serokell-brief` daily at 8am
 - **HTTP server**: Hono server on port 3847 serves API + React app
 - **Parser**: Converts brief markdown to structured JSON
 - **Web UI**: React + Tailwind app for visual brief display
@@ -618,8 +618,8 @@ scripts/
 config/
 ├── leverage-rules.yaml        # Strategic leverage scoring rules
 └── launchd/
-    ├── com.cybos.brief-server.plist.example   # Server daemon template
-    └── com.cybos.morning-brief.plist.example  # 8am daily trigger template
+    ├── com.serokell.brief-server.plist.example   # Server daemon template
+    └── com.serokell.morning-brief.plist.example  # 8am daily trigger template
 ```
 
 ### API Endpoints
@@ -703,12 +703,12 @@ bun scripts/brief-server.ts
 
 ## Calendar Integration
 
-Cybos queries Google Calendar via the unified Gmail MCP (which handles both email and calendar).
+SerokellSalesAgent queries Google Calendar via the unified Gmail MCP (which handles both email and calendar).
 
 ### How It Works
 
 - **MCP Server**: Unified Gmail MCP (`gmail-mcp`) with built-in OAuth credentials
-- **Command**: `/cyber-calendar` - returns today+tomorrow meetings
+- **Command**: `/serokell-calendar` - returns today+tomorrow meetings
 - **Output**: Markdown tables (ephemeral, not saved)
 - **Use case**: Morning brief automation
 - **Auth**: Same "Sign in with Google" flow as Gmail - one auth for both
@@ -746,19 +746,19 @@ mcp__gmail__create_calendar_event
 
 Both email sync and calendar are designed for headless execution:
 ```bash
-claude --headless "/cyber-email --sync"
-claude --headless "/cyber-calendar"
+claude --headless "/serokell-email --sync"
+claude --headless "/serokell-calendar"
 ```
 
 ---
 
 ## Morning Brief System
 
-Cybos generates comprehensive morning briefs consolidating all data sources.
+SerokellSalesAgent generates comprehensive morning briefs consolidating all data sources.
 
 ### How It Works
 
-- **Command**: `/cyber-brief`
+- **Command**: `/serokell-brief`
 - **Output**: `/content/briefs/MMDD-YY.md` (persistent)
 - **Data sources**: Telegram, Gmail, Calendar, GTD.md
 - **Script dependency**: `scripts/telegram-gramjs.ts --all --summary-only`
@@ -810,7 +810,7 @@ Cybos generates comprehensive morning briefs consolidating all data sources.
 ### Headless Execution
 
 ```bash
-claude --headless "/cyber-brief"
+claude --headless "/serokell-brief"
 ```
 
 ---
@@ -821,7 +821,7 @@ Interactive focus/clarity ritual for breaking distraction loops and reconnecting
 
 ### How It Works
 
-- **Command**: `/cyber-unstuck` - Opens browser to web interface
+- **Command**: `/serokell-unstuck` - Opens browser to web interface
 - **Web UI**: `localhost:3847/unstuck` (React + progressive reveal flow)
 - **Backend**: `scripts/brief-server.ts` (API endpoints)
   - `GET /api/unstuck/goals` - Returns Active Priorities from `context/who-am-i.md`
@@ -896,7 +896,7 @@ Interactive focus/clarity ritual for breaking distraction loops and reconnecting
 
 ### Core MCP Servers
 
-Cybos uses these MCP servers with the following priority hierarchy:
+SerokellSalesAgent uses these MCP servers with the following priority hierarchy:
 
 **Primary:**
 - **exa**: Web search, company research, URL content extraction (PRIMARY for research)
@@ -1124,7 +1124,7 @@ mcp__gmail__create_calendar_event
 Configuration:
 - Server: Custom Python MCP at ~/gmail-mcp/
 - Auth: OAuth 2.0 with BUILT-IN credentials (zero config)
-- Project: cybos-v2 (Gmail API + Calendar API enabled)
+- Project: serokell-v2 (Gmail API + Calendar API enabled)
 - Token storage: ~/cyberman/tokens.json (encrypted)
 
 Zero-config setup for new users:
@@ -1183,7 +1183,7 @@ All research uses the **orchestrator workflow** (`.claude/skills/Research/workfl
 5. OUTPUT:
    ├─ Final synthesis: workspace/report.md
    ├─ All agent outputs preserved in: workspace/raw/
-   └─ Log to: /.cybos/logs/MMDD-YY.md
+   └─ Log to: /.serokell/logs/MMDD-YY.md
 ```
 
 **Workspace Structure:**
@@ -1218,7 +1218,7 @@ See `.claude/skills/Research/shared/agent-selection-matrix.md` for complete matr
 Content creation follows a layered architecture:
 
 ```
-COMMAND (cyber-essay, cyber-tweet, etc.)
+COMMAND (serokell-essay, cyber-tweet, etc.)
     │
     ▼
 WORKFLOW (essay.md, tweet.md, telegram-post.md)
@@ -1254,7 +1254,7 @@ Russian posts (@cryptoEssay) + English translations:
 
 4. OUTPUT
    └─ Saved to /content/posts/MMDD-<slug>-YY.md
-   └─ Log to /.cybos/logs/MMDD-YY.md
+   └─ Log to /.serokell/logs/MMDD-YY.md
 ```
 
 **Workflow**: `.claude/skills/Content/workflows/telegram-post.md`
@@ -1281,7 +1281,7 @@ Long-form English content:
 
 5. OUTPUT
    └─ Saved to /content/essays/MMDD-<slug>-YY.md
-   └─ Log to /.cybos/logs/MMDD-YY.md
+   └─ Log to /.serokell/logs/MMDD-YY.md
 ```
 
 **Workflow**: `.claude/skills/Content/workflows/essay.md`
@@ -1305,7 +1305,7 @@ English tweets and threads:
 
 4. OUTPUT
    └─ Saved to /content/tweets/MMDD-<slug>-YY.md
-   └─ Log to /.cybos/logs/MMDD-YY.md
+   └─ Log to /.serokell/logs/MMDD-YY.md
 ```
 
 **Workflow**: `.claude/skills/Content/workflows/tweet.md`
@@ -1342,11 +1342,11 @@ Schedule content to Twitter and/or LinkedIn via Typefully:
 
 6. CONFIRM & LOG
    └─ Display: Platforms, timing, Typefully URL
-   └─ Log to /.cybos/logs/MMDD-<slug>-YY.md
+   └─ Log to /.serokell/logs/MMDD-<slug>-YY.md
    └─ Local file remains unchanged (archive preserved)
 ```
 
-**Command**: `/cyber-schedule @content/file.md --image @content/image.png`
+**Command**: `/serokell-schedule @content/file.md --image @content/image.png`
 **Workflow**: `.claude/skills/Content/workflows/schedule.md`
 **Status**: ✅ Production ready (tested: multi-platform, scheduling, images)
 
@@ -1385,7 +1385,7 @@ Main session pipeline with automatic style inference:
 
 **Adding new styles**: Create `context/img-styles/{name}.md` with palette, elements, keywords.
 
-**Command**: `/cyber-image "concept"` or `/cyber-image @source.md "visualize"`
+**Command**: `/serokell-image "concept"` or `/serokell-image @source.md "visualize"`
 **Workflow**: `.claude/skills/Content/workflows/image.md`
 
 **Info Style Concept Engineering** (for diagrams/infographics):
@@ -1413,14 +1413,14 @@ Professional infographic generator with **20 layouts × 17 styles**. Analyzes co
 
 **Output**:
 ```
-~/CybosVault/private/content/infographics/{topic-slug}/
+~/SerokellSalesVault/private/content/infographics/{topic-slug}/
 ├── source-{slug}.{ext}
 ├── analysis.md
 ├── structured-content.md
 ├── prompts/infographic.md
 └── infographic.png
 ```
-Final image also copied to: `~/CybosVault/private/content/images/MMDD-{slug}-YY.png`
+Final image also copied to: `~/SerokellSalesVault/private/content/images/MMDD-{slug}-YY.png`
 
 **Command**: `/baoyu-infographic path/to/content.md --layout hierarchical-layers --style technical-schematic`
 **Skill**: `.claude/skills/baoyu-infographic/SKILL.md`
@@ -1482,7 +1482,7 @@ Process GTD.md items autonomously with entity context:
    └─ Log to learnings.md
 ```
 
-**Command**: `/cyber-gtd`, `/cyber-gtd --count 3`, `/cyber-gtd --execute`
+**Command**: `/serokell-gtd`, `/serokell-gtd --count 3`, `/serokell-gtd --execute`
 **Workflow**: `.claude/skills/GTD/SKILL.md`
 
 **Output File Format:**
@@ -1670,16 +1670,16 @@ bun scripts/db/query.ts status --json
 
 | Command | Purpose |
 |---------|---------|
-| `/cyber-reindex` | Full database rebuild |
-| `/cyber-reindex --status` | Show database status |
-| `/cyber-reindex --extract` | Index + LLM extraction |
-| `/cyber-reindex --extract-only` | Run extraction on indexed interactions |
+| `/serokell-reindex` | Full database rebuild |
+| `/serokell-reindex --status` | Show database status |
+| `/serokell-reindex --extract` | Index + LLM extraction |
+| `/serokell-reindex --extract-only` | Run extraction on indexed interactions |
 
 ### Freshness Checking
 
 SessionStart hook checks database freshness:
 1. Queries `batch_runs` table for last run timestamp
-2. If >24 hours old, warns user to run `/cyber-reindex`
+2. If >24 hours old, warns user to run `/serokell-reindex`
 3. If database unavailable, shows warning to start PostgreSQL
 
 ### Entity Files (Sparse)
@@ -1720,12 +1720,12 @@ bun scripts/db/index.ts
 bun scripts/db/index.ts --extract
 
 # Environment variables (.env)
-CYBOS_ANTHROPIC_KEY=sk-ant-...  # For LLM extraction
-CYBOS_USER_NAME=Your Name      # For identity resolution
-CYBOS_USER_OWNER_NAME=YourName # For owner/target labeling
+SEROKELL_ANTHROPIC_KEY=sk-ant-...  # For LLM extraction
+SEROKELL_USER_NAME=Your Name      # For identity resolution
+SEROKELL_USER_OWNER_NAME=YourName # For owner/target labeling
 ```
 
-**Database location**: `.cybos/cybos.sqlite` (in app root for legacy mode) or `~/CybosVault/private/.cybos/db/cybos.sqlite` (vault mode)
+**Database location**: `.serokell/serokell.sqlite` (in app root for legacy mode) or `~/SerokellSalesVault/private/.serokell/db/serokell.sqlite` (vault mode)
 
 ---
 
@@ -1763,11 +1763,11 @@ Projects are `# headings` in GTD.md (not `## headings`). Tasks under a heading b
 
 ```
 /projects/<slug>/
-└── .cybos/
+└── .serokell/
     └── context.md    # Required: goals, status, collaborators
 ```
 
-Only `.cybos/context.md` is required. Organize the rest as needed for your project.
+Only `.serokell/context.md` is required. Organize the rest as needed for your project.
 
 ### Project Context Template
 
@@ -1816,16 +1816,16 @@ Rule: If it's about **deciding to invest in external entity**, it's a deal. Ever
 
 | Command | Purpose |
 |---------|---------|
-| `/cyber-init-project "Name"` | Create project folder with context template |
-| `/cyber-project slug` | Show project status and tasks |
-| `/cyber-projects` | List all projects |
-| `/cyber-gtd --project slug` | Process tasks for specific project |
+| `/serokell-init-project "Name"` | Create project folder with context template |
+| `/serokell-project slug` | Show project status and tasks |
+| `/serokell-projects` | List all projects |
+| `/serokell-gtd --project slug` | Process tasks for specific project |
 
 ### Context Auto-Loading
 
 When user mentions a project:
 1. Check if `/projects/<slug>/` exists (try kebab-case conversion)
-2. If exists, read `/projects/<slug>/.cybos/context.md`
+2. If exists, read `/projects/<slug>/.serokell/context.md`
 3. Also check GTD.md for tasks under the `# <slug>` heading
 4. Incorporate context into response
 
@@ -1835,7 +1835,7 @@ When user mentions a project:
 
 ```
 project-root/
-├── vault -> ~/CybosVault           # Symlink to user data (gitignored, shows private/ and shared/)
+├── vault -> ~/SerokellSalesVault           # Symlink to user data (gitignored, shows private/ and shared/)
 ├── .mcp.json                       # MCP server configuration (uses ${VAR} for env vars)
 ├── .claude/
 │   ├── settings.json           # Hook wiring, permissions
@@ -1895,7 +1895,7 @@ project-root/
 ├── deals/                      # Deal folders
 │   └── <company-slug>/
 │       ├── index.md            # DataView frontmatter + full deal context
-│       ├── .cybos/
+│       ├── .serokell/
 │       │   └── scratchpad/
 │       ├── research/
 │       │   ├── MMDD-<slug>-YY.md      # Main synthesis
@@ -1912,7 +1912,7 @@ project-root/
 ├── projects/                   # Multi-week initiatives
 │   ├── README.md
 │   └── <project-slug>/
-│       └── .cybos/
+│       └── .serokell/
 │           └── context.md             # Goals, status, collaborators
 ├── content/                    # Generated content
 │   ├── posts/              # Telegram posts (RU) + Twitter (EN)
@@ -1925,8 +1925,8 @@ project-root/
 ├── config/                     # Configuration files
 │   ├── leverage-rules.yaml     # Strategic leverage scoring rules
 │   └── launchd/                # macOS scheduling plists (templates)
-│       ├── com.cybos.brief-server.plist.example
-│       └── com.cybos.morning-brief.plist.example
+│       ├── com.serokell.brief-server.plist.example
+│       └── com.serokell.morning-brief.plist.example
 └── scripts/                    # Utility scripts
     ├── extract-granola.ts
     ├── telegram-gramjs.ts      # GramJS MTProto client for Telegram
@@ -1968,13 +1968,13 @@ project-root/
 
 ```bash
 # User Identity (required)
-CYBOS_USER_NAME=Your Name
-CYBOS_USER_OWNER_NAME=YourName
-CYBOS_USER_SLUG=your-name
-CYBOS_USER_ALIASES=Me,Your Name
+SEROKELL_USER_NAME=Your Name
+SEROKELL_USER_OWNER_NAME=YourName
+SEROKELL_USER_SLUG=your-name
+SEROKELL_USER_ALIASES=Me,Your Name
 
-# LLM Extraction (required for /cyber-reindex --extract)
-CYBOS_ANTHROPIC_KEY=sk-ant-...
+# LLM Extraction (required for /serokell-reindex --extract)
+SEROKELL_ANTHROPIC_KEY=sk-ant-...
 
 # Web Research (required)
 PERPLEXITY_API_KEY=pplx-...
@@ -1987,7 +1987,7 @@ FIRECRAWL_API_KEY=fc-...
 # Image Generation (required for content)
 GEMINI_API_KEY=...
 
-# Telegram (required for /cyber-telegram)
+# Telegram (required for /serokell-telegram)
 TELEGRAM_API_ID=...              # Get from https://my.telegram.org/apps
 TELEGRAM_API_HASH=...            # Get from https://my.telegram.org/apps
 
@@ -2014,8 +2014,8 @@ The hook injects:
 
 **Database Freshness Check:**
 1. Queries `batch_runs` table via `bun scripts/db/query.ts status --json`
-2. If database available and last run >24h, shows warning to run `/cyber-reindex`
-3. If database not initialized, shows warning to run `/cyber-reindex`
+2. If database available and last run >24h, shows warning to run `/serokell-reindex`
+3. If database not initialized, shows warning to run `/serokell-reindex`
 
 Configuration in `.claude/settings.json`:
 ```json
@@ -2035,7 +2035,7 @@ Configuration in `.claude/settings.json`:
 
 ## Logging System
 
-**Unified logging location**: `~/CybosVault/private/.cybos/logs/`
+**Unified logging location**: `~/SerokellSalesVault/private/.serokell/logs/`
 
 All logs are stored in the vault for portability and backup. Path resolved via `scripts/paths.ts:getLogsPath()`.
 
@@ -2064,7 +2064,7 @@ LOG_FILE="$VAULT_LOG_DIR/my-script.log"
 **TypeScript scripts** use `scripts/paths.ts`:
 ```typescript
 import { getLogsPath } from './paths'
-const logDir = getLogsPath()  // ~/CybosVault/private/.cybos/logs
+const logDir = getLogsPath()  // ~/SerokellSalesVault/private/.serokell/logs
 ```
 
 **LaunchD plists** use `__VAULT_LOGS__` placeholder (substituted by `install-brief.sh`).

@@ -56,7 +56,7 @@ Display both versions:
 ═══════════════════════════════════════
 ```
 
-Save to `~/CybosVault/private/content/posts/MMDD-<slug>-YY.md`
+Save to `~/SerokellSalesVault/private/content/posts/MMDD-<slug>-YY.md`
 
 ### 6. IMAGE (if requested)
 
@@ -64,14 +64,14 @@ Use `@.claude/skills/Content/workflows/image.md`
 
 ### 7. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | content | post | [Topic]
 - Workflow: telegram-post
 - Languages: RU, EN
 - Data verified: yes/no
-- Output: ~/CybosVault/private/content/posts/MMDD-<slug>-YY.md
+- Output: ~/SerokellSalesVault/private/content/posts/MMDD-<slug>-YY.md
 
 ---
 ```

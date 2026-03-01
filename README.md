@@ -1,6 +1,6 @@
-# Cybos
+# SerokellSalesAgent
 
-Cybernetic Operating System - AI-powered VC operations assistant. Research companies, process messages, generate content, write investment memos.
+Serokell Sales Agent - AI-powered VC operations assistant. Research companies, process messages, generate content, write investment memos.
 
 ## Quick Start
 
@@ -18,52 +18,52 @@ For manual setup, see [docs/SETUP.md](docs/SETUP.md).
 ### Research
 | Command | Purpose |
 |---------|---------|
-| `/cyber-research-company "Name"` | Company due diligence |
-| `/cyber-research-tech "Topic"` | Technology deep-dive |
-| `/cyber-research-market "Sector"` | Market analysis |
-| `/cyber-research-topic "Topic"` | Topic exploration |
+| `/serokell-research-company "Name"` | Company due diligence |
+| `/serokell-research-tech "Topic"` | Technology deep-dive |
+| `/serokell-research-market "Sector"` | Market analysis |
+| `/serokell-research-topic "Topic"` | Topic exploration |
 
 **Flags:** `--quick` (10-30s), `--standard` (2-5m, default), `--deep` (5-15m)
 
 ### Content
 | Command | Purpose |
 |---------|---------|
-| `/cyber-tweet "Topic"` | Draft tweet |
-| `/cyber-essay "Topic"` | Write essay |
-| `/cyber-image "Concept"` | Generate image |
-| `/cyber-schedule @file.md` | Schedule to Twitter/LinkedIn |
+| `/serokell-tweet "Topic"` | Draft tweet |
+| `/serokell-essay "Topic"` | Write essay |
+| `/serokell-image "Concept"` | Generate image |
+| `/serokell-schedule @file.md` | Schedule to Twitter/LinkedIn |
 
 ### Messaging
 | Command | Purpose |
 |---------|---------|
-| `/cyber-telegram` | Process 1 unread Telegram message |
-| `/cyber-telegram --count 3` | Process 3 messages |
-| `/cyber-telegram --user "@name"` | Process specific person |
-| `/cyber-email --sync` | Sync emails (last 3 days) |
+| `/serokell-telegram` | Process 1 unread Telegram message |
+| `/serokell-telegram --count 3` | Process 3 messages |
+| `/serokell-telegram --user "@name"` | Process specific person |
+| `/serokell-email --sync` | Sync emails (last 3 days) |
 
 ### Operations
 | Command | Purpose |
 |---------|---------|
-| `/cyber-brief` | Morning brief (Telegram + Email + Calendar + GTD) |
-| `/cyber-calendar` | Today + tomorrow meetings |
-| `/cyber-gtd` | Process GTD tasks |
-| `/cyber-memo "Company"` | Generate investment memo |
-| `/cyber-init-deal "Company"` | Initialize deal folder |
-| `/cyber-reindex` | Rebuild entity database |
-| `/cyber-log` | Show recent activity |
-| `/cyber-summarize therapy @file` | Summarize therapy session transcript |
+| `/serokell-brief` | Morning brief (Telegram + Email + Calendar + GTD) |
+| `/serokell-calendar` | Today + tomorrow meetings |
+| `/serokell-gtd` | Process GTD tasks |
+| `/serokell-memo "Company"` | Generate investment memo |
+| `/serokell-init-deal "Company"` | Initialize deal folder |
+| `/serokell-reindex` | Rebuild entity database |
+| `/serokell-log` | Show recent activity |
+| `/serokell-summarize therapy @file` | Summarize therapy session transcript |
 
 ### Projects
 | Command | Purpose |
 |---------|---------|
-| `/cyber-init-project "Name"` | Initialize project |
-| `/cyber-project <slug>` | Show project status |
-| `/cyber-projects` | List all projects |
+| `/serokell-init-project "Name"` | Initialize project |
+| `/serokell-project <slug>` | Show project status |
+| `/serokell-projects` | List all projects |
 
 ## Architecture
 
 ```
-CYBOS
+SEROKELL
 ├── SKILLS (workflows)
 │   ├── Research, Browse, Telegram
 │   ├── Content, DDMemo, GTD, Summarize
@@ -86,7 +86,7 @@ CYBOS
 
 **Design principles:**
 - File-first: All state is markdown on disk, indexed in SQLite
-- Vault-based: User data in `~/CybosVault/`, separate from code
+- Vault-based: User data in `~/SerokellSalesVault/`, separate from code
 - Private/Shared split: Personal data stays local, team data syncs via Git
 - Parallel agents: Multiple Task calls run simultaneously
 - Self-improving: Learns from mistakes via `.claude/napkin.md`
@@ -94,7 +94,7 @@ CYBOS
 ## File Structure
 
 ```
-~/CybosVault/                      # User data vault
+~/SerokellSalesVault/                      # User data vault
 ├── private/                       # Personal data (not synced)
 │   ├── context/                   # Identity, calls, telegram, emails
 │   ├── deals/                     # Deal folders with research + memos
@@ -104,7 +104,7 @@ CYBOS
 │   │   ├── tweets/, essays/, images/
 │   │   ├── briefs/                # Morning briefs
 │   │   └── work/                  # GTD task outputs
-│   └── .cybos/db/                 # SQLite database
+│   └── .serokell/db/                 # SQLite database
 │
 ├── shared/                        # Team-shared data (synced via Git)
 │   ├── deals/                     # Shared company research + DD
@@ -112,7 +112,7 @@ CYBOS
 │   ├── projects/                  # Multi-person projects
 │   └── context/calls/             # Team call transcripts
 
-cybos/                             # Code repository
+serokell-sales-agent/                             # Code repository
 ├── .claude/
 │   ├── napkin.md                  # Self-improvement log
 │   ├── skills/                    # Workflows
@@ -142,4 +142,4 @@ cybos/                             # Code repository
 
 MIT License with Attribution Requirement
 
-Copyright (c) 2026 Cybos Contributors
+Copyright (c) 2026 SerokellSalesAgent Contributors

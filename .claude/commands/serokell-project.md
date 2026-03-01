@@ -8,12 +8,12 @@ Project slug: $ARGUMENTS
    - Accept slug directly: "scheduler"
    - Or convert display name to slug: "Context Graph" → "context-graph"
 
-2. Check if `~/CybosVault/private/projects/<slug>/` exists
+2. Check if `~/SerokellSalesVault/private/projects/<slug>/` exists
    - If not: check if GTD.md has `# <slug>` heading (GTD-only project)
    - If neither: report "Project not found"
 
 3. Load project context:
-   - If folder exists: read `~/CybosVault/private/projects/<slug>/.cybos/context.md`
+   - If folder exists: read `~/SerokellSalesVault/private/projects/<slug>/.serokell/context.md`
    - Extract: Status, Type, Goal, Key Results progress, Milestones progress
 
 4. Load tasks from GTD.md:
@@ -64,18 +64,18 @@ X tasks total, Y completed
 
 ## Quick Actions
 
-- Edit context: `~/CybosVault/private/projects/<slug>/.cybos/context.md`
+- Edit context: `~/SerokellSalesVault/private/projects/<slug>/.serokell/context.md`
 - Add tasks: Add under `# <slug>` in GTD.md
-- Run research: `/cyber-research-topic "query" --project <slug>`
+- Run research: `/serokell-research-topic "query" --project <slug>`
 ```
 
 **Examples**:
 ```bash
-/cyber-project scheduler
-/cyber-project context-graph
-/cyber-project "Cyber Accelerator"
+/serokell-project scheduler
+/serokell-project context-graph
+/serokell-project "Cyber Accelerator"
 ```
 
 **GTD-only projects** (no folder):
 - Show only tasks from GTD.md
-- Suggest: "Create folder with /cyber-init-project if you need to add context/artifacts"
+- Suggest: "Create folder with /serokell-init-project if you need to add context/artifacts"

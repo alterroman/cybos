@@ -40,10 +40,10 @@ Based on user request or slash command:
 
 | Research Type | Trigger | Example |
 |---------------|---------|---------|
-| **Company DD** | `/cyber-research-company` or company name | "Acme Corp", "Research Anthropic" |
-| **Technology** | `/cyber-research-tech` or tech topic | "Trusted Execution Environments", "AI agents" |
-| **Market** | `/cyber-research-market` or market/sector | "AI Infrastructure", "Robotics market" |
-| **Topic (Content)** | `/cyber-research-topic` or content topic | "AI second-order effects", "Agent economy" |
+| **Company DD** | `/serokell-research-company` or company name | "Acme Corp", "Research Anthropic" |
+| **Technology** | `/serokell-research-tech` or tech topic | "Trusted Execution Environments", "AI agents" |
+| **Market** | `/serokell-research-market` or market/sector | "AI Infrastructure", "Robotics market" |
+| **Topic (Content)** | `/serokell-research-topic` or content topic | "AI second-order effects", "Agent economy" |
 | **Topic (Investment)** | Content topic with investment angle | "AI infrastructure opportunities" |
 
 ### 1.2 Determine Intensity Level
@@ -65,14 +65,14 @@ If no flag provided, infer from context:
 
 **Company research:**
 ```
-~/CybosVault/private/deals/<company-slug>~/CybosVault/private/research/MMDD-<slug>-YY/
+~/SerokellSalesVault/private/deals/<company-slug>~/SerokellSalesVault/private/research/MMDD-<slug>-YY/
 ├── raw/                  # Agent outputs go here
 └── report.md            # Final synthesis (created at end)
 ```
 
 **Tech/Market/Topic research:**
 ```
-~/CybosVault/private/research/<category>/<slug>/MMDD-<slug>-YY/
+~/SerokellSalesVault/private/research/<category>/<slug>/MMDD-<slug>-YY/
 ├── raw/                  # Agent outputs go here
 └── report.md            # Final synthesis (created at end)
 ```
@@ -210,7 +210,7 @@ Prompt: "Consolidate research on [target] into unified report.
 **Agent outputs**: [workspace-path]/raw/agent-*.md (read ALL files)
 
 Apply appropriate lens:
-- Company/Market: Investment lens (cyber•Fund rubric)
+- Company/Market: Investment lens (Serokell rubric)
 - Technology: Investment + technical lens
 - Topic-Content: Content creation angle (narratives, people, ideas)
 - Topic-Investment: Investment opportunities in topic
@@ -244,13 +244,13 @@ Check that files exist:
 ### 5.2 Update Deal Context (Company Only)
 
 If research type is Company:
-- Check if `~/CybosVault/private/deals/<company>/index.md` exists
+- Check if `~/SerokellSalesVault/private/deals/<company>/index.md` exists
 - If NOT exists: create from template with basic info from research
 - If exists: optionally update with new findings
 
 ### 5.3 Log Completion
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | research | [type] | [subject]

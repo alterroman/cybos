@@ -11,7 +11,7 @@ Handle: "ask for call", "message X", "email X", "reach out to X"
    - Telegram (if available, for quick asks)
    - Twitter DM (last resort)
 4. **Load context:**
-   - Previous calls from `~/CybosVault/private/context/calls/`
+   - Previous calls from `~/SerokellSalesVault/private/context/calls/`
    - Deal context if exists
    - Entity notes
 5. **Draft message:**

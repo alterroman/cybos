@@ -75,14 +75,14 @@ function uniqueList(items: string[]): string[] {
  * User identity constants loaded from environment.
  */
 export const USER_IDENTITY = (() => {
-  const name = (process.env.CYBOS_USER_NAME || "").trim() || "User";
+  const name = (process.env.SEROKELL_USER_NAME || "").trim() || "User";
   const ownerValue =
-    (process.env.CYBOS_USER_OWNER_NAME || "").trim() ||
+    (process.env.SEROKELL_USER_OWNER_NAME || "").trim() ||
     name.split(/\s+/)[0] ||
     name;
   const slug =
-    (process.env.CYBOS_USER_SLUG || "").trim() || slugifyName(name) || "user";
-  const aliases = parseAliasList(process.env.CYBOS_USER_ALIASES);
+    (process.env.SEROKELL_USER_SLUG || "").trim() || slugifyName(name) || "user";
+  const aliases = parseAliasList(process.env.SEROKELL_USER_ALIASES);
   const names = uniqueList(["Me", ownerValue, name, ...aliases]);
 
   return {

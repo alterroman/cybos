@@ -132,7 +132,7 @@ Append to logs:
 |------|--------|---------|
 | Company intro | `Company A <> Company B` | `OpenMind <> Legion` |
 | Person intro | `Name A <> Name B` | `Alice <> Bob` |
-| Deal group | `Company <> cyber•Fund` | `Startup <> cyber•Fund` |
+| Deal group | `Company <> Serokell` | `Startup <> Serokell` |
 
 ## Error Handling
 

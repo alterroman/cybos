@@ -1,7 +1,7 @@
 /**
- * Cybos Global Configuration Management
+ * SerokellSalesAgent Global Configuration Management
  *
- * Handles reading, writing, and migrating the global config at ~/.cybos/config.json
+ * Handles reading, writing, and migrating the global config at ~/.serokell/config.json
  * API keys stay in .env file (not in this config) for security.
  *
  * Usage:
@@ -19,7 +19,7 @@ import { homedir } from 'os'
 
 // ===== TYPES =====
 
-export interface CybosConfig {
+export interface SerokellSalesAgentConfig {
   version: string
   vault_path: string
   app_path: string
@@ -53,7 +53,7 @@ export interface ConfigValidationResult {
 // ===== CONSTANTS =====
 
 export const CURRENT_VERSION = '2.1'
-export const CONFIG_DIR = resolve(homedir(), '.cybos')
+export const CONFIG_DIR = resolve(homedir(), '.serokell')
 export const CONFIG_PATH = resolve(CONFIG_DIR, 'config.json')
 
 /**
@@ -63,9 +63,9 @@ export function getConfigPath(): string {
   return CONFIG_PATH
 }
 
-const DEFAULT_CONFIG: CybosConfig = {
+const DEFAULT_CONFIG: SerokellSalesAgentConfig = {
   version: CURRENT_VERSION,
-  vault_path: resolve(homedir(), 'CybosVault'),
+  vault_path: resolve(homedir(), 'SerokellSalesVault'),
   app_path: '',  // Set during setup to actual app location
   private: {
     git_enabled: false,
@@ -91,18 +91,18 @@ const DEFAULT_CONFIG: CybosConfig = {
 // ===== CONFIG LOADING =====
 
 /**
- * Load config from ~/.cybos/config.json
+ * Load config from ~/.serokell/config.json
  * Returns null if config doesn't exist (setup not completed)
  * Automatically migrates old versions
  */
-export function loadConfig(): CybosConfig | null {
+export function loadConfig(): SerokellSalesAgentConfig | null {
   if (!existsSync(CONFIG_PATH)) {
     return null
   }
 
   try {
     const raw = readFileSync(CONFIG_PATH, 'utf-8')
-    const config = JSON.parse(raw) as CybosConfig
+    const config = JSON.parse(raw) as SerokellSalesAgentConfig
 
     // Check for version migration
     const migrated = migrateConfig(config)
@@ -120,10 +120,10 @@ export function loadConfig(): CybosConfig | null {
 }
 
 /**
- * Save config to ~/.cybos/config.json
+ * Save config to ~/.serokell/config.json
  * Creates directory if it doesn't exist
  */
-export function saveConfig(config: CybosConfig): void {
+export function saveConfig(config: SerokellSalesAgentConfig): void {
   // Ensure directory exists
   if (!existsSync(CONFIG_DIR)) {
     mkdirSync(CONFIG_DIR, { recursive: true, mode: 0o700 }) // User-only permissions
@@ -137,7 +137,7 @@ export function saveConfig(config: CybosConfig): void {
  * Get config or throw if not setup
  * Use this in commands that require setup to be complete
  */
-export function getConfigOrThrow(): CybosConfig {
+export function getConfigOrThrow(): SerokellSalesAgentConfig {
   const config = loadConfig()
   if (!config) {
     throw new ConfigNotFoundError()
@@ -153,14 +153,14 @@ export function getConfigOrThrow(): CybosConfig {
 /**
  * Check if setup is complete (config exists and marked complete)
  */
-export function isSetupComplete(config: CybosConfig | null): boolean {
+export function isSetupComplete(config: SerokellSalesAgentConfig | null): boolean {
   return config !== null && config.setup_completed === true
 }
 
 /**
  * Validate config for required fields and correctness
  */
-export function validateConfig(config: CybosConfig): ConfigValidationResult {
+export function validateConfig(config: SerokellSalesAgentConfig): ConfigValidationResult {
   const errors: string[] = []
   const warnings: string[] = []
 
@@ -211,7 +211,7 @@ export function validateConfig(config: CybosConfig): ConfigValidationResult {
 /**
  * Migrate config from older versions to current version
  */
-export function migrateConfig(config: CybosConfig): CybosConfig {
+export function migrateConfig(config: SerokellSalesAgentConfig): SerokellSalesAgentConfig {
   let migrated = { ...config }
 
   // Migration: add app_path if missing (for configs created before app_path was added)
@@ -284,7 +284,7 @@ export async function launchSetupWizard(): Promise<void> {
 
   if (!serverRunning) {
     // Start the server in background
-    console.log('Starting Cybos server...')
+    console.log('Starting SerokellSalesAgent server...')
     const proc = Bun.spawn(['bun', 'scripts/brief-server.ts'], {
       cwd: getAppRoot(),
       stdout: 'ignore',
@@ -332,14 +332,14 @@ export function getAppRoot(): string {
 
 export class ConfigNotFoundError extends Error {
   constructor() {
-    super('Cybos configuration not found. Setup wizard will open.')
+    super('SerokellSalesAgent configuration not found. Setup wizard will open.')
     this.name = 'ConfigNotFoundError'
   }
 }
 
 export class SetupIncompleteError extends Error {
   constructor() {
-    super('Cybos setup is incomplete. Setup wizard will open.')
+    super('SerokellSalesAgent setup is incomplete. Setup wizard will open.')
     this.name = 'SetupIncompleteError'
   }
 }
@@ -351,11 +351,11 @@ export class SetupIncompleteError extends Error {
  * If not, launches wizard and exits
  * Use at the start of commands that require config
  */
-export async function ensureSetup(): Promise<CybosConfig> {
+export async function ensureSetup(): Promise<SerokellSalesAgentConfig> {
   const config = loadConfig()
 
   if (!config || !config.setup_completed) {
-    console.log('Cybos not configured. Opening setup wizard...')
+    console.log('SerokellSalesAgent not configured. Opening setup wizard...')
     await launchSetupWizard()
     console.log('\nSetup wizard opened in browser.')
     console.log('Please complete setup and run the command again.')

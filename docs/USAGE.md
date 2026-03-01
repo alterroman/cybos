@@ -1,6 +1,6 @@
-# Cybos Usage Guide
+# SerokellSalesAgent Usage Guide
 
-Detailed workflows and best practices for using Cybos.
+Detailed workflows and best practices for using SerokellSalesAgent.
 
 ---
 
@@ -9,8 +9,8 @@ Detailed workflows and best practices for using Cybos.
 ### Company Research
 
 ```bash
-/cyber-init-deal "Acme Corp"
-/cyber-research-company "Acme Corp"
+/serokell-init-deal "Acme Corp"
+/serokell-research-company "Acme Corp"
 ```
 
 **What happens:**
@@ -24,7 +24,7 @@ Detailed workflows and best practices for using Cybos.
 ### Technology Research
 
 ```bash
-/cyber-research-tech "Trusted Execution Environments"
+/serokell-research-tech "Trusted Execution Environments"
 ```
 
 **What happens:**
@@ -38,7 +38,7 @@ Detailed workflows and best practices for using Cybos.
 ### Market Research
 
 ```bash
-/cyber-research-market "AI Infrastructure"
+/serokell-research-market "AI Infrastructure"
 ```
 
 **What happens:**
@@ -63,7 +63,7 @@ Detailed workflows and best practices for using Cybos.
 ### Tweets
 
 ```bash
-/cyber-tweet "AI agents using crypto wallets"
+/serokell-tweet "AI agents using crypto wallets"
 ```
 
 **Workflow:** Draft → Review → Polish → Save
@@ -75,7 +75,7 @@ Loads `voice-identity.md` + `writing-style-en.md`, creates hook-driven tweet. Ou
 ### Essays
 
 ```bash
-/cyber-essay "Why compute is becoming a commodity"
+/serokell-essay "Why compute is becoming a commodity"
 ```
 
 **Workflow:** Draft → Review → Polish
@@ -87,7 +87,7 @@ Structure: Hook → Stakes → Mechanism → Turn → Landing (500-2500 words)
 ### Telegram Posts
 
 ```bash
-/cyber-post "AI automation for VCs"
+/serokell-post "AI automation for VCs"
 ```
 
 Creates Russian post + English translation. Uses `writing-style-ru.md`.
@@ -95,7 +95,7 @@ Creates Russian post + English translation. Uses `writing-style-ru.md`.
 ### Images
 
 ```bash
-/cyber-image "Solitary figure in brutalist VC office"
+/serokell-image "Solitary figure in brutalist VC office"
 ```
 
 **Workflow:** Draft prompt → Review → Generate via Nano Banana MCP
@@ -113,13 +113,13 @@ Use `@path/to/file.md` to reference source material:
 
 ```bash
 # Expand idea into essay
-/cyber-essay @content/ideas/agent-economy.md "Full essay with examples"
+/serokell-essay @content/ideas/agent-economy.md "Full essay with examples"
 
 # Distill research into tweet
-/cyber-tweet @deals/acme-corp/research/report.md "Key insight"
+/serokell-tweet @deals/acme-corp/research/report.md "Key insight"
 
 # Multiple sources
-/cyber-essay "TEE market" @content/ideas/tee.md @research/tee-market/
+/serokell-essay "TEE market" @content/ideas/tee.md @research/tee-market/
 ```
 
 ---
@@ -127,11 +127,11 @@ Use `@path/to/file.md` to reference source material:
 ## Telegram Processing
 
 ```bash
-/cyber-telegram                    # 1 unread dialog
-/cyber-telegram --count 3          # 3 unread dialogs
-/cyber-telegram --user "@username" # Specific person
-/cyber-telegram --requests         # Message requests (non-contacts)
-/cyber-telegram --dry-run          # Read only, no drafts
+/serokell-telegram                    # 1 unread dialog
+/serokell-telegram --count 3          # 3 unread dialogs
+/serokell-telegram --user "@username" # Specific person
+/serokell-telegram --requests         # Message requests (non-contacts)
+/serokell-telegram --dry-run          # Read only, no drafts
 ```
 
 **What happens:**
@@ -146,10 +146,10 @@ Use `@path/to/file.md` to reference source material:
 ## GTD Runner
 
 ```bash
-/cyber-gtd                  # Plan first GTD item
-/cyber-gtd --count 3        # Process 3 items
-/cyber-gtd --execute        # Skip plan, run immediately
-/cyber-gtd --project slug   # Only tasks under # heading
+/serokell-gtd                  # Plan first GTD item
+/serokell-gtd --count 3        # Process 3 items
+/serokell-gtd --execute        # Skip plan, run immediately
+/serokell-gtd --project slug   # Only tasks under # heading
 ```
 
 **Task Classification:**
@@ -169,10 +169,10 @@ Use `@path/to/file.md` to reference source material:
 
 ```bash
 # Prerequisite: run research first
-/cyber-research-company "Company"
+/serokell-research-company "Company"
 
 # Generate memo
-/cyber-memo "Company"
+/serokell-memo "Company"
 ```
 
 **What happens:**
@@ -188,8 +188,8 @@ Use `@path/to/file.md` to reference source material:
 ## Morning Brief
 
 ```bash
-/cyber-brief              # Generate brief
-/cyber-brief --email-days 7  # 7 days of emails
+/serokell-brief              # Generate brief
+/serokell-brief --email-days 7  # 7 days of emails
 ```
 
 **Data sources:** Telegram, Gmail, Calendar, GTD.md
@@ -201,8 +201,8 @@ Use `@path/to/file.md` to reference source material:
 ## Social Scheduling
 
 ```bash
-/cyber-schedule @content/tweets/file.md              # Schedule content
-/cyber-schedule @content/file.md --image @img.png    # With image
+/serokell-schedule @content/tweets/file.md              # Schedule content
+/serokell-schedule @content/file.md --image @img.png    # With image
 ```
 
 Schedules to Twitter and/or LinkedIn via Typefully.
@@ -212,10 +212,10 @@ Schedules to Twitter and/or LinkedIn via Typefully.
 ## Projects
 
 ```bash
-/cyber-init-project "Cyber Accelerator Q1"
-/cyber-project cyber-accelerator-q1
-/cyber-projects
-/cyber-gtd --project cyber-accelerator-q1
+/serokell-init-project "Cyber Accelerator Q1"
+/serokell-project cyber-accelerator-q1
+/serokell-projects
+/serokell-gtd --project cyber-accelerator-q1
 ```
 
 Projects are `# headings` in GTD.md. Use `/projects/` folder for multi-month initiatives with artifacts.
@@ -276,7 +276,7 @@ Agents run in parallel via Task tool.
 ## Best Practices
 
 ### 1. Research Before Memo
-Always run `/cyber-research-company` before `/cyber-memo`.
+Always run `/serokell-research-company` before `/serokell-memo`.
 
 ### 2. Iterative Content
 Content workflows expect feedback:
@@ -287,11 +287,11 @@ Content workflows expect feedback:
 ### 3. Use Ideas Folder
 Capture rough thoughts in `/content/ideas/` and expand later:
 ```bash
-/cyber-essay @content/ideas/agent-econ.md "Full essay"
+/serokell-essay @content/ideas/agent-econ.md "Full essay"
 ```
 
 ### 4. Monitor Logs
-Check `/cyber-log` regularly to track activity.
+Check `/serokell-log` regularly to track activity.
 
 ### 5. Update Deal Context
 When new information emerges, update `/deals/<company>/index.md`.
@@ -327,7 +327,7 @@ bun .claude/hooks/load-context.ts < /dev/null
 
 ### Adding a Workflow
 1. Create: `.claude/skills/<Skill>/workflows/<workflow>.md`
-2. Create command: `.claude/commands/cyber-<command>.md`
+2. Create command: `.claude/commands/serokell-<command>.md`
 3. Reference workflow with `@.claude/skills/...`
 
 ### Adding an Agent

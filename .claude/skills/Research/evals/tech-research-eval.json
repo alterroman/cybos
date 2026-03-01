@@ -13,8 +13,8 @@
     "Synthesizer creates technology research report with investment implications",
     "Evaluates Big Tech threat (6-week rule)",
     "Assesses timing (why now?)",
-    "Saves to ~/CybosVault/private/research/trusted-execution-environments/YYYY-MM-DD.md",
-    "Creates ~/CybosVault/private/research/trusted-execution-environments/.cybos/context.md if needed",
+    "Saves to ~/SerokellSalesVault/private/research/trusted-execution-environments/YYYY-MM-DD.md",
+    "Creates ~/SerokellSalesVault/private/research/trusted-execution-environments/.serokell/context.md if needed",
     "Logs action to daily log"
   ],
   "success_criteria": {
@@ -31,7 +31,7 @@
       "References to research papers or technical documentation",
       "Comparison to alternative technologies",
       "Specific performance metrics (e.g., '1-second auctions' for TEE speed)",
-      "Connection to cyber•Fund focus areas (privacy, AI infra)",
+      "Connection to Serokell focus areas (privacy, AI infra)",
       "Clear assessment of wrapper risk vs. true innovation"
     ],
     "failure_indicators": [

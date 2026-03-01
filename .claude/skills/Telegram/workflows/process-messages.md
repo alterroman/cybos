@@ -18,20 +18,20 @@ This workflow supports three modes:
 
 ```bash
 # Default: Process unread messages
-/cyber-telegram                    # 1 unread dialog
-/cyber-telegram --count 3          # 3 unread dialogs
+/serokell-telegram                    # 1 unread dialog
+/serokell-telegram --count 3          # 3 unread dialogs
 
 # Message requests: Process from requests folder
-/cyber-telegram --requests           # Unread from message requests
-/cyber-telegram --requests --count 3 # 3 from message requests
+/serokell-telegram --requests           # Unread from message requests
+/serokell-telegram --requests --count 3 # 3 from message requests
 
 # User mode: Find specific person (any read state)
-/cyber-telegram --user "@username"   # By Telegram username
-/cyber-telegram --user "Name"        # By name (also checks message requests)
+/serokell-telegram --user "@username"   # By Telegram username
+/serokell-telegram --user "Name"        # By name (also checks message requests)
 
 # Modifiers (work with all modes)
-/cyber-telegram --dry-run            # Read only, no drafts saved
-/cyber-telegram --no-mark-unread     # Don't preserve unread state
+/serokell-telegram --dry-run            # Read only, no drafts saved
+/serokell-telegram --no-mark-unread     # Don't preserve unread state
 ```
 
 ## Workflow Steps
@@ -64,26 +64,26 @@ bun scripts/telegram-gramjs.ts --requests [--count N] [--dry-run]
    - Requests mode: Message requests folder (non-contacts)
 3. Reads last 20 messages per dialog
 4. Loads entity context for known contacts
-5. Saves per-person history to `~/CybosVault/private/context/telegram/<person-slug>.md`
+5. Saves per-person history to `~/SerokellSalesVault/private/context/telegram/<person-slug>.md`
 6. Saves work file:
-   - Unread/requests: `~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md`
-   - User mode: `~/CybosVault/private/content/work/MMDD-telegram-<user-slug>-YY.md`
+   - Unread/requests: `~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md`
+   - User mode: `~/SerokellSalesVault/private/content/work/MMDD-telegram-<user-slug>-YY.md`
 7. Marks dialogs as unread (preserves state)
 
 **If first run (no session):**
 - Script prompts for phone number
 - User receives Telegram code
 - Script prompts for code
-- Session saved to `~/CybosVault/private/.cybos/telegram/`
+- Session saved to `~/SerokellSalesVault/private/.serokell/telegram/`
 
 ### 2. READ WORK FILE
 
 Load the generated work file:
 
 ```
-Read: ~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md
+Read: ~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md
 # or for --user mode:
-Read: ~/CybosVault/private/content/work/MMDD-telegram-<user-slug>-YY.md
+Read: ~/SerokellSalesVault/private/content/work/MMDD-telegram-<user-slug>-YY.md
 ```
 
 The work file contains:
@@ -143,7 +143,7 @@ Ask: "Approve all drafts? (yes/edit/skip)"
 If user approves all drafts:
 
 ```bash
-bun scripts/telegram-save-drafts.ts ~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md
+bun scripts/telegram-save-drafts.ts ~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md
 ```
 
 If user requests changes:
@@ -178,8 +178,8 @@ Processed N conversation(s):
    - Status: Marked unread
 
 Files:
-- History: ~/CybosVault/private/context/telegram/<person-slug>.md
-- Work file: ~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md
+- History: ~/SerokellSalesVault/private/context/telegram/<person-slug>.md
+- Work file: ~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md
 
 Next steps:
 - Open Telegram to review and send drafts
@@ -188,7 +188,7 @@ Next steps:
 
 ### 7. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | telegram | process | messages
@@ -196,7 +196,7 @@ Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
 - Mode: unread/user/requests
 - Dialogs: N
 - Drafts saved: N
-- Output: ~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md
+- Output: ~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md
 - Dry run: yes/no
 
 ---
@@ -216,7 +216,7 @@ Before marking workflow complete:
 
 **If authentication fails:**
 - Check TELEGRAM_API_ID and TELEGRAM_API_HASH in .env
-- Delete `~/CybosVault/private/.cybos/telegram/session.txt` and re-authenticate
+- Delete `~/SerokellSalesVault/private/.serokell/telegram/session.txt` and re-authenticate
 - Report error to user
 
 **If rate limited (FLOOD_WAIT):**
@@ -237,10 +237,10 @@ Before marking workflow complete:
 
 | Output | Location |
 |--------|----------|
-| Per-person history | `~/CybosVault/private/context/telegram/<person-slug>.md` |
-| Work file (unread) | `~/CybosVault/private/content/work/MMDD-telegram-replies-YY.md` |
-| Work file (user) | `~/CybosVault/private/content/work/MMDD-telegram-<user-slug>-YY.md` |
-| Logs | `.cybos/logs/MMDD-YY.md` |
+| Per-person history | `~/SerokellSalesVault/private/context/telegram/<person-slug>.md` |
+| Work file (unread) | `~/SerokellSalesVault/private/content/work/MMDD-telegram-replies-YY.md` |
+| Work file (user) | `~/SerokellSalesVault/private/content/work/MMDD-telegram-<user-slug>-YY.md` |
+| Logs | `.serokell/logs/MMDD-YY.md` |
 
 ## Prerequisites
 
@@ -250,7 +250,7 @@ Before marking workflow complete:
    TELEGRAM_API_HASH=...    # Get from https://my.telegram.org/apps
    ```
 
-2. **First run**: Script will prompt for phone number and verification code. Session is saved to `~/CybosVault/private/.cybos/telegram/` for future use.
+2. **First run**: Script will prompt for phone number and verification code. Session is saved to `~/SerokellSalesVault/private/.serokell/telegram/` for future use.
 
 3. **Dependencies**: `bun add telegram` (GramJS package)
 

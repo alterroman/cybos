@@ -30,12 +30,12 @@ source "$SCRIPT_DIR/get-log-path.sh"
 LOG_DIR="$VAULT_LOG_DIR"
 
 # Resolve vault paths for briefs
-CONFIG_FILE="$HOME/.cybos/config.json"
+CONFIG_FILE="$HOME/.serokell/config.json"
 if [[ -f "$CONFIG_FILE" ]]; then
   VAULT_PATH=$(grep '"vault_path"' "$CONFIG_FILE" | sed 's/.*: *"\([^"]*\)".*/\1/' | sed "s|~|$HOME|")
   BRIEFS_DIR="$VAULT_PATH/private/content/briefs"
 else
-  BRIEFS_DIR="$HOME/CybosVault/private/content/briefs"
+  BRIEFS_DIR="$HOME/SerokellSalesVault/private/content/briefs"
 fi
 
 # Colors for output
@@ -116,9 +116,9 @@ install_launchd() {
   log_info "Installing launchd agents..."
 
   local agents=(
-    "com.cybos.brief-server"
-    "com.cybos.morning-brief"
-    "com.cybos.reindex"
+    "com.serokell.brief-server"
+    "com.serokell.morning-brief"
+    "com.serokell.reindex"
   )
 
   for agent in "${agents[@]}"; do
@@ -140,7 +140,7 @@ install_launchd() {
     # Copy plist with placeholder substitution
     log_info "Processing $agent with path substitution..."
     sed -e "s|__HOME__|$HOME|g" \
-        -e "s|__CYBOS_ROOT__|$PROJECT_DIR|g" \
+        -e "s|__SEROKELL_ROOT__|$PROJECT_DIR|g" \
         -e "s|__VAULT_LOGS__|$VAULT_LOG_DIR|g" \
         "$src" > "$dst"
 
@@ -156,9 +156,9 @@ uninstall_launchd() {
   log_info "Uninstalling launchd agents..."
 
   local agents=(
-    "com.cybos.brief-server"
-    "com.cybos.morning-brief"
-    "com.cybos.reindex"
+    "com.serokell.brief-server"
+    "com.serokell.morning-brief"
+    "com.serokell.reindex"
   )
 
   for agent in "${agents[@]}"; do
@@ -184,9 +184,9 @@ check_status() {
   echo "=== LaunchAgents ==="
 
   local agents=(
-    "com.cybos.brief-server"
-    "com.cybos.morning-brief"
-    "com.cybos.reindex"
+    "com.serokell.brief-server"
+    "com.serokell.morning-brief"
+    "com.serokell.reindex"
   )
 
   for agent in "${agents[@]}"; do

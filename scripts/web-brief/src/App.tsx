@@ -77,7 +77,7 @@ const EmptyState: React.FC<{ day: string }> = ({ day }) => (
       <Calendar className="w-8 h-8 text-gray-400" />
     </div>
     <h3 className="text-xl font-bold text-gray-900 mb-2">No brief for {day}</h3>
-    <p className="text-gray-500 mb-6">Run <code className="bg-gray-100 px-2 py-1 rounded">/cyber-brief</code> to generate</p>
+    <p className="text-gray-500 mb-6">Run <code className="bg-gray-100 px-2 py-1 rounded">/serokell-brief</code> to generate</p>
   </div>
 );
 

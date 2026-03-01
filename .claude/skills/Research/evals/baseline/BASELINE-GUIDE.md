@@ -11,7 +11,7 @@ Run these commands in order and save outputs to the files specified.
 
 **Command**:
 ```
-/cyber-research-company "Anthropic"
+/serokell-research-company "Anthropic"
 ```
 
 **Expected behavior**:
@@ -19,7 +19,7 @@ Run these commands in order and save outputs to the files specified.
 - Executes parallel MCP calls
 - Spawns 4 agents (company, market, financial, team)
 - Synthesizes findings
-- Saves to ~/CybosVault/private/deals/anthropic~/CybosVault/private/research/MMDD-<slug>-YY.md
+- Saves to ~/SerokellSalesVault/private/deals/anthropic~/SerokellSalesVault/private/research/MMDD-<slug>-YY.md
 
 **Save output to**: `company-anthropic-2026-01-02.md`
 
@@ -36,7 +36,7 @@ Run these commands in order and save outputs to the files specified.
 
 **Command**:
 ```
-/cyber-research-tech "Trusted Execution Environments"
+/serokell-research-tech "Trusted Execution Environments"
 ```
 
 **Expected behavior**:
@@ -44,7 +44,7 @@ Run these commands in order and save outputs to the files specified.
 - Executes parallel MCP calls
 - Spawns 3 agents (tech, market, financial)
 - Synthesizes findings
-- Saves to ~/CybosVault/private/research/trusted-execution-environments/MMDD-<slug>-YY.md
+- Saves to ~/SerokellSalesVault/private/research/trusted-execution-environments/MMDD-<slug>-YY.md
 
 **Save output to**: `tech-tees-2026-01-02.md`
 
@@ -60,7 +60,7 @@ Run these commands in order and save outputs to the files specified.
 
 **Command**:
 ```
-/cyber-research-market "AI Infrastructure"
+/serokell-research-market "AI Infrastructure"
 ```
 
 **Expected behavior**:
@@ -68,7 +68,7 @@ Run these commands in order and save outputs to the files specified.
 - Executes parallel MCP calls
 - Spawns 3 agents (market, tech, financial)
 - Synthesizes findings
-- Saves to ~/CybosVault/private/research/ai-infrastructure/MMDD-<slug>-YY.md
+- Saves to ~/SerokellSalesVault/private/research/ai-infrastructure/MMDD-<slug>-YY.md
 
 **Save output to**: `market-ai-infra-2026-01-02.md`
 
@@ -84,7 +84,7 @@ Run these commands in order and save outputs to the files specified.
 
 **Command**:
 ```
-/cyber-research-topic "post-labor economy"
+/serokell-research-topic "post-labor economy"
 ```
 
 **Expected result**: ERROR - Command doesn't exist yet

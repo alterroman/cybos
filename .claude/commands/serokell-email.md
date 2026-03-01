@@ -1,23 +1,23 @@
 ---
-name: cyber-email
+name: serokell-email
 description: Process Gmail messages - read, draft replies, save attachments to deals, sync to index
 ---
 
-Process unread Gmail messages by reading, drafting replies, saving attachments to deal folders, and labeling for follow-up. Also supports sync mode for indexing emails to `~/CybosVault/private/context/emails/`.
+Process unread Gmail messages by reading, drafting replies, saving attachments to deal folders, and labeling for follow-up. Also supports sync mode for indexing emails to `~/SerokellSalesVault/private/context/emails/`.
 
 **Usage:**
-- `/cyber-email` (process 1 email)
-- `/cyber-email --count 3` (process 3 emails)
-- `/cyber-email --from "founder@startup.com"` (filter by sender)
-- `/cyber-email --deals` (only emails from known deals)
-- `/cyber-email --sync` (sync last 3 days to ~/CybosVault/private/context/emails/)
-- `/cyber-email --sync --days 7` (sync last 7 days)
+- `/serokell-email` (process 1 email)
+- `/serokell-email --count 3` (process 3 emails)
+- `/serokell-email --from "founder@startup.com"` (filter by sender)
+- `/serokell-email --deals` (only emails from known deals)
+- `/serokell-email --sync` (sync last 3 days to ~/SerokellSalesVault/private/context/emails/)
+- `/serokell-email --sync --days 7` (sync last 7 days)
 
 **Arguments:**
 - `--count N`: Number of emails to process (default: 1)
 - `--from EMAIL`: Filter by sender email address
-- `--deals`: Only process emails from companies in `~/CybosVault/private/deals/` directory
-- `--sync`: Sync mode - index emails to ~/CybosVault/private/context/emails/ instead of processing
+- `--deals`: Only process emails from companies in `~/SerokellSalesVault/private/deals/` directory
+- `--sync`: Sync mode - index emails to ~/SerokellSalesVault/private/context/emails/ instead of processing
 - `--days N`: Number of days to sync (default: 3, only with --sync)
 
 **Workflow:**
@@ -35,16 +35,16 @@ Process unread Gmail messages by reading, drafting replies, saving attachments t
      - Full email body (HTML → markdown)
      - Conversation thread (last 3-5 emails)
      - Attachment list (pitch decks, PDFs, updates)
-   - Check if sender domain matches company in `~/CybosVault/private/deals/<company>/`
-   - If match found: load `~/CybosVault/private/deals/<company>/index.md` for relationship history
+   - Check if sender domain matches company in `~/SerokellSalesVault/private/deals/<company>/`
+   - If match found: load `~/SerokellSalesVault/private/deals/<company>/index.md` for relationship history
    - Query database for call history: `bun scripts/db/query.ts find-entity "<email>" --json`
 
 3. **DRAFT REPLY**: Compose contextual response
    - Analyze sender tone (formal/casual, technical/business)
    - Reference specific points from their message
    - For deal-related emails:
-     - Incorporate context from `~/CybosVault/private/deals/<company>/index.md`
-     - Reference recent research from `~/CybosVault/private/deals/<company>/research/`
+     - Incorporate context from `~/SerokellSalesVault/private/deals/<company>/index.md`
+     - Reference recent research from `~/SerokellSalesVault/private/deals/<company>/research/`
      - Check Granola call transcripts if available
    - Create draft using Gmail MCP `send_email` tool
    - **DO NOT auto-send** - save as Gmail draft
@@ -52,14 +52,14 @@ Process unread Gmail messages by reading, drafting replies, saving attachments t
 
 4. **SAVE ATTACHMENTS**: Download relevant files (if any)
    - Detect file types: pitch decks, memos, company updates
-   - For known deals: save to `~/CybosVault/private/deals/<company>/materials/` or `~/CybosVault/private/deals/<company>/updates/`
+   - For known deals: save to `~/SerokellSalesVault/private/deals/<company>/materials/` or `~/SerokellSalesVault/private/deals/<company>/updates/`
    - For new companies: prompt user to create deal folder first
    - File naming: `MMDD-<type>-YY.pdf` (e.g., `0105-pitch-deck-26.pdf`)
    - Routing rules:
-     - Pitch decks → `~/CybosVault/private/deals/<company>/materials/MMDD-pitch-deck-YY.pdf`
-     - Company updates → `~/CybosVault/private/deals/<company>/updates/MMDD-update-YY.pdf`
-     - Investment memos → `~/CybosVault/private/deals/<company>/materials/MMDD-memo-YY.pdf`
-     - Other files → `~/CybosVault/private/deals/<company>/materials/MMDD-<filename>`
+     - Pitch decks → `~/SerokellSalesVault/private/deals/<company>/materials/MMDD-pitch-deck-YY.pdf`
+     - Company updates → `~/SerokellSalesVault/private/deals/<company>/updates/MMDD-update-YY.pdf`
+     - Investment memos → `~/SerokellSalesVault/private/deals/<company>/materials/MMDD-memo-YY.pdf`
+     - Other files → `~/SerokellSalesVault/private/deals/<company>/materials/MMDD-<filename>`
 
 5. **LABEL & ORGANIZE**: Apply Gmail labels
    - Apply label: "TO ANSWER" (create if doesn't exist)
@@ -77,7 +77,7 @@ Process unread Gmail messages by reading, drafting replies, saving attachments t
       - Subject: Following up on our AI infrastructure discussion
       - Preview: Thanks for the intro from Sarah...
       - Draft: Hi John, great to reconnect...
-      - Attachments: pitch-deck.pdf → ~/CybosVault/private/deals/acme-corp/materials/0105-pitch-deck-26.pdf
+      - Attachments: pitch-deck.pdf → ~/SerokellSalesVault/private/deals/acme-corp/materials/0105-pitch-deck-26.pdf
       - Labeled: TO ANSWER
 
    2. **Jane Doe <jane@example.com>** [New sender]
@@ -91,20 +91,20 @@ Process unread Gmail messages by reading, drafting replies, saving attachments t
 
 When email sender matches a company:
 1. Extract company from sender domain (e.g., `john@acmecorp.ai` → "acmecorp")
-2. Fuzzy match against existing `~/CybosVault/private/deals/` folders
+2. Fuzzy match against existing `~/SerokellSalesVault/private/deals/` folders
 3. If match found:
-   - Load `~/CybosVault/private/deals/<company>/index.md`
-   - Check for recent research in `~/CybosVault/private/deals/<company>/research/`
+   - Load `~/SerokellSalesVault/private/deals/<company>/index.md`
+   - Check for recent research in `~/SerokellSalesVault/private/deals/<company>/research/`
    - Use context in draft reply
 4. If no match and attachments present:
-   - Prompt: "Create ~/CybosVault/private/deals/<company-slug>/ for this sender?"
+   - Prompt: "Create ~/SerokellSalesVault/private/deals/<company-slug>/ for this sender?"
    - If yes: create folder structure and populate index.md
 
 **New Deal Folder Structure:**
 ```
-~/CybosVault/private/deals/<company-slug>/
+~/SerokellSalesVault/private/deals/<company-slug>/
 ├── index.md                # Populated with sender info, email date (frontmatter + full context)
-├── .cybos/
+├── .serokell/
 │   └── scratchpad/
 ├── materials/              # Pitch decks, memos
 ├── updates/                # Company update emails
@@ -136,8 +136,8 @@ When email sender matches a company:
 
 **Context Enrichment:**
 When drafting replies, combine:
-1. `~/CybosVault/private/deals/<company>/index.md` - investment stage, key contacts
-2. `~/CybosVault/private/deals/<company>/research/` - latest DD notes
+1. `~/SerokellSalesVault/private/deals/<company>/index.md` - investment stage, key contacts
+2. `~/SerokellSalesVault/private/deals/<company>/research/` - latest DD notes
 3. Gmail thread history - previous email conversations
 4. Database entity context: `bun scripts/db/query.ts entity <slug> --json` - includes call history
 
@@ -156,16 +156,16 @@ metrics you mentioned.
 
 ## Sync Mode
 
-Sync mode indexes emails to `~/CybosVault/private/context/emails/` for morning brief and context. This is separate from the interactive processing workflow above.
+Sync mode indexes emails to `~/SerokellSalesVault/private/context/emails/` for morning brief and context. This is separate from the interactive processing workflow above.
 
 **Usage:**
-- `/cyber-email --sync` - Index last 3 days (unread OR important, prioritize important)
-- `/cyber-email --sync --days 7` - Index last 7 days
+- `/serokell-email --sync` - Index last 3 days (unread OR important, prioritize important)
+- `/serokell-email --sync --days 7` - Index last 7 days
 
 **Sync Workflow:**
 
 1. **LOAD STATE**
-   - Read `~/CybosVault/private/context/emails/.state.json`
+   - Read `~/SerokellSalesVault/private/context/emails/.state.json`
    - Get set of `processedMessageIds` for deduplication
 
 2. **QUERY GMAIL**
@@ -182,7 +182,7 @@ Sync mode indexes emails to `~/CybosVault/private/context/emails/` for morning b
 4. **FOR EACH NEW EMAIL**
    a. Read full content: `mcp__gmail__read_email(messageId)`
    b. Generate 1-line summary (inline, ~60 chars max)
-   c. Create folder: `~/CybosVault/private/context/emails/YYYY-MM-DD_<from-slug>-<subject-slug>/`
+   c. Create folder: `~/SerokellSalesVault/private/context/emails/YYYY-MM-DD_<from-slug>-<subject-slug>/`
       - from-slug: sender first name or email prefix, kebab-case
       - subject-slug: first 30 chars of subject, kebab-case
    d. Write `metadata.json`:
@@ -220,7 +220,7 @@ Sync mode indexes emails to `~/CybosVault/private/context/emails/` for morning b
 
 6. **INDEX TO DATABASE**
    - Email metadata is indexed automatically by the database indexer
-   - Run `/cyber-reindex` to update database if needed
+   - Run `/serokell-reindex` to update database if needed
    - Query emails: `bun scripts/db/query.ts find-interactions --type email`
 
 7. **REPORT**
@@ -265,7 +265,7 @@ Rules:
 **Headless Execution:**
 Sync mode is designed for headless Claude Code execution:
 ```bash
-claude --headless "/cyber-email --sync"
+claude --headless "/serokell-email --sync"
 ```
 
 This enables automated morning brief workflows.

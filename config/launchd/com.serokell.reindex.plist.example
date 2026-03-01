@@ -2,20 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- Morning Brief Generator
-         Runs daily at 8:00 AM to generate brief and open browser
-         Uses --skip-gen on initial run, full gen in schedule -->
+    <!-- Daily Reindex Job
+         Runs once at 7:00 AM to rebuild context graph database
+         Runs BEFORE morning brief (8am) so brief has fresh data -->
 
     <key>Label</key>
-    <string>com.cybos.morning-brief</string>
+    <string>com.serokell.reindex</string>
 
     <key>ProgramArguments</key>
     <array>
-        <string>__CYBOS_ROOT__/scripts/morning-brief.sh</string>
+        <string>__SEROKELL_ROOT__/scripts/reindex.sh</string>
     </array>
 
     <key>WorkingDirectory</key>
-    <string>__CYBOS_ROOT__</string>
+    <string>__SEROKELL_ROOT__</string>
 
     <key>EnvironmentVariables</key>
     <dict>
@@ -25,21 +25,21 @@
         <string>__HOME__</string>
     </dict>
 
-    <!-- Run at 8:00 AM every day -->
+    <!-- Run at 7:00 AM every day (1 hour before brief) -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>8</integer>
+        <integer>7</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>
 
     <!-- Logging (stored in vault) -->
     <key>StandardOutPath</key>
-    <string>__VAULT_LOGS__/morning-brief.out.log</string>
+    <string>__VAULT_LOGS__/reindex.out.log</string>
 
     <key>StandardErrorPath</key>
-    <string>__VAULT_LOGS__/morning-brief.err.log</string>
+    <string>__VAULT_LOGS__/reindex.err.log</string>
 
     <!-- Don't run at load - only on schedule -->
     <key>RunAtLoad</key>

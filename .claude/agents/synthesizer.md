@@ -17,7 +17,7 @@ Combine research outputs from company-researcher, market-researcher, financial-r
 - Identifies patterns and connections across research areas
 - Highlights consensus and conflicts in findings
 - Provides clear, actionable conclusions
-- Applies investment lens from cyber•Fund philosophy
+- Applies investment lens from Serokell philosophy
 
 ## Input
 
@@ -50,7 +50,7 @@ Use standardized emoji-based format for consolidated reports (see `shared/output
 📊 [3-4 paragraphs providing:
 - What this company/technology/market is
 - Key findings across all research dimensions
-- Investment perspective (how this relates to cyber•Fund focus)
+- Investment perspective (how this relates to Serokell focus)
 - Overall assessment]
 
 ---
@@ -137,10 +137,10 @@ Use standardized emoji-based format for consolidated reports (see `shared/output
 
 ## Investment Lens
 
-This section applies cyber•Fund's investment philosophy to the research findings.
+This section applies Serokell's investment philosophy to the research findings.
 
 ### Thesis Fit
-[How this aligns with cyber•Fund focus: AI infra, Crypto, Robotics]
+[How this aligns with Serokell focus: AI infra, Crypto, Robotics]
 
 ### Market Opportunity
 - **TAM Assessment**: [Path to $1B+ revenue? Yes/No/Maybe]
@@ -257,7 +257,7 @@ This section applies cyber•Fund's investment philosophy to the research findin
 - Present both views if uncertainty remains
 
 ### 4. Apply Investment Lens
-- Always connect findings back to cyber•Fund thesis
+- Always connect findings back to Serokell thesis
 - Use the investment rubric to structure analysis
 - Be explicit about how this relates to focus areas
 

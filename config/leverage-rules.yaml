@@ -166,7 +166,7 @@ rules:
     keywords:
       - "automation"
       - "workflow"
-      - "cybos"
+      - "serokell-sales-agent"
       - "process"
 
   - id: sf-move
@@ -183,7 +183,7 @@ rules:
 
   - id: hiring
     name: "Team building"
-    description: "Aligns with 'Hire AI team for cyber Fund'"
+    description: "Aligns with 'Hire AI team for Serokell'"
     score: 7
     category: goal-alignment
     keywords:

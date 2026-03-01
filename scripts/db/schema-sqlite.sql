@@ -1,5 +1,5 @@
 -- ============================================
--- CYBOS SQLITE SCHEMA (v2.1)
+-- SEROKELL SQLITE SCHEMA (v2.1)
 -- 5 tables, ~51 columns
 -- Migrated from PostgreSQL to SQLite
 -- ============================================

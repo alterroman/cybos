@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: cybos
-      POSTGRES_PASSWORD: cybos_dev
+      POSTGRES_PASSWORD: serokell_dev
       POSTGRES_DB: cybos
     ports:
       - "5433:5432"  # Using 5433 to avoid conflict with local PostgreSQL

@@ -4,14 +4,14 @@ Arguments: $ARGUMENTS (optional: "today", "week", or specific date YYYY-MM-DD)
 
 **Display logic**:
 
-- **No argument** or **"today"**: Read `~/CybosVault/private/.cybos/logs/MMDD-YY.md` for today
+- **No argument** or **"today"**: Read `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md` for today
 - **"week"**: Read last 7 days of log files
 - **Specific date (YYYY-MM-DD)**: Read that date's log file
 
 **Output format**:
 
 ```
-# Cybos Activity Log
+# SerokellSalesAgent Activity Log
 
 [If showing multiple days:]
 ## MMDD-YY
@@ -38,6 +38,6 @@ Arguments: $ARGUMENTS (optional: "today", "week", or specific date YYYY-MM-DD)
 - If no logs exist at all: "No logs found. Activity will be logged as workflows are executed."
 
 **Notes**:
-- Logs are appended to `~/CybosVault/private/.cybos/logs/MMDD-YY.md` after each workflow completion
+- Logs are appended to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md` after each workflow completion
 - Format: `## HH:MM | category | type | subject`
 - Useful for reviewing recent work and tracking progress

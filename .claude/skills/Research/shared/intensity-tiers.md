@@ -163,8 +163,8 @@ If user includes intensity flag, use it explicitly:
 - `--deep` → Deep research
 
 **Examples**:
-- `/cyber-research-company "Acme Corp" --quick`
-- `/cyber-research-tech "TEEs" --deep`
+- `/serokell-research-company "Acme Corp" --quick`
+- `/serokell-research-tech "TEEs" --deep`
 
 ### Inference from Query
 
@@ -231,7 +231,7 @@ When unclear, default to **Standard** and explain:
 
 3. SYNTHESIZE
    └─ Consolidate with investment lens
-   └─ Apply cyber•Fund rubric
+   └─ Apply Serokell rubric
 
 4. OUTPUT
    └─ Full research report (1,500-3,000 words)

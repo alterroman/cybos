@@ -198,7 +198,7 @@ Response: Abort and explain why research couldn't be completed
 
 All errors should be logged in debug logs:
 
-**Location**: `.cybos/logs/research-debug/MMDD-<slug>-YY.md`
+**Location**: `.serokell/logs/research-debug/MMDD-<slug>-YY.md`
 
 **Format**:
 ```markdown

@@ -10,4 +10,4 @@ Target: $ARGUMENTS
 
 Parse intensity from arguments: --quick, --standard (default), --deep
 
-Assess market opportunity through cyber•Fund lens: path to $1B+ companies, timing, white spaces.
+Assess market opportunity through Serokell lens: path to $1B+ companies, timing, white spaces.

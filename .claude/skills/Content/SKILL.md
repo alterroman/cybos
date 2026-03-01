@@ -1,16 +1,16 @@
 ---
 name: content
-description: Generate posts, essays and images following brand guidelines. Use for tweets, essays, Telegram posts, and image generation. Load identity from ~/CybosVault/private/context/identity.md.
+description: Generate posts, essays and images following brand guidelines. Use for tweets, essays, Telegram posts, and image generation. Load identity from ~/SerokellSalesVault/private/context/identity.md.
 ---
 
 # Content Skill
 
-Generate posts, essays and images following brand guidelines. Load identity from `~/CybosVault/private/context/identity.md`.
+Generate posts, essays and images following brand guidelines. Load identity from `~/SerokellSalesVault/private/context/identity.md`.
 
 ## Architecture
 
 ```
-COMMAND (cyber-essay, cyber-tweet, etc.)
+COMMAND (serokell-essay, cyber-tweet, etc.)
     │
     ▼
 WORKFLOW (essay.md, tweet.md, telegram-post.md)
@@ -49,10 +49,10 @@ Note: Image generation runs in main session (pipeline in `workflows/image.md`), 
 
 | Command | Maps To |
 |---------|---------|
-| `/cyber-essay` | `workflows/essay.md` |
-| `/cyber-tweet` | `workflows/tweet.md` |
+| `/serokell-essay` | `workflows/essay.md` |
+| `/serokell-tweet` | `workflows/tweet.md` |
 | Telegram post request | `workflows/telegram-post.md` |
-| `/cyber-image` | `workflows/image.md` |
+| `/serokell-image` | `workflows/image.md` |
 
 ## MCP Tools
 
@@ -64,10 +64,10 @@ Note: Image generation runs in main session (pipeline in `workflows/image.md`), 
 
 | Type | Location |
 |------|----------|
-| Posts | `~/CybosVault/private/content/posts/MMDD-<slug>-YY.md` |
-| Essays | `~/CybosVault/private/content/essays/MMDD-<slug>-YY.md` |
-| Tweets | `~/CybosVault/private/content/tweets/MMDD-<slug>-YY.md` |
-| Images | `~/CybosVault/private/content/images/MMDD-<slug>-YY.png` |
+| Posts | `~/SerokellSalesVault/private/content/posts/MMDD-<slug>-YY.md` |
+| Essays | `~/SerokellSalesVault/private/content/essays/MMDD-<slug>-YY.md` |
+| Tweets | `~/SerokellSalesVault/private/content/tweets/MMDD-<slug>-YY.md` |
+| Images | `~/SerokellSalesVault/private/content/images/MMDD-<slug>-YY.png` |
 
 ## Key Rules
 

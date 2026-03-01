@@ -11,13 +11,13 @@ Load memo template:
 
 Company: $ARGUMENTS
 
-**Prerequisites**: Company research must exist in ~/CybosVault/private/deals/<company>/research/
+**Prerequisites**: Company research must exist in ~/SerokellSalesVault/private/deals/<company>/research/
 
 Execute the DD memo workflow:
 
 1. **GATHER**: Load all research and context
-   - All research reports from ~/CybosVault/private/deals/<company>/research/
-   - Deal context from ~/CybosVault/private/deals/<company>/index.md
+   - All research reports from ~/SerokellSalesVault/private/deals/<company>/research/
+   - Deal context from ~/SerokellSalesVault/private/deals/<company>/index.md
    - Investment philosophy and memo template
 
 2. **ANALYZE**: Use memo-analyst agent (Opus model) for strategic analysis
@@ -36,9 +36,9 @@ Execute the DD memo workflow:
    - Validate scoring and recommendation
    - Flag information gaps
 
-5. **OUTPUT**: Save memo to ~/CybosVault/private/deals/<company-slug>/memo/memo.md
+5. **OUTPUT**: Save memo to ~/SerokellSalesVault/private/deals/<company-slug>/memo/memo.md
    - **Overwrites** previous version (living document)
 
-6. **LOG**: Log memo generation to ~/CybosVault/private/.cybos/logs/MMDD-<slug>-YY.md
+6. **LOG**: Log memo generation to ~/SerokellSalesVault/private/.serokell/logs/MMDD-<slug>-YY.md
 
-Apply cyber•Fund rubric rigorously: legendary outcomes, defensible moats, strong founders, market timing.
+Apply Serokell rubric rigorously: legendary outcomes, defensible moats, strong founders, market timing.

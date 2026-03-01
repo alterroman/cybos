@@ -9,7 +9,7 @@ Summarize therapy session transcripts into structured Russian-language notes for
 
 ## Output
 
-- Structured summary saved to: `~/CybosVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md`
+- Structured summary saved to: `~/SerokellSalesVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md`
 
 ## Workflow Steps
 
@@ -139,7 +139,7 @@ Before saving, verify:
 
 Determine output path:
 ```
-~/CybosVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md
+~/SerokellSalesVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md
 ```
 
 If file already exists:
@@ -163,7 +163,7 @@ Emotional shift: X/10 → Y/10
 Key insights: [count]
 Homework items: [count]
 
-Saved to: ~/CybosVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md
+Saved to: ~/SerokellSalesVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md
 ```
 
 ## Language Notes
@@ -236,6 +236,6 @@ Client: Every time there's a deadline, I freeze. I know I can do the work, but s
 ## Integration
 
 This workflow can be triggered by:
-- `/cyber-summarize therapy @file.md`
+- `/serokell-summarize therapy @file.md`
 - Direct request: "summarize this therapy session"
 - Detecting therapy transcript in provided file

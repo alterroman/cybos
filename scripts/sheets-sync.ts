@@ -17,7 +17,7 @@
  *   5. Set GOOGLE_SERVICE_ACCOUNT_KEY env var to the JSON content (or path to file)
  *      OR set GOOGLE_API_KEY for read-only public sheets (limited)
  *
- * Config in ~/.cybos/config.json:
+ * Config in ~/.serokell/config.json:
  *   {
  *     "bd": {
  *       "serokell_leads_sheet_id": "1BxiMVs0...",
@@ -250,7 +250,7 @@ async function appendLeads(sheetId: string, token: string, leads: Lead[], startR
 // ===== CONFIG =====
 
 function loadConfig(): Record<string, unknown> {
-  const configPath = resolve(homedir(), '.cybos', 'config.json')
+  const configPath = resolve(homedir(), '.serokell', 'config.json')
   if (!existsSync(configPath)) return {}
   return JSON.parse(readFileSync(configPath, 'utf-8'))
 }
@@ -271,7 +271,7 @@ function loadServiceAccount(): object | null {
   }
 
   // Option 2: default file location
-  const defaultPath = resolve(homedir(), '.cybos', 'google-service-account.json')
+  const defaultPath = resolve(homedir(), '.serokell', 'google-service-account.json')
   if (existsSync(defaultPath)) {
     return JSON.parse(readFileSync(defaultPath, 'utf-8'))
   }
@@ -299,7 +299,7 @@ async function checkStatus(sheetId: string): Promise<void> {
   if (!sa) {
     console.log('❌ Google Service Account not configured')
     console.log('   Set GOOGLE_SERVICE_ACCOUNT_KEY env var or place credentials at:')
-    console.log('   ~/.cybos/google-service-account.json')
+    console.log('   ~/.serokell/google-service-account.json')
     return
   }
 
@@ -332,7 +332,7 @@ async function main() {
   if (args['status'] === 'true') {
     if (!sheetId) {
       console.log('❌ No sheet ID configured.')
-      console.log('   Add to ~/.cybos/config.json: { "bd": { "serokell_leads_sheet_id": "YOUR_ID" } }')
+      console.log('   Add to ~/.serokell/config.json: { "bd": { "serokell_leads_sheet_id": "YOUR_ID" } }')
       console.log('   Or pass --sheet-id YOUR_ID')
       process.exit(1)
     }
@@ -343,7 +343,7 @@ async function main() {
   // Validate required args
   if (!sheetId) {
     console.error('❌ No Google Sheets ID provided.')
-    console.error('   Use --sheet-id YOUR_ID or configure in ~/.cybos/config.json')
+    console.error('   Use --sheet-id YOUR_ID or configure in ~/.serokell/config.json')
     console.error('   under: { "bd": { "serokell_leads_sheet_id": "YOUR_ID" } }')
     process.exit(1)
   }
@@ -377,14 +377,14 @@ async function main() {
   if (!sa) {
     console.error('❌ Google Service Account not configured.')
     console.error('   Set GOOGLE_SERVICE_ACCOUNT_KEY env var to your service account JSON')
-    console.error('   Or place credentials at: ~/.cybos/google-service-account.json')
+    console.error('   Or place credentials at: ~/.serokell/google-service-account.json')
     console.error('')
     console.error('📖 Setup guide:')
     console.error('   1. Go to https://console.cloud.google.com')
     console.error('   2. Create project → Enable Sheets API')
     console.error('   3. Create Service Account → Download JSON key')
     console.error('   4. Share your spreadsheet with the service account email')
-    console.error('   5. Place key JSON at ~/.cybos/google-service-account.json')
+    console.error('   5. Place key JSON at ~/.serokell/google-service-account.json')
     process.exit(1)
   }
 

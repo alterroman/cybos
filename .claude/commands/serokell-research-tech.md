@@ -10,4 +10,4 @@ Target: $ARGUMENTS
 
 Parse intensity from arguments: --quick, --standard (default), --deep
 
-Focus on cyber•Fund priority areas: TEEs/privacy, AI agents, robotics data, compute financialization.
+Focus on Serokell priority areas: TEEs/privacy, AI agents, robotics data, compute financialization.

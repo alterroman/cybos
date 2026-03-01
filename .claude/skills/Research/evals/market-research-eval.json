@@ -14,7 +14,7 @@
     "Synthesizer creates market report with investment perspective",
     "Identifies under-invested opportunities (white spaces)",
     "Lists promising companies for follow-up research",
-    "Saves to ~/CybosVault/private/research/ai-infrastructure/YYYY-MM-DD.md",
+    "Saves to ~/SerokellSalesVault/private/research/ai-infrastructure/YYYY-MM-DD.md",
     "Creates market context file",
     "Logs action"
   ],
@@ -31,7 +31,7 @@
     "quality_indicators": [
       "Specific market size numbers with citations",
       "Market structure clearly explained",
-      "Comparison to cyber•Fund focus areas",
+      "Comparison to Serokell focus areas",
       "Assessment of defensibility potential in this market",
       "Recent funding activity and trends noted",
       "Regulatory considerations mentioned if relevant"

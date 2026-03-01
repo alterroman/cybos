@@ -1,10 +1,10 @@
 # Investment Lens
 
-This reference outlines cyber•Fund's investment philosophy and evaluation rubric. Apply this lens to ALL research outputs.
+This reference outlines Serokell's investment philosophy and evaluation rubric. Apply this lens to ALL research outputs.
 
 ## Investment Focus
 
-cyber•Fund focuses on three core areas:
+Serokell focuses on three core areas:
 - **AI Infrastructure** - Training, inference, data, tooling (NOT consumer AI apps)
 - **Crypto/Blockchain** - Novel consensus, privacy (TEEs), programmable finance
 - **Robotics** - Data collection, simulation, embodied AI
@@ -82,7 +82,7 @@ Every research report must include:
 
 ## Philosophy Principles
 
-From cyber•Fund's core beliefs:
+From Serokell's core beliefs:
 
 1. **Open > Closed** - Prefer open source, decentralized systems
 2. **Infrastructure > Features** - Platform plays over point solutions

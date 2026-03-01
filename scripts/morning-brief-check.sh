@@ -14,7 +14,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 BRIEFS_DIR="$PROJECT_DIR/content/briefs"
-LOG_DIR="$PROJECT_DIR/.cybos/logs"
+LOG_DIR="$PROJECT_DIR/.serokell/logs"
 LOG_FILE="$LOG_DIR/morning-brief-check.log"
 
 # Ensure log directory exists

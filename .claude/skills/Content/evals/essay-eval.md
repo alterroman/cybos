@@ -6,7 +6,7 @@ Test essay outputs against style guide compliance.
 
 ## How to Use
 
-1. Generate an essay with `/cyber-essay "topic"`
+1. Generate an essay with `/serokell-essay "topic"`
 2. Run this eval against the output
 3. Score each category
 4. Identify patterns for style guide iteration
@@ -104,27 +104,27 @@ Use these to generate test essays:
 
 **Test 1: Technical thesis**
 ```
-/cyber-essay "Why AI wrappers will mostly fail in the next 18 months"
+/serokell-essay "Why AI wrappers will mostly fail in the next 18 months"
 ```
 
 **Test 2: Futurism**
 ```
-/cyber-essay "Machine-to-machine payments will be bigger than human payments by 2030"
+/serokell-essay "Machine-to-machine payments will be bigger than human payments by 2030"
 ```
 
 **Test 3: Personal experience**
 ```
-/cyber-essay "What I learned from reviewing 200 AI startups this year"
+/serokell-essay "What I learned from reviewing 200 AI startups this year"
 ```
 
 **Test 4: Contrarian take**
 ```
-/cyber-essay "Most AI safety discourse is status games"
+/serokell-essay "Most AI safety discourse is status games"
 ```
 
 **Test 5: Market analysis**
 ```
-/cyber-essay "The TEE compute thesis: why trusted execution matters for AI"
+/serokell-essay "The TEE compute thesis: why trusted execution matters for AI"
 ```
 
 ---

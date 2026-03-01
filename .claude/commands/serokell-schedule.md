@@ -1,14 +1,14 @@
 ---
-name: cyber-schedule
+name: serokell-schedule
 description: Schedule content to Twitter and/or LinkedIn via Typefully
 ---
 
 Schedule content to social media platforms via Typefully API v2.
 
 **Usage:**
-- `/cyber-schedule @content/tweets/MMDD-topic-YY.md`
-- `/cyber-schedule "Raw text content to post"`
-- `/cyber-schedule @content/posts/MMDD-post-YY.md --image @content/images/MMDD-img-YY.png`
+- `/serokell-schedule @content/tweets/MMDD-topic-YY.md`
+- `/serokell-schedule "Raw text content to post"`
+- `/serokell-schedule @content/posts/MMDD-post-YY.md --image @content/images/MMDD-img-YY.png`
 
 **Arguments:**
 - Content: @-prefixed file path OR raw text in quotes (required)
@@ -17,9 +17,9 @@ Schedule content to social media platforms via Typefully API v2.
 
 **Examples:**
 ```
-/cyber-schedule @content/tweets/0104-ai-agents-26.md
-/cyber-schedule "Quick thought about AI agents"
-/cyber-schedule @content/posts/0104-post-26.md --account cyberfund
+/serokell-schedule @content/tweets/0104-ai-agents-26.md
+/serokell-schedule "Quick thought about AI agents"
+/serokell-schedule @content/posts/0104-post-26.md --account cyberfund
 ```
 
 **Workflow:**

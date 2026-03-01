@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Cybos Shell Setup
+# SerokellSalesAgent Shell Setup
 # Configures environment variables for Claude Code MCP servers
 #
 # Supported: zsh (macOS/Linux), bash (with limitations)
@@ -34,7 +34,7 @@ for arg in "$@"; do
     esac
 done
 
-echo "Cybos Shell Setup"
+echo "SerokellSalesAgent Shell Setup"
 echo "===================="
 echo ""
 echo "Project directory: $PROJECT_DIR"
@@ -216,7 +216,7 @@ setup_shell_integration() {
 
     # Create the shell integration block
     SHELL_BLOCK="$MARKER
-# Auto-load Cybos .env for Claude Code MCP servers
+# Auto-load SerokellSalesAgent .env for Claude Code MCP servers
 # Installed by: $PROJECT_DIR/scripts/setup-shell.sh
 
 if [[ -f \"$PROJECT_DIR/.env\" ]]; then

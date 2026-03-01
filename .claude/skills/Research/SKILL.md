@@ -1,11 +1,11 @@
 ---
 name: research
-description: Company due diligence, technology deep-dives, market analysis, and topic exploration for cyber•Fund investment decisions, content creation, and personal projects. Supports 3 intensity levels (quick/standard/deep) for speed-quality tradeoffs.
+description: Company due diligence, technology deep-dives, market analysis, and topic exploration for Serokell investment decisions, content creation, and personal projects. Supports 3 intensity levels (quick/standard/deep) for speed-quality tradeoffs.
 ---
 
 # Research Skill
 
-Company due diligence, technology deep-dives, market analysis, and topic exploration for cyber•Fund investment decisions, content creation, and personal projects.
+Company due diligence, technology deep-dives, market analysis, and topic exploration for Serokell investment decisions, content creation, and personal projects.
 
 ## Capabilities
 
@@ -60,7 +60,7 @@ See `shared/agent-selection-matrix.md` for full matrix.
 ## Common References
 
 - `shared/agent-selection-matrix.md` - Dynamic agent selection
-- `shared/investment-lens.md` - cyber•Fund investment philosophy
+- `shared/investment-lens.md` - Serokell investment philosophy
 - `shared/mcp-strategy.md` - MCP tool selection
 - `shared/output-standards.md` - Formats and emoji conventions
 - `shared/intensity-tiers.md` - 3-tier intensity spec
@@ -70,8 +70,8 @@ See `shared/agent-selection-matrix.md` for full matrix.
 All research creates timestamped workspace:
 
 ```
-~/CybosVault/private/deals/<company>~/CybosVault/private/research/MMDD-<slug>-YY/   # Company
-~/CybosVault/private/research/<topic>/MMDD-<slug>-YY/           # Tech/Market/Topic
+~/SerokellSalesVault/private/deals/<company>~/SerokellSalesVault/private/research/MMDD-<slug>-YY/   # Company
+~/SerokellSalesVault/private/research/<topic>/MMDD-<slug>-YY/           # Tech/Market/Topic
 ├── raw/                                     # Agent outputs
 └── report.md                                # Final synthesis
 ```
@@ -85,7 +85,7 @@ All research creates timestamped workspace:
 
 ## Investment Context
 
-All research applies cyber•Fund's investment philosophy:
+All research applies Serokell's investment philosophy:
 - Path to $1B+ revenue (not niche $50M ARR outcomes)
 - Defensible moat (data, network effects, hard tech)
 - Clear business model (revenue > token speculation)

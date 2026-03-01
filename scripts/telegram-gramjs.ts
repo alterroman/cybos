@@ -29,7 +29,7 @@ import { getLogsPath, getContextPath, getWorkPath } from './paths';
 // Configuration
 // ============================================================================
 
-const SESSION_DIR = join(process.env.HOME!, '.cybos', 'telegram');
+const SESSION_DIR = join(process.env.HOME!, '.serokell', 'telegram');
 const SESSION_FILE = join(SESSION_DIR, 'session.txt');
 const DIALOG_CACHE_FILE = join(SESSION_DIR, 'dialog-cache.json');
 const CONTEXT_DIR = join(getContextPath(), 'telegram');
@@ -1325,7 +1325,7 @@ Environment variables:
 
 First run:
   The script will prompt for phone number and verification code.
-  Session is saved to ~/.cybos/telegram/ for future use.
+  Session is saved to ~/.serokell/telegram/ for future use.
 `);
       process.exit(0);
     }
@@ -1344,7 +1344,7 @@ async function loginOnly(): Promise<void> {
 
   if (await client.checkAuthorization()) {
     console.log('✅ Already authenticated! Session is valid.');
-    console.log(`   Session file: ~/.cybos/telegram/session.txt`);
+    console.log(`   Session file: ~/.serokell/telegram/session.txt`);
   } else {
     console.log('📱 Starting authentication...\n');
     await authenticate(client);

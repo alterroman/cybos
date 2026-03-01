@@ -170,7 +170,7 @@ const WelcomeStep: React.FC<{ onNext: () => void }> = ({ onNext }) => (
     <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center mx-auto mb-8">
       <Sparkles className="w-10 h-10 text-white" />
     </div>
-    <h1 className="text-4xl font-bold mb-4">Welcome to Cybos</h1>
+    <h1 className="text-4xl font-bold mb-4">Welcome to SerokellSalesAgent</h1>
     <p className="text-xl text-gray-500 mb-8 max-w-md mx-auto">
       Let's set up your personal AI assistant in just a few steps.
     </p>
@@ -276,7 +276,7 @@ const VaultStep: React.FC<{
         label="Vault Path"
         value={data.vaultPath}
         onChange={(v) => onChange({ vaultPath: v })}
-        placeholder="~/CybosVault"
+        placeholder="~/SerokellSalesVault"
       />
 
       <div className="bg-gray-50 rounded-xl p-4 mb-6">
@@ -348,7 +348,7 @@ const IdentityStep: React.FC<{
         </div>
         <div>
           <h2 className="text-2xl font-bold">Your Identity</h2>
-          <p className="text-gray-500">Tell Cybos about yourself</p>
+          <p className="text-gray-500">Tell SerokellSalesAgent about yourself</p>
         </div>
       </div>
 
@@ -686,7 +686,7 @@ const CompleteStep: React.FC<{
         </div>
         <h1 className="text-4xl font-bold mb-4">You're all set!</h1>
         <p className="text-xl text-gray-500 mb-8 max-w-md mx-auto">
-          Cybos is ready. Your vault is at:
+          SerokellSalesAgent is ready. Your vault is at:
         </p>
         <code className="bg-gray-100 px-4 py-2 rounded-lg text-sm mb-8 block max-w-sm mx-auto">
           {data.vaultPath}
@@ -698,7 +698,7 @@ const CompleteStep: React.FC<{
             <li>1. <strong>Open the cyberman folder</strong> in VS Code or Cursor</li>
             <li className="pl-4 text-gray-500">Your vault appears as <code className="bg-gray-200 px-1 rounded">vault/</code> in the sidebar</li>
             <li>2. Run <code className="bg-gray-200 px-1 rounded">claude</code> in the terminal</li>
-            <li>3. Try <code className="bg-gray-200 px-1 rounded">/cyber-brief</code> to generate your first brief</li>
+            <li>3. Try <code className="bg-gray-200 px-1 rounded">/serokell-brief</code> to generate your first brief</li>
           </ul>
         </div>
 
@@ -775,7 +775,7 @@ const CompleteStep: React.FC<{
 export const SetupWizard: React.FC = () => {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<SetupData>({
-    vaultPath: '~/CybosVault',
+    vaultPath: '~/SerokellSalesVault',
     user: {
       name: '',
       ownerName: '',

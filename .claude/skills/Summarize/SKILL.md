@@ -19,11 +19,11 @@ Transform transcripts and long-form content into structured, actionable summarie
 
 ## Output Location
 
-- Therapy: `~/CybosVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md`
+- Therapy: `~/SerokellSalesVault/private/context/my-life/therapy/YYYY-MM-DD-summary.md`
 
 ## Usage
 
 ```
-/cyber-summarize therapy @path/to/transcript.md
-/cyber-summarize therapy @path/to/transcript.txt
+/serokell-summarize therapy @path/to/transcript.md
+/serokell-summarize therapy @path/to/transcript.txt
 ```

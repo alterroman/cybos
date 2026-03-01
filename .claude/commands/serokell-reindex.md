@@ -1,5 +1,5 @@
 ---
-name: cyber-reindex
+name: serokell-reindex
 description: Rebuild context graph database from deals, calls, emails, telegram, and entity files
 ---
 
@@ -7,13 +7,13 @@ description: Rebuild context graph database from deals, calls, emails, telegram,
 
 Runs the database indexer to populate SQLite with entities and interactions.
 
-**Database:** `~/CybosVault/private/.cybos/db/cybos.sqlite` (auto-created)
+**Database:** `~/SerokellSalesVault/private/.serokell/db/serokell.sqlite` (auto-created)
 
 ## Prerequisites
 
-For LLM extraction (`--extract`), you need `CYBOS_ANTHROPIC_KEY` set in:
+For LLM extraction (`--extract`), you need `SEROKELL_ANTHROPIC_KEY` set in:
 - Environment variable, OR
-- `~/CybosVault/private/.env`, OR
+- `~/SerokellSalesVault/private/.env`, OR
 - Project `.env`
 
 The script auto-loads from these locations.
@@ -27,40 +27,40 @@ The script auto-loads from these locations.
 ## Examples
 
 ```bash
-/cyber-reindex              # Full index + LLM extraction (default)
-/cyber-reindex --status     # Show database status
-/cyber-reindex --no-extract # Index only, skip LLM extraction
+/serokell-reindex              # Full index + LLM extraction (default)
+/serokell-reindex --status     # Show database status
+/serokell-reindex --no-extract # Index only, skip LLM extraction
 ```
 
 ## Sources
 
 The indexer processes five sources into a unified SQLite database:
 
-### 1. Entity Files (`~/CybosVault/private/context/entities/**/*.md`)
+### 1. Entity Files (`~/SerokellSalesVault/private/context/entities/**/*.md`)
 
 - Parse frontmatter for type, aliases, contact info
 - Build entity_aliases table for deduplication
 - Type: person, company, product
 
-### 2. Deal Folders (`~/CybosVault/private/deals/*/`)
+### 2. Deal Folders (`~/SerokellSalesVault/private/deals/*/`)
 
 - Each folder becomes a deal record
 - Parse `index.md` for metadata (YAML frontmatter + content)
 - Link to introducing entities
 
-### 3. Calls (`~/CybosVault/private/context/calls/*/`)
+### 3. Calls (`~/SerokellSalesVault/private/context/calls/*/`)
 
 - Parse `metadata.json` for attendees, date, title
 - Create interactions with participant links
 - Track file checksums for incremental updates
 
-### 4. Emails (`~/CybosVault/private/context/emails/*/`)
+### 4. Emails (`~/SerokellSalesVault/private/context/emails/*/`)
 
 - Parse `metadata.json` in each email folder
 - Extract sender, recipients, subject
 - Create interaction records
 
-### 5. Telegram Logs (`~/CybosVault/private/context/telegram/*.md`)
+### 5. Telegram Logs (`~/SerokellSalesVault/private/context/telegram/*.md`)
 
 - Parse per-person markdown files
 - Extract metadata from header (username, type)
@@ -103,8 +103,8 @@ Extraction also:
 
 **Step 1: Get app path from config**
 ```bash
-# Read app_path from ~/.cybos/config.json
-cat ~/.cybos/config.json | grep app_path
+# Read app_path from ~/.serokell/config.json
+cat ~/.serokell/config.json | grep app_path
 # Returns: "app_path": "~/Work/cyberman",
 ```
 
@@ -114,7 +114,7 @@ cd <APP_PATH> && bun scripts/db/index.ts --extract    # Default: index + extract
 cd <APP_PATH> && bun scripts/db/index.ts              # Without extract (use --no-extract arg to skip)
 ```
 
-The `app_path` is set during setup and stored in `~/.cybos/config.json`.
+The `app_path` is set during setup and stored in `~/.serokell/config.json`.
 
 ## Output
 
@@ -180,5 +180,5 @@ cd <APP_PATH> && bun scripts/db/query.ts who-shared acme-corp
 ## Hook Integration
 
 The SessionStart hook checks database freshness:
-- Last run > 24 hours ago → suggest `/cyber-reindex`
+- Last run > 24 hours ago → suggest `/serokell-reindex`
 - Database not accessible → show warning to start PostgreSQL

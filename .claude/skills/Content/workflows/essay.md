@@ -84,7 +84,7 @@ Apply feedback while maintaining voice:
 
 ### 5. OUTPUT
 
-Save to `~/CybosVault/private/content/essays/MMDD-<slug>-YY.md`
+Save to `~/SerokellSalesVault/private/content/essays/MMDD-<slug>-YY.md`
 
 Format:
 ```markdown
@@ -109,14 +109,14 @@ sources: [list if any]
 
 ### 6. LOG
 
-Append to `~/CybosVault/private/.cybos/logs/MMDD-YY.md`:
+Append to `~/SerokellSalesVault/private/.serokell/logs/MMDD-YY.md`:
 
 ```markdown
 ## HH:MM | content | essay | [title-slug]
 - Workflow: essay
 - Word count: [X]
 - Sources: [list if used]
-- Output: ~/CybosVault/private/content/essays/MMDD-<slug>-YY.md
+- Output: ~/SerokellSalesVault/private/content/essays/MMDD-<slug>-YY.md
 
 ---
 ```
@@ -145,7 +145,7 @@ Before output, verify against `writing-style-en.md` checklist:
 
 ## Notes
 
-- Essays often expand from `~/CybosVault/private/content/ideas/` drafts
+- Essays often expand from `~/SerokellSalesVault/private/content/ideas/` drafts
 - Can expand tweet threads into full essays
 - Link to related research when relevant
 - Consider publishing on: Twitter Articles, LinkedIn, Mirror, personal site
